@@ -1,0 +1,42 @@
+{
+  "name": "@eway-crm/connector",
+  "version": "1.0.0",
+  "description": "eWay-CRM API JavaScript connector library.",
+  "main": "lib/index.js",
+  "types": "lib/indx.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eway-crm/js-lib.git"
+  },
+  "keywords": [
+    "eway-crm",
+    "eway",
+    "crm",
+    "connector",
+    "api"
+  ],
+  "author": "eWay System s.r.o.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eway-crm/js-lib/issues"
+  },
+  "homepage": "https://github.com/eway-crm/js-lib#readme",
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  },
+  "files": [ "lib/**/*" ]
+}
