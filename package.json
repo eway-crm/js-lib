@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/indx.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
@@ -33,7 +33,10 @@
   },
   "homepage": "https://github.com/eway-crm/js-lib#readme",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^26.0.1",
     "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.3"
