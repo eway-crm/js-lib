@@ -38,5 +38,11 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.3"
   },
-  "files": [ "lib/**/*" ]
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "axios": "^0.19.2",
+    "es6-promise": "^4.2.8"
+  }
 }
