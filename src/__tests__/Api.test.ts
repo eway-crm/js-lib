@@ -19,6 +19,6 @@ test('Base Login Test', (done) => {
             expect(result.Data.length).toBe(1);
             expect(result.Data[0].Username).toBe(username);
             done();
-        },
+        }
     );
 });
