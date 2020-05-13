@@ -1,5 +1,5 @@
 import { ISessionHandler } from './ISessionHandler';
-import { ApiConnection } from '.';
+import { ApiConnection } from './ApiConnection';
 import { IApiResult } from './IApiResult';
 
 type TLoginResponse = IApiResult & {

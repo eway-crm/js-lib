@@ -1,10 +1,10 @@
-import { ApiConnection } from '../index';
+import { ApiConnection } from '../ApiConnection';
 import { IApiResult } from '../IApiResult';
 import 'jest';
 
 jest.setTimeout(30000);
 
-test('Base Login Test', done => {
+test('Base Login Test', (done) => {
     const serviceUrl = 'https://trial.eway-crm.com/31994';
     const username = 'api';
     const passwordHash = '470AE7216203E23E1983EF1851E72947';
@@ -13,12 +13,12 @@ test('Base Login Test', done => {
     connection.callMethod(
         'SearchUsers',
         {
-            transmitObject: { Username: username }
+            transmitObject: { Username: username },
         },
-        (result: (IApiResult & { Data: { Username: string }[] })) => {
+        (result: IApiResult & { Data: { Username: string }[] }) => {
             expect(result.Data.length).toBe(1);
             expect(result.Data[0].Username).toBe(username);
             done();
-        }
-    )
+        },
+    );
 });
