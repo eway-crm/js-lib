@@ -1,5 +1,6 @@
 import { ApiConnection } from '../index';
 import { IApiResult } from '../IApiResult';
+import 'jest';
 
 jest.setTimeout(30000);
 
@@ -16,6 +17,7 @@ test('Base Login Test', done => {
         },
         (result: (IApiResult & { Data: { Username: string }[] })) => {
             expect(result.Data.length).toBe(1);
+            expect(result.Data[0].Username).toBe(username);
             done();
         }
     )
