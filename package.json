@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "eWay-CRM API JavaScript connector library.",
   "main": "lib/index.js",
-  "types": "lib/indx.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
