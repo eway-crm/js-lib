@@ -135,6 +135,10 @@ export class ApiConnection {
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorCallback);
     };
 
+    readonly getItemPreviewGetMethodUrl = (folderName: string, itemGuid: string, itemVersion?: number): string => {
+        return this.svcUri + '/GetItemPreview?folderName=' + folderName + '&itemGuid=' + itemGuid + ((!!itemVersion || itemVersion === 0) ? ('&itemVersion=' + itemVersion) : '');
+    };
+
     private static handleCallPromise<TResult extends IApiResult>(
         call: Promise<AxiosResponse<any>>,
         successCallback: (result: TResult) => void,
