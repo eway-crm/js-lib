@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { ReturnCodes } from './ReturnCodes';
 import { IApiResult } from './IApiResult';
 import { ISessionHandler } from './ISessionHandler';
@@ -118,9 +118,16 @@ export class ApiConnection {
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
         errorCallback: (error: any) => void,
+        headers?: any
     ) => {
         const methodUrl = this.svcUri + '/' + methodName;
-        const promise = Axios.post(methodUrl, data);
+        let config: AxiosRequestConfig | undefined = undefined;
+        if (!!headers) {
+            config = {
+                headers: headers
+            }
+        }
+        const promise = Axios.post(methodUrl, data, config);
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorCallback);
     };
 
