@@ -121,11 +121,11 @@ export class ApiConnection {
         headers?: any
     ) => {
         const methodUrl = this.svcUri + '/' + methodName;
-        let config: AxiosRequestConfig | undefined = undefined;
+        let config: AxiosRequestConfig | undefined;
         if (!!headers) {
             config = {
-                headers: headers
-            }
+                headers
+            };
         }
         const promise = Axios.post(methodUrl, data, config);
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorCallback);
