@@ -50,6 +50,8 @@ If you are developing a web app running on a different host than your eWay-CRM w
 <add key="AccessControlAllowOrigin" value="https://YOUR-ORIGIN:PORT" />
 ```
 
+⚠ If you add the setting above to your web.config, the web-based eWay-CRM Administration Center won't work in Internet Explorer, which will be a huge loss for the whole humankind.
+
 ## Using the Connection Object
 
 Once having the `ApiConnection` instance, the API requests look like this searching of our user record.
