@@ -11,7 +11,7 @@ const obtainer = (result: TObtainResponse) => {
 
 export class CommonDataConnection extends TokenizedServiceConnection<TObtainResponse> {
 
-    constructor(connection: ApiConnection, errorCallback?: () => void) {
+    constructor(connection: ApiConnection, errorCallback?: (error: Error) => void) {
         super('ObtainCommonDataApiAccessToken', HttpMethod.get, false, 'InvalidCommonDataToken', obtainer, connection, errorCallback);
     }
 

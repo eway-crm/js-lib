@@ -12,7 +12,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     private readonly invalidTokenReturnCode: string;
     private readonly urlAndTokenObtainer: (response: TObtainResponse) => { url: string | null, token: string | null };
     private readonly connection: ApiConnection;
-    private readonly generalErrorCallback: (() => void) | null;
+    private readonly generalErrorCallback: ((error: Error) => void) | null;
 
     private url: string | null;
     private token: string | null;
@@ -25,7 +25,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
         invalidTokenReturnCode: string,
         urlAndTokenObtainer: (response: TObtainResponse) => { url: string | null, token: string | null },
         connection: ApiConnection,
-        errorCallback?: () => void
+        errorCallback?: (error: Error) => void
     ) {
         this.obtainTokenMethodName = obtainTokenMethodName;
         this.obtainTokenMethodType = obtainTokenMethodType;
@@ -75,16 +75,16 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                         if (unsuccessCallback) {
                             unsuccessCallback(result);
                         } else {
-                            console.error('Unhandled ls connection return code ' + result.ReturnCodeString + '.\nDescription: ' + result.Description);
                             if (!!this.generalErrorCallback) {
-                                this.generalErrorCallback();
+                                const error = new Error('Unhandled tokenized service connection return code ' + result.ReturnCodeString + '.\nDescription: ' + result.Description);
+                                this.generalErrorCallback(error);
                             }
                         }
                     },
                     (error: any) => {
-                        console.error(error);
                         if (!!this.generalErrorCallback) {
-                            this.generalErrorCallback();
+                            const err = new Error('Unhandled tokenized service connection communication error: ' + error);
+                            this.generalErrorCallback(err);
                         }
                     }
                 )
@@ -93,7 +93,10 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                 if (unsuccessCallback) {
                     unsuccessCallback(null);
                 } else {
-                    console.error('Unable to call method ' + methodName + ' at ls. Tokenized api is disabled.');
+                    if (!!this.generalErrorCallback) {
+                        const err = new Error('Unable to call method ' + methodName + '. Tokenized api is disabled.');
+                        this.generalErrorCallback(err);
+                    }
                 }
             }
         );
@@ -147,16 +150,13 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                     if (response.data.ReturnCodeString === 'Success') {
                         successCallback(response.data);
                     } else {
-                        console.warn('Tokenized API method ' + methodName + ' returned not success return code: ' + JSON.stringify(response.data));
                         unsuccessCallback(response.data);
                     }
                 } else {
-                    console.error('Tokenized API' + methodName + ' response error: ' + JSON.stringify(response));
                     errorCallback(response);
                 }
             })
             .catch((error) => {
-                console.error('Tokenized API' + methodName + ' request failed: ' + JSON.stringify(error));
                 errorCallback(error);
             });
     }

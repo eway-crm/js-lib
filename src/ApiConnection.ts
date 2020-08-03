@@ -123,7 +123,7 @@ export class ApiConnection {
         switch (httpMethod) {
             case HttpMethod.get:
                 if (!data) {
-                    console.error('Calling api get method with data specified does not make any sense.');
+                    throw new Error('Calling api get method with data specified does not make any sense.');
                 }
                 promise = Axios.get(methodUrl, config);
                 break;
