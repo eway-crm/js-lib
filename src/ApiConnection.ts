@@ -45,17 +45,17 @@ export class ApiConnection {
         appVersion: string,
         clientMachineIdentifier: string,
         clientMachineName: string,
-        errorCallback?: (error: Error) => void,
+        errorCallback?: (error: Error) => void
     ): ApiConnection {
         return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback));
     }
 
     readonly callMethod = <TResult extends IApiResult>(
         methodName: string,
-        data: any,
+        data: object & any,
         successCallback: (result: TResult) => void,
         unsuccessCallback?: (result: TResult) => void,
-        httpMethod?: HttpMethod,
+        httpMethod?: HttpMethod
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -100,57 +100,55 @@ export class ApiConnection {
             }
         };
 
-        switch (httpMethod) {
-            case HttpMethod.get:
-                this.callGetWithoutSession(methodName, successCallback, unsuccessClb, errorClb);
-                break;
-            case HttpMethod.post:
-                this.callWithoutSession(methodName, data, successCallback, unsuccessClb, errorClb);
-                break;
-            default:
-                throw new Error(`Unknown http method '${httpMethod}'.`);
-        }
+        this.callWithoutSession(methodName, data, successCallback, unsuccessClb, errorClb, null, httpMethod);
     };
 
     readonly callWithoutSession = <TResult extends IApiResult>(
         methodName: string,
-        data: object,
+        data: object | null,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
         errorCallback: (error: any) => void,
-        headers?: any
+        headers?: any,
+        httpMethod?: HttpMethod
     ) => {
+        if (!httpMethod) {
+            httpMethod = HttpMethod.post;
+        }
+
         const methodUrl = this.svcUri + '/' + methodName;
         let config: AxiosRequestConfig | undefined;
         if (!!headers) {
             config = {
-                headers
+                headers,
             };
         }
-        const promise = Axios.post(methodUrl, data, config);
-        ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorCallback);
-    };
-
-    readonly callGetWithoutSession = <TResult extends IApiResult>(
-        methodName: string,
-        successCallback: (result: TResult) => void,
-        unsuccessCallback: (result: TResult) => void,
-        errorCallback: (error: any) => void,
-    ) => {
-        const methodUrl = this.svcUri + '/' + methodName;
-        const promise = Axios.get(methodUrl);
+        let promise: Promise<AxiosResponse<TResult>>;
+        switch (httpMethod) {
+            case HttpMethod.get:
+                if (!data) {
+                    console.error('Calling api get method with data specified does not make any sense.');
+                }
+                promise = Axios.get(methodUrl, config);
+                break;
+            case HttpMethod.post:
+                promise = Axios.post(methodUrl, data, config);
+                break;
+            default:
+                throw new Error(`Unknown http method '${httpMethod}'.`);
+        }
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorCallback);
     };
 
     readonly getItemPreviewGetMethodUrl = (folderName: string, itemGuid: string, itemVersion?: number): string => {
-        return this.svcUri + '/GetItemPreview?folderName=' + folderName + '&itemGuid=' + itemGuid + ((!!itemVersion || itemVersion === 0) ? ('&itemVersion=' + itemVersion) : '');
+        return this.svcUri + '/GetItemPreview?folderName=' + folderName + '&itemGuid=' + itemGuid + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + itemVersion : '');
     };
 
     private static handleCallPromise<TResult extends IApiResult>(
-        call: Promise<AxiosResponse<any>>,
+        call: Promise<AxiosResponse<TResult>>,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
-        errorCallback: (error: any) => void,
+        errorCallback: (error: any) => void
     ) {
         call.then((response: AxiosResponse<TResult>) => {
             if (response.status === 200) {

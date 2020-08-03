@@ -76,7 +76,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
                 } else {
                     throw err;
                 }
-            },
+            }
         );
     };
 }
