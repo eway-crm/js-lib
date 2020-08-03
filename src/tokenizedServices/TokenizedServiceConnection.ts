@@ -92,11 +92,6 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
             () => {
                 if (unsuccessCallback) {
                     unsuccessCallback(null);
-                } else {
-                    if (!!this.generalErrorCallback) {
-                        const err = new Error('Unable to call method ' + methodName + '. Tokenized api is disabled.');
-                        this.generalErrorCallback(err);
-                    }
                 }
             }
         );
