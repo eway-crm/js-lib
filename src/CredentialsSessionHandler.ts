@@ -68,14 +68,6 @@ export class CredentialsSessionHandler implements ISessionHandler {
                 } else {
                     throw error;
                 }
-            },
-            (error) => {
-                const err = new Error('Unable to login. Error follows.\n' + JSON.stringify(error));
-                if (this.errorCallback) {
-                    this.errorCallback(err);
-                } else {
-                    throw err;
-                }
             }
         );
     };

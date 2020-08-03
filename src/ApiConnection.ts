@@ -4,6 +4,7 @@ import { IApiResult } from './IApiResult';
 import { ISessionHandler } from './ISessionHandler';
 import { HttpMethod } from './HttpMethod';
 import { CredentialsSessionHandler } from './CredentialsSessionHandler';
+import { AnonymousSessionHandler } from './AnonymousSessionHandler';
 
 export class ApiConnection {
     private readonly svcUri: string;
@@ -50,6 +51,10 @@ export class ApiConnection {
         return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback));
     }
 
+    static createAnonymous(apiServiceUri: string, errorCallback?: (error: Error) => void): ApiConnection {
+        return new ApiConnection(apiServiceUri, new AnonymousSessionHandler(), errorCallback);
+    }
+
     readonly callMethod = <TResult extends IApiResult>(
         methodName: string,
         data: object & any,
@@ -91,16 +96,8 @@ export class ApiConnection {
                 }
             }
         };
-        const errorClb = (error: any) => {
-            const err = new Error('Unhandled connection error when calling ' + methodName + ':' + error);
-            if (this.errorCallback) {
-                this.errorCallback(err, data);
-            } else {
-                throw err;
-            }
-        };
 
-        this.callWithoutSession(methodName, data, successCallback, unsuccessClb, errorClb, null, httpMethod);
+        this.callWithoutSession(methodName, data, successCallback, unsuccessClb, null, httpMethod);
     };
 
     readonly callWithoutSession = <TResult extends IApiResult>(
@@ -108,7 +105,6 @@ export class ApiConnection {
         data: object | null,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
-        errorCallback: (error: any) => void,
         headers?: any,
         httpMethod?: HttpMethod
     ) => {
@@ -137,7 +133,17 @@ export class ApiConnection {
             default:
                 throw new Error(`Unknown http method '${httpMethod}'.`);
         }
-        ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorCallback);
+
+        const errorClb = (error: any) => {
+            const err = new Error('Unhandled connection error when calling ' + methodName + ':' + error);
+            if (this.errorCallback) {
+                this.errorCallback(err, data);
+            } else {
+                throw err;
+            }
+        };
+
+        ApiConnection.handleCallPromise(promise, successCallback, unsuccessCallback, errorClb);
     };
 
     readonly getItemPreviewGetMethodUrl = (folderName: string, itemGuid: string, itemVersion?: number): string => {
