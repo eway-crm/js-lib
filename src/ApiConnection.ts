@@ -135,7 +135,7 @@ export class ApiConnection {
         }
 
         const errorClb = (error: any) => {
-            const err = new Error('Unhandled connection error when calling ' + methodName + ':' + error);
+            const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + error);
             if (this.errorCallback) {
                 this.errorCallback(err, data);
             } else {
