@@ -8,6 +8,7 @@ import { AnonymousSessionHandler } from './AnonymousSessionHandler';
 
 export class ApiConnection {
     private readonly svcUri: string;
+    private readonly baseUri: string;
     private readonly sessionHandler: ISessionHandler;
     private readonly errorCallback: ((error: Error, data?: any) => void) | undefined;
 
@@ -23,17 +24,22 @@ export class ApiConnection {
 
         if (apiServiceUri.substr(apiServiceUri.length - 4).toLowerCase() === '.svc') {
             this.svcUri = apiServiceUri;
+            const apiServiceOptions = ["/API.svc", "/InsecureAPI.svc", "/WcfService/Service.svc"];
+            const apiOption = apiServiceOptions.find(option => option === apiServiceUri.substr(apiServiceUri.length - option.length)) || "";
+            this.baseUri = apiServiceUri.substr(0, apiServiceUri.length - apiOption.length);
         } else {
-            if (apiServiceUri.substr(apiServiceUri.length - 1) !== '/') {
-                apiServiceUri += '/';
-            }
-            if (apiServiceUri.substr(0, 8).toLowerCase() === 'https://') {
-                this.svcUri = apiServiceUri + 'API.svc';
-            } else {
-                this.svcUri = apiServiceUri + 'InsecureAPI.svc';
-            }
+            this.baseUri = apiServiceUri;
+                if (this.baseUri.substr(this.baseUri.length - 1) === '/') {
+                    this.baseUri = this.baseUri.substr(0, this.baseUri.length - 1);
+                }
+    
+                if (apiServiceUri.substr(0, 8).toLowerCase() === 'https://') {
+                    this.svcUri = this.baseUri + '/API.svc';
+                } else {
+                    this.svcUri = this.baseUri + '/InsecureAPI.svc';
+                }
         }
-
+        
         this.sessionHandler = sessionHandler;
         this.errorCallback = errorCallback;
         this.sessionId = null;
@@ -53,6 +59,50 @@ export class ApiConnection {
 
     static createAnonymous(apiServiceUri: string, errorCallback?: (error: Error) => void): ApiConnection {
         return new ApiConnection(apiServiceUri, new AnonymousSessionHandler(), errorCallback);
+    }
+
+    readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean, statusCode: number | null, statusText: string, address: string }) => void) => {
+        const address = this.baseUri + "/WA";
+        Axios.get(address)
+            .then((response: AxiosResponse) => {
+                try {
+                if (response.status >= 200 && response.status < 400) {
+                    callback({
+                        isAvailable: true,
+                        statusCode: response.status,
+                        statusText: response.statusText,
+                        address
+                    })
+                } else {
+                    callback({
+                        isAvailable: false,
+                        statusCode: response.status,
+                        statusText: response.statusText,
+                        address
+                    })
+                }
+            } catch (clbError) {
+                if (this.errorCallback) {
+                    this.errorCallback(clbError);
+                } else {
+                    throw {
+                        rethrowInPromiseCatch: true,
+                        originalError: clbError
+                    };
+                }
+            }
+            })
+            .catch((error) => {
+                if (!error.rethrowInPromiseCatch && error.originalError) {
+                    throw error.originalError;
+                }
+                callback({
+                    isAvailable: false,
+                    statusCode: null,
+                    statusText: error.message,
+                    address
+                });
+            });
     }
 
     readonly callMethod = <TResult extends IApiResult>(
