@@ -69,3 +69,14 @@ test('Get Web Access Url Status with Anonymous WS and Direct SVC', (done) => {
         done();
     });
 });
+
+test('Get Web Access Url Status with Anonymous WS and Direct SVC lowercase', (done) => {
+    const serviceUrl = 'https://trial.eway-crm.com/31994/wcfservice/service.svc';
+
+    const connection = ApiConnection.createAnonymous(serviceUrl, done);
+    connection.getWebAccessStatus((result) => {
+        expect(result.isAvailable).toBe(true);
+        expect(result.address.toLowerCase()).toBe("https://trial.eway-crm.com/31994/wa");
+        done();
+    });
+});

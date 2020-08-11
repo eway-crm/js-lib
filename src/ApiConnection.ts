@@ -25,7 +25,7 @@ export class ApiConnection {
         if (apiServiceUri.substr(apiServiceUri.length - 4).toLowerCase() === '.svc') {
             this.svcUri = apiServiceUri;
             const apiServiceOptions = ["/API.svc", "/InsecureAPI.svc", "/WcfService/Service.svc"];
-            const apiOption = apiServiceOptions.find(option => option === apiServiceUri.substr(apiServiceUri.length - option.length)) || "";
+            const apiOption = apiServiceOptions.find(option => option.toLowerCase() === apiServiceUri.substr(apiServiceUri.length - option.length).toLowerCase()) || "";
             this.baseUri = apiServiceUri.substr(0, apiServiceUri.length - apiOption.length);
         } else {
             this.baseUri = apiServiceUri;
