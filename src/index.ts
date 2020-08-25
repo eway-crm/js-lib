@@ -7,9 +7,10 @@ import { ReturnCodes } from './ReturnCodes';
 import { ITokenizedApiResult } from './tokenizedServices/ITokenizedApiResult';
 import { TokenizedServiceConnection } from './tokenizedServices/TokenizedServiceConnection';
 import { CommonDataConnection } from './tokenizedServices/CommonDataConnection';
+import { ApiMethods } from './ApiMethods';
 
 Promise.polyfill();
 
 export default ApiConnection;
 
-export { HttpMethod, IApiResult, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection };
+export { HttpMethod, IApiResult, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods };
