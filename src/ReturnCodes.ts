@@ -1,4 +1,5 @@
 export class ReturnCodes {
-    static rcBadSession = 'rcBadSession';
-    static rcWebServiceMoved = 'rcWebServiceMoved';
+    static readonly rcSuccess = 'rcSuccess';
+    static readonly rcBadSession = 'rcBadSession';
+    static readonly rcWebServiceMoved = 'rcWebServiceMoved';
 }

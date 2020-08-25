@@ -5,6 +5,7 @@ import { ISessionHandler } from './ISessionHandler';
 import { HttpMethod } from './HttpMethod';
 import { CredentialsSessionHandler } from './CredentialsSessionHandler';
 import { AnonymousSessionHandler } from './AnonymousSessionHandler';
+import { ApiMethods } from './ApiMethods';
 
 export class ApiConnection {
     private readonly svcUri: string;
@@ -29,17 +30,17 @@ export class ApiConnection {
             this.baseUri = apiServiceUri.substr(0, apiServiceUri.length - apiOption.length);
         } else {
             this.baseUri = apiServiceUri;
-                if (this.baseUri.substr(this.baseUri.length - 1) === '/') {
-                    this.baseUri = this.baseUri.substr(0, this.baseUri.length - 1);
-                }
-    
-                if (apiServiceUri.substr(0, 8).toLowerCase() === 'https://') {
-                    this.svcUri = this.baseUri + '/API.svc';
-                } else {
-                    this.svcUri = this.baseUri + '/InsecureAPI.svc';
-                }
+            if (this.baseUri.substr(this.baseUri.length - 1) === '/') {
+                this.baseUri = this.baseUri.substr(0, this.baseUri.length - 1);
+            }
+
+            if (apiServiceUri.substr(0, 8).toLowerCase() === 'https://') {
+                this.svcUri = this.baseUri + '/API.svc';
+            } else {
+                this.svcUri = this.baseUri + '/InsecureAPI.svc';
+            }
         }
-        
+
         this.sessionHandler = sessionHandler;
         this.errorCallback = errorCallback;
         this.sessionId = null;
@@ -66,31 +67,31 @@ export class ApiConnection {
         Axios.get(address)
             .then((response: AxiosResponse) => {
                 try {
-                if (response.status >= 200 && response.status < 400) {
-                    callback({
-                        isAvailable: true,
-                        statusCode: response.status,
-                        statusText: response.statusText,
-                        address
-                    })
-                } else {
-                    callback({
-                        isAvailable: false,
-                        statusCode: response.status,
-                        statusText: response.statusText,
-                        address
-                    })
+                    if (response.status >= 200 && response.status < 400) {
+                        callback({
+                            isAvailable: true,
+                            statusCode: response.status,
+                            statusText: response.statusText,
+                            address
+                        })
+                    } else {
+                        callback({
+                            isAvailable: false,
+                            statusCode: response.status,
+                            statusText: response.statusText,
+                            address
+                        })
+                    }
+                } catch (clbError) {
+                    if (this.errorCallback) {
+                        this.errorCallback(clbError);
+                    } else {
+                        throw {
+                            rethrowInPromiseCatch: true,
+                            originalError: clbError
+                        };
+                    }
                 }
-            } catch (clbError) {
-                if (this.errorCallback) {
-                    this.errorCallback(clbError);
-                } else {
-                    throw {
-                        rethrowInPromiseCatch: true,
-                        originalError: clbError
-                    };
-                }
-            }
             })
             .catch((error) => {
                 if (!error.rethrowInPromiseCatch && error.originalError) {
@@ -130,7 +131,7 @@ export class ApiConnection {
 
         data.sessionId = sessionId;
         const unsuccessClb = (result: TResult) => {
-            if (result.ReturnCode === ReturnCodes.rcBadSession) {
+            if (result.ReturnCode === ReturnCodes.rcBadSession && methodName !== ApiMethods.logOut) {
                 this.sessionId = null;
                 this.sessionHandler.invalidateSessionId(sessionId, noSessionCallback);
                 return;
@@ -197,7 +198,7 @@ export class ApiConnection {
     };
 
     readonly getItemPreviewGetMethodUrl = (folderName: string, itemGuid: string, itemVersion?: number): string => {
-        return this.svcUri + '/GetItemPreview?folderName=' + folderName + '&itemGuid=' + itemGuid + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + itemVersion : '');
+        return this.svcUri + '/' + ApiMethods.getItemPreview + '?folderName=' + folderName + '&itemGuid=' + itemGuid + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + itemVersion : '');
     };
 
     private static handleCallPromise<TResult extends IApiResult>(
@@ -208,7 +209,7 @@ export class ApiConnection {
     ) {
         call.then((response: AxiosResponse<TResult>) => {
             if (response.status === 200) {
-                if (response.data.ReturnCode === 'rcSuccess') {
+                if (response.data.ReturnCode === ReturnCodes.rcSuccess) {
                     successCallback(response.data);
                 } else {
                     unsuccessCallback(response.data);
