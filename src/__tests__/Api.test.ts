@@ -23,6 +23,24 @@ test('Base Login Test', (done) => {
     );
 });
 
+test('Base Promise Login Test', (done) => {
+    const serviceUrl = 'https://trial.eway-crm.com/31994';
+    const username = 'api';
+    const passwordHash = '470AE7216203E23E1983EF1851E72947';
+
+    const connection = ApiConnection.create(serviceUrl, username, passwordHash, 'JestTest1', '00:00:00:00:00', 'JestTestMachine', done);
+    connection
+        .askMethod<IApiResult & { Data: { Username: string }[] }>('SearchUsers', {
+            transmitObject: { Username: username },
+        })
+        .then((result) => {
+            expect(result.Data.length).toBe(1);
+            expect(result.Data[0].Username).toBe(username);
+            done();
+        })
+        .catch(done);
+});
+
 test('Preview url test', (done) => {
     const serviceUrl = 'https://trial.eway-crm.com/31994';
     const username = 'api';

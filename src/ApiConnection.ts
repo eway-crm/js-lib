@@ -106,12 +106,41 @@ export class ApiConnection {
             });
     };
 
+    /**
+     * Creates a promise for async API method call.
+     * @param methodName API method name. Ex. 'GetUsers'.
+     * @param data Input data or empty object. Ex. {transmitObject: {FileAs: 'Peter File'}} or {itemGuids: ['9ac561be-9b7d-4938-8e55-4cce97142483']}.
+     * @param httpMethod Optional. The used HTTP method. POST or GET. Default is POST.
+     * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
+     */
+    readonly askMethod = <TResult extends IApiResult>(methodName: string, data: object & any, httpMethod?: HttpMethod, catchGlobally?: boolean): Promise<TResult> => {
+        return new Promise<TResult>((resolve, reject) => {
+            const errClb = catchGlobally
+                ? (e: any) => {
+                      reject(e);
+                      throw e;
+                  }
+                : reject;
+            this.callMethod<TResult>(methodName, data, resolve, errClb, httpMethod, errClb);
+        });
+    };
+
+    /**
+     * Asynchronously calls API method with automatically added session data.
+     * @param methodName API method name. Ex. 'GetUsers'.
+     * @param data Input data or empty object. Ex. {transmitObject: {FileAs: 'Peter File'}} or {itemGuids: ['9ac561be-9b7d-4938-8e55-4cce97142483']}.
+     * @param successCallback Handler callback when the method executes well. Gets the whole response JSON object as the only argument.
+     * @param unsuccessCallback Optional. Handler callback for eWay-API app level failures. Gets the whole response JSON object as the only argument. If not supplied, the global error handler is used.
+     * @param httpMethod Optional. The used HTTP method. POST or GET. Default is POST.
+     * @param errorCallback Optional. Handler callback for any other failures. If not supplied, the global error handler is used.
+     */
     readonly callMethod = <TResult extends IApiResult>(
         methodName: string,
         data: object & any,
         successCallback: (result: TResult) => void,
         unsuccessCallback?: (result: TResult) => void,
-        httpMethod?: HttpMethod
+        httpMethod?: HttpMethod,
+        errorCallback?: (error: any) => void
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -158,7 +187,7 @@ export class ApiConnection {
                       successCallback(result);
                   };
 
-        this.callWithoutSession(methodName, data, successClb, unsuccessClb, null, httpMethod);
+        this.callWithoutSession(methodName, data, successClb, unsuccessClb, null, httpMethod, errorCallback);
     };
 
     readonly callWithoutSession = <TResult extends IApiResult>(
@@ -167,7 +196,8 @@ export class ApiConnection {
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
         headers?: any,
-        httpMethod?: HttpMethod
+        httpMethod?: HttpMethod,
+        errorCallback?: (error: any) => void
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -197,10 +227,22 @@ export class ApiConnection {
 
         const errorClb = (error: any) => {
             const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + error);
-            if (this.errorCallback) {
-                this.errorCallback(err, data);
+            if (errorCallback) {
+                try {
+                    errorCallback(err);
+                } catch (e) {
+                    if (this.errorCallback) {
+                        this.errorCallback(e, data);
+                    } else {
+                        throw e;
+                    }
+                }
             } else {
-                throw err;
+                if (this.errorCallback) {
+                    this.errorCallback(err, data);
+                } else {
+                    throw err;
+                }
             }
         };
 
