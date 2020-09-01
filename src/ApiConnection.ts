@@ -25,8 +25,8 @@ export class ApiConnection {
 
         if (apiServiceUri.substr(apiServiceUri.length - 4).toLowerCase() === '.svc') {
             this.svcUri = apiServiceUri;
-            const apiServiceOptions = ["/API.svc", "/InsecureAPI.svc", "/WcfService/Service.svc"];
-            const apiOption = apiServiceOptions.find(option => option.toLowerCase() === apiServiceUri.substr(apiServiceUri.length - option.length).toLowerCase()) || "";
+            const apiServiceOptions = ['/API.svc', '/InsecureAPI.svc', '/WcfService/Service.svc'];
+            const apiOption = apiServiceOptions.find((option) => option.toLowerCase() === apiServiceUri.substr(apiServiceUri.length - option.length).toLowerCase()) || '';
             this.baseUri = apiServiceUri.substr(0, apiServiceUri.length - apiOption.length);
         } else {
             this.baseUri = apiServiceUri;
@@ -62,8 +62,8 @@ export class ApiConnection {
         return new ApiConnection(apiServiceUri, new AnonymousSessionHandler(), errorCallback);
     }
 
-    readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean, statusCode: number | null, statusText: string, address: string }) => void) => {
-        const address = this.baseUri + "/WA";
+    readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void) => {
+        const address = this.baseUri + '/WA';
         Axios.get(address)
             .then((response: AxiosResponse) => {
                 try {
@@ -72,15 +72,15 @@ export class ApiConnection {
                             isAvailable: true,
                             statusCode: response.status,
                             statusText: response.statusText,
-                            address
-                        })
+                            address,
+                        });
                     } else {
                         callback({
                             isAvailable: false,
                             statusCode: response.status,
                             statusText: response.statusText,
-                            address
-                        })
+                            address,
+                        });
                     }
                 } catch (clbError) {
                     if (this.errorCallback) {
@@ -88,7 +88,7 @@ export class ApiConnection {
                     } else {
                         throw {
                             rethrowInPromiseCatch: true,
-                            originalError: clbError
+                            originalError: clbError,
                         };
                     }
                 }
@@ -101,10 +101,10 @@ export class ApiConnection {
                     isAvailable: false,
                     statusCode: null,
                     statusText: error.message,
-                    address
+                    address,
                 });
             });
-    }
+    };
 
     readonly callMethod = <TResult extends IApiResult>(
         methodName: string,
@@ -131,10 +131,12 @@ export class ApiConnection {
 
         data.sessionId = sessionId;
         const unsuccessClb = (result: TResult) => {
-            if (result.ReturnCode === ReturnCodes.rcBadSession && methodName !== ApiMethods.logOut) {
+            if (result.ReturnCode === ReturnCodes.rcBadSession) {
                 this.sessionId = null;
-                this.sessionHandler.invalidateSessionId(sessionId, noSessionCallback);
-                return;
+                if (methodName !== ApiMethods.logOut) {
+                    this.sessionHandler.invalidateSessionId(sessionId, noSessionCallback);
+                    return;
+                }
             }
             if (unsuccessCallback) {
                 unsuccessCallback(result);
@@ -148,7 +150,15 @@ export class ApiConnection {
             }
         };
 
-        this.callWithoutSession(methodName, data, successCallback, unsuccessClb, null, httpMethod);
+        const successClb =
+            methodName !== ApiMethods.logOut
+                ? successCallback
+                : (result: TResult) => {
+                      this.sessionId = null;
+                      successCallback(result);
+                  };
+
+        this.callWithoutSession(methodName, data, successClb, unsuccessClb, null, httpMethod);
     };
 
     readonly callWithoutSession = <TResult extends IApiResult>(

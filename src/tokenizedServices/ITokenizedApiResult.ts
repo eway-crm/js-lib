@@ -1,4 +1,4 @@
 export interface ITokenizedApiResult {
-    ReturnCodeString: string,
-    Description: string
+    ReturnCodeString: string;
+    Description: string;
 }

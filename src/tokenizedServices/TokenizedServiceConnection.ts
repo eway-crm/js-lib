@@ -1,16 +1,15 @@
-import Axios, { AxiosResponse } from "axios";
-import { HttpMethod } from "../HttpMethod";
-import { ApiConnection } from "../ApiConnection";
-import { ITokenizedApiResult } from "./ITokenizedApiResult";
-import { IApiResult } from "../IApiResult";
+import Axios, { AxiosResponse } from 'axios';
+import { HttpMethod } from '../HttpMethod';
+import { ApiConnection } from '../ApiConnection';
+import { ITokenizedApiResult } from './ITokenizedApiResult';
+import { IApiResult } from '../IApiResult';
 
 export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
-
     private readonly obtainTokenMethodName: string;
     private readonly obtainTokenMethodType: HttpMethod;
     private readonly needsSession: boolean;
     private readonly invalidTokenReturnCode: string;
-    private readonly urlAndTokenObtainer: (response: TObtainResponse) => { url: string | null, token: string | null };
+    private readonly urlAndTokenObtainer: (response: TObtainResponse) => { url: string | null; token: string | null };
     private readonly connection: ApiConnection;
     private readonly generalErrorCallback: ((error: Error) => void) | null;
 
@@ -23,7 +22,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
         obtainTokenMethodType: HttpMethod,
         needsSession: boolean,
         invalidTokenReturnCode: string,
-        urlAndTokenObtainer: (response: TObtainResponse) => { url: string | null, token: string | null },
+        urlAndTokenObtainer: (response: TObtainResponse) => { url: string | null; token: string | null },
         connection: ApiConnection,
         errorCallback?: (error: Error) => void
     ) {
@@ -56,7 +55,12 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
         }
     };
 
-    readonly callTokenizedApi = <TResult extends ITokenizedApiResult>(methodName: string, data: any, successCallback: (data: TResult) => void, unsuccessCallback?: ((data: TResult | null) => void) | null) => {
+    readonly callTokenizedApi = <TResult extends ITokenizedApiResult>(
+        methodName: string,
+        data: any,
+        successCallback: (data: TResult) => void,
+        unsuccessCallback?: ((data: TResult | null) => void) | null
+    ) => {
         this.isEnabled(
             (url: string, token: string) => {
                 data.token = token;
@@ -87,7 +91,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                             this.generalErrorCallback(err);
                         }
                     }
-                )
+                );
             },
             () => {
                 if (unsuccessCallback) {
@@ -133,13 +137,17 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
         }
     };
 
-    private static call<TResult extends ITokenizedApiResult>(serviceUrl: string, methodName: string, data: object, successCallback: (result: TResult) => void, unsuccessCallback: (result: TResult) => void, errorCallback: (error: any) => void) {
+    private static call<TResult extends ITokenizedApiResult>(
+        serviceUrl: string,
+        methodName: string,
+        data: object,
+        successCallback: (result: TResult) => void,
+        unsuccessCallback: (result: TResult) => void,
+        errorCallback: (error: any) => void
+    ) {
         // We count on that we are in Admin/Subdirectory.
         const address = serviceUrl + '/' + methodName;
-        Axios.post(
-            address,
-            data
-        )
+        Axios.post(address, data)
             .then((response: AxiosResponse<TResult>) => {
                 if (response.status === 200) {
                     if (response.data.ReturnCodeString === 'Success') {
