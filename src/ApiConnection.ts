@@ -55,7 +55,7 @@ export class ApiConnection {
         clientMachineName: string,
         errorCallback?: (error: Error) => void
     ): ApiConnection {
-        return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback));
+        return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback), errorCallback);
     }
 
     static createAnonymous(apiServiceUri: string, errorCallback?: (error: Error) => void): ApiConnection {
@@ -148,7 +148,7 @@ export class ApiConnection {
         const noSessionCallback = () => {
             this.sessionHandler.getSessionId(this, (newSessionId) => {
                 this.sessionId = newSessionId;
-                this.callMethod(methodName, data, successCallback, unsuccessCallback, httpMethod);
+                this.callMethod(methodName, data, successCallback, unsuccessCallback, httpMethod, errorCallback);
             });
         };
 
