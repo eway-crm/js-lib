@@ -9,9 +9,10 @@ import { TokenizedServiceConnection } from './tokenizedServices/TokenizedService
 import { CommonDataConnection } from './tokenizedServices/CommonDataConnection';
 import { ApiMethods } from './ApiMethods';
 import GlobalSettingsNames from './constants/GlobalSettingsNames';
+import { FolderNames, TFolderName } from './constants/FolderNames';
 
 Promise.polyfill();
 
 export default ApiConnection;
 
-export { HttpMethod, IApiResult, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods, GlobalSettingsNames };
+export { HttpMethod, IApiResult, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods, GlobalSettingsNames, FolderNames, TFolderName };
