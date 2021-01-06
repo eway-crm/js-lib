@@ -9,13 +9,15 @@ const obtainer = (result: TObtainResponse) => {
     return { url: result.ServiceUrl, token: result.Token };
 };
 
-export class CommonDataConnection extends TokenizedServiceConnection<TObtainResponse> {
+export class CommonDataConnection {
+    private readonly tokenizedConnection: TokenizedServiceConnection<TObtainResponse>;
+
     constructor(connection: ApiConnection, errorCallback?: (error: Error) => void) {
-        super('ObtainCommonDataApiAccessToken', HttpMethod.get, false, 'InvalidCommonDataToken', obtainer, connection, errorCallback);
+        this.tokenizedConnection = new TokenizedServiceConnection<TObtainResponse>('ObtainCommonDataApiAccessToken', HttpMethod.get, false, 'InvalidCommonDataToken', obtainer, connection, errorCallback);
     }
 
     readonly isCommonDataApiEnabled = (enabledCallback: (url: string, token: string) => void, disabledCallback: () => void) => {
-        this.isEnabled(enabledCallback, disabledCallback);
+        this.tokenizedConnection.isEnabled(enabledCallback, disabledCallback);
     };
 
     readonly callCommonDataApi = <TResult extends ITokenizedApiResult>(
@@ -24,6 +26,6 @@ export class CommonDataConnection extends TokenizedServiceConnection<TObtainResp
         successCallback: (data: TResult) => void,
         unsuccessCallback?: ((data: TResult | null) => void) | null
     ) => {
-        this.callTokenizedApi(methodName, data, successCallback, unsuccessCallback);
+        this.tokenizedConnection.callTokenizedApi(methodName, data, successCallback, unsuccessCallback);
     };
 }
