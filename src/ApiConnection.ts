@@ -63,8 +63,8 @@ export class ApiConnection {
     }
 
     readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void) => {
-        const address = this.baseUri + '/WA';
-        Axios.get(address, { maxRedirects: 0 })
+        const address = this.baseUri + '/WA/Content/Images/loading.gif';
+        Axios.head(address)
             .then((response: AxiosResponse) => {
                 try {
                     if (response.status >= 200 && response.status < 400) {
