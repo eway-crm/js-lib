@@ -65,7 +65,7 @@ test('Get Web Access Url Status', (done) => {
     const connection = ApiConnection.create(serviceUrl, username, passwordHash, 'JestTest1', '00:00:00:00:00', 'JestTestMachine', done);
     connection.getWebAccessStatus((result) => {
         expect(result.isAvailable).toBe(true);
-        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa');
+        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa/content/images/loading.gif');
         done();
     });
 });
@@ -76,7 +76,7 @@ test('Get Web Access Url Status with Anonymous WS', (done) => {
     const connection = ApiConnection.createAnonymous(serviceUrl, done);
     connection.getWebAccessStatus((result) => {
         expect(result.isAvailable).toBe(true);
-        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa');
+        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa/content/images/loading.gif');
         done();
     });
 });
@@ -87,7 +87,7 @@ test('Get Web Access Url Status with Anonymous WS and Direct SVC', (done) => {
     const connection = ApiConnection.createAnonymous(serviceUrl, done);
     connection.getWebAccessStatus((result) => {
         expect(result.isAvailable).toBe(true);
-        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa');
+        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa/content/images/loading.gif');
         done();
     });
 });
@@ -98,7 +98,7 @@ test('Get Web Access Url Status with Anonymous WS and Direct SVC lowercase', (do
     const connection = ApiConnection.createAnonymous(serviceUrl, done);
     connection.getWebAccessStatus((result) => {
         expect(result.isAvailable).toBe(true);
-        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa');
+        expect(result.address.toLowerCase()).toBe('https://trial.eway-crm.com/31994/wa/content/images/loading.gif');
         done();
     });
 });
