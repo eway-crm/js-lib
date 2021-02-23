@@ -3,8 +3,10 @@ class GlobalSettingsNames {
     static exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
     static forcedEmailTrackingGroups = 'ForcedEmailTrackingGroups';
     static groupsForAllUnpaidInvoicesNotification = 'GroupsForAllUnpaidInvoicesNotification';
+    static lastActivityAttributes = 'LastActivityAttributes';
     static leadDeadlineAlertGroups = 'LeadDeadlineAlertGroups';
     static minimumPasswordLength = 'MinimumPasswordLength';
+    static nextStepAttributes = 'NextStepAttributes';
     static notifyAboutInvoicedInvoiceInPohodaGroup = 'NotifyAboutInvoicedInvoiceInPohodaGroup';
     static notifyAboutPaidInvoiceInPohodaGroup = 'NotifyAboutPaidInvoiceInPohodaGroup';
     static phoneListTaskSolverGroup = 'PhoneListTaskSolverGroup';
