@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import { ITokenData } from '../interfaces/ITokenData';
+import base64url from "base64url";
 
 export class OAuthHelper {
     static finishAuthorization = (wsUrl: string, clientId: string, clientSecret: string, codeVerifier: string, authorizationCode: string, redirectUrl: string, callback: (tokenData: ITokenData) => void) => {
@@ -22,6 +23,15 @@ export class OAuthHelper {
         params.append('grant_type', 'refresh_token');
 
         OAuthHelper.callTokenEndpoint(wsUrl, params, callback);
+    }
+
+    static getWebServiceUrl = (refreshToken: string) => {
+        const parts = refreshToken.split('.');
+        if (parts.length != 2) {
+          throw new Error("Invalid token supplied");
+        }
+
+        return base64url.decode(parts[1]);
     }
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
