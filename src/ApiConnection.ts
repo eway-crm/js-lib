@@ -6,16 +6,20 @@ import { HttpMethod } from './HttpMethod';
 import { CredentialsSessionHandler } from './CredentialsSessionHandler';
 import { AnonymousSessionHandler } from './AnonymousSessionHandler';
 import { ApiMethods } from './ApiMethods';
+import { OAuthSessionHandler } from './OAuthSessionHandler';
+import { UnionError } from './exceptions/UnionError';
+import { HttpRequestError } from './exceptions/HttpRequestError';
+import { ITokenData } from './interfaces/ITokenData';
 
 export class ApiConnection {
     private readonly svcUri: string;
     private readonly baseUri: string;
     private readonly sessionHandler: ISessionHandler;
-    private readonly errorCallback: ((error: Error, data?: any) => void) | undefined;
+    private readonly errorCallback: ((error: UnionError, data?: any) => void) | undefined;
 
     private sessionId: string | null;
 
-    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: any) => void) {
+    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: UnionError, data?: any) => void) {
         if (!apiServiceUri) {
             throw new Error("The argument 'apiServiceUri' cannot be empty.");
         }
@@ -53,13 +57,31 @@ export class ApiConnection {
         appVersion: string,
         clientMachineIdentifier: string,
         clientMachineName: string,
-        errorCallback?: (error: Error) => void
+        errorCallback?: (error: UnionError) => void
     ): ApiConnection {
         return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback), errorCallback);
     }
 
-    static createAnonymous(apiServiceUri: string, errorCallback?: (error: Error) => void): ApiConnection {
+    static createAnonymous(apiServiceUri: string, errorCallback?: (error: UnionError) => void): ApiConnection {
         return new ApiConnection(apiServiceUri, new AnonymousSessionHandler(), errorCallback);
+    }
+
+    static createUsingOAuth(
+        apiServiceUri: string,
+        username: string,
+        clientId: string,
+        clientSecret: string,
+        refreshToken: string,
+        accessToken: string,
+        appVersion: string,
+        errorCallback?: (error: UnionError) => void,
+        refreshTokenCallback?: (tokenData: ITokenData) => void
+    ): ApiConnection {
+        return new ApiConnection(apiServiceUri, new OAuthSessionHandler(username, clientId, clientSecret, refreshToken, accessToken, appVersion, errorCallback, refreshTokenCallback), errorCallback);
+    }
+
+    get wsUrl(): string {
+        return this.baseUri;
     }
 
     readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void) => {
@@ -140,7 +162,7 @@ export class ApiConnection {
         successCallback: (result: TResult) => void,
         unsuccessCallback?: (result: TResult) => void,
         httpMethod?: HttpMethod,
-        errorCallback?: (error: any) => void
+        errorCallback?: (error: UnionError) => void
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -197,7 +219,7 @@ export class ApiConnection {
         unsuccessCallback: (result: TResult) => void,
         headers?: any,
         httpMethod?: HttpMethod,
-        errorCallback?: (error: any) => void
+        errorCallback?: (error: UnionError) => void
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -225,11 +247,10 @@ export class ApiConnection {
                 throw new Error(`Unknown http method '${httpMethod}'.`);
         }
 
-        const errorClb = (error: any) => {
-            const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + error);
+        const errorClb = (error: UnionError) => {
             if (errorCallback) {
                 try {
-                    errorCallback(err);
+                    errorCallback(error);
                 } catch (e) {
                     if (this.errorCallback) {
                         this.errorCallback(e, data);
@@ -238,6 +259,7 @@ export class ApiConnection {
                     }
                 }
             } else {
+                const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + error);
                 if (this.errorCallback) {
                     this.errorCallback(err, data);
                 } else {
@@ -257,7 +279,7 @@ export class ApiConnection {
         call: Promise<AxiosResponse<TResult>>,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
-        errorCallback: (error: any) => void
+        errorCallback: (error: UnionError) => void
     ) {
         call.then((response: AxiosResponse<TResult>) => {
             if (response.status === 200) {
@@ -267,9 +289,14 @@ export class ApiConnection {
                     unsuccessCallback(response.data);
                 }
             } else {
-                errorCallback(response);
+                errorCallback(new HttpRequestError(response.status, response.statusText));
             }
         }).catch((error) => {
+            if (error.response) {
+                errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
+                return;
+            }
+
             errorCallback(error);
         });
     }
