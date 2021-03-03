@@ -29,7 +29,7 @@ export class OAuthHelper {
 
     static getWebServiceUrl = (refreshToken: string) => {
         const parts = refreshToken.split('.');
-        if (parts.length != 2) {
+        if (parts.length !== 2) {
           throw new Error('Invalid token supplied');
         }
 
