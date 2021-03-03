@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import { ITokenData } from '../interfaces/ITokenData';
-import base64url from "base64url";
+import base64url from 'base64url';
+import jwt_decode from 'jwt-decode';
+import { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
 
 export class OAuthHelper {
     static finishAuthorization = (wsUrl: string, clientId: string, clientSecret: string, codeVerifier: string, authorizationCode: string, redirectUrl: string, callback: (tokenData: ITokenData) => void) => {
@@ -28,10 +30,16 @@ export class OAuthHelper {
     static getWebServiceUrl = (refreshToken: string) => {
         const parts = refreshToken.split('.');
         if (parts.length != 2) {
-          throw new Error("Invalid token supplied");
+          throw new Error('Invalid token supplied');
         }
 
         return base64url.decode(parts[1]);
+    }
+
+    static getUserName = (accessToken: string) => {
+        const parts = jwt_decode<IEWJwtPayload>(accessToken);
+
+        return parts.username;
     }
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {

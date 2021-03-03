@@ -1,7 +1,7 @@
 import { ISessionHandler } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
 import { IApiResult } from './IApiResult';
-import { UnionError } from './exceptions/UnionError';
+import { TUnionError } from './exceptions/HttpRequestError';
 
 type TLoginResponse = IApiResult & {
     SessionId: string | null;
@@ -15,9 +15,9 @@ export class CredentialsSessionHandler implements ISessionHandler {
     private readonly appVersion: string;
     private readonly clientMachineIdentifier: string;
     private readonly clientMachineName: string;
-    private readonly errorCallback: ((error: UnionError) => void) | undefined;
+    private readonly errorCallback: ((error: TUnionError) => void) | undefined;
 
-    constructor (username: string, passwordHash: string, appVersion: string, clientMachineIdentifier: string, clientMachineName: string, errorCallback?: (error: UnionError) => void) {
+    constructor (username: string, passwordHash: string, appVersion: string, clientMachineIdentifier: string, clientMachineName: string, errorCallback?: (error: TUnionError) => void) {
         if (!username || !passwordHash) {
             throw new Error("Non of the arguments 'username', 'passwordHash' can be empty.");
         }

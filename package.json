@@ -47,6 +47,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "base64url": "^3.0.1",
-    "es6-promise": "^4.2.8"
+    "es6-promise": "^4.2.8",
+    "jwt-decode": "^3.1.2"
   }
 }

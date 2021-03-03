@@ -3,8 +3,7 @@ import { ApiConnection } from './ApiConnection';
 import { IApiResult } from './IApiResult';
 import { OAuthHelper } from '.';
 import { ITokenData } from './interfaces/ITokenData';
-import { UnionError } from './exceptions/UnionError';
-import { HttpRequestError } from './exceptions/HttpRequestError';
+import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 
 type TLoginResponse = IApiResult & {
     SessionId: string | null;
@@ -18,12 +17,12 @@ export class OAuthSessionHandler implements ISessionHandler {
     private readonly appVersion: string;
     private readonly clientId: string;
     private readonly clientSecret: string;
-    private readonly errorCallback: ((error: UnionError) => void) | undefined;
+    private readonly errorCallback: ((error: TUnionError) => void) | undefined;
     private readonly refreshTokenCallback?: ((tokenData: ITokenData) => void) | undefined;
 
     private accessToken: string;
 
-    constructor (username: string, clientId: string, clientSecret: string, refreshToken: string, accessToken: string, appVersion: string, errorCallback?: (error: UnionError) => void,
+    constructor (username: string, clientId: string, clientSecret: string, refreshToken: string, accessToken: string, appVersion: string, errorCallback?: (error: TUnionError) => void,
         refreshTokenCallback?: (tokenData: ITokenData) => void) {
         if (!username || !refreshToken || !clientId || !clientSecret) {
             throw new Error("Non of the arguments 'username', 'clientId', 'clientSecret', 'refreshToken' can be empty.");

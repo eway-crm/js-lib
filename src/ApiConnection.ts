@@ -7,19 +7,18 @@ import { CredentialsSessionHandler } from './CredentialsSessionHandler';
 import { AnonymousSessionHandler } from './AnonymousSessionHandler';
 import { ApiMethods } from './ApiMethods';
 import { OAuthSessionHandler } from './OAuthSessionHandler';
-import { UnionError } from './exceptions/UnionError';
-import { HttpRequestError } from './exceptions/HttpRequestError';
+import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { ITokenData } from './interfaces/ITokenData';
 
 export class ApiConnection {
     private readonly svcUri: string;
     private readonly baseUri: string;
     private readonly sessionHandler: ISessionHandler;
-    private readonly errorCallback: ((error: UnionError, data?: any) => void) | undefined;
+    private readonly errorCallback: ((error: TUnionError, data?: any) => void) | undefined;
 
     private sessionId: string | null;
 
-    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: UnionError, data?: any) => void) {
+    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: TUnionError, data?: any) => void) {
         if (!apiServiceUri) {
             throw new Error("The argument 'apiServiceUri' cannot be empty.");
         }
@@ -57,12 +56,12 @@ export class ApiConnection {
         appVersion: string,
         clientMachineIdentifier: string,
         clientMachineName: string,
-        errorCallback?: (error: UnionError) => void
+        errorCallback?: (error: TUnionError) => void
     ): ApiConnection {
         return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback), errorCallback);
     }
 
-    static createAnonymous(apiServiceUri: string, errorCallback?: (error: UnionError) => void): ApiConnection {
+    static createAnonymous(apiServiceUri: string, errorCallback?: (error: TUnionError) => void): ApiConnection {
         return new ApiConnection(apiServiceUri, new AnonymousSessionHandler(), errorCallback);
     }
 
@@ -74,7 +73,7 @@ export class ApiConnection {
         refreshToken: string,
         accessToken: string,
         appVersion: string,
-        errorCallback?: (error: UnionError) => void,
+        errorCallback?: (error: TUnionError) => void,
         refreshTokenCallback?: (tokenData: ITokenData) => void
     ): ApiConnection {
         return new ApiConnection(apiServiceUri, new OAuthSessionHandler(username, clientId, clientSecret, refreshToken, accessToken, appVersion, errorCallback, refreshTokenCallback), errorCallback);
@@ -162,7 +161,7 @@ export class ApiConnection {
         successCallback: (result: TResult) => void,
         unsuccessCallback?: (result: TResult) => void,
         httpMethod?: HttpMethod,
-        errorCallback?: (error: UnionError) => void
+        errorCallback?: (error: TUnionError) => void
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -219,7 +218,7 @@ export class ApiConnection {
         unsuccessCallback: (result: TResult) => void,
         headers?: any,
         httpMethod?: HttpMethod,
-        errorCallback?: (error: UnionError) => void
+        errorCallback?: (error: TUnionError) => void
     ) => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
@@ -247,7 +246,7 @@ export class ApiConnection {
                 throw new Error(`Unknown http method '${httpMethod}'.`);
         }
 
-        const errorClb = (error: UnionError) => {
+        const errorClb = (error: TUnionError) => {
             if (errorCallback) {
                 try {
                     errorCallback(error);
@@ -279,7 +278,7 @@ export class ApiConnection {
         call: Promise<AxiosResponse<TResult>>,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
-        errorCallback: (error: UnionError) => void
+        errorCallback: (error: TUnionError) => void
     ) {
         call.then((response: AxiosResponse<TResult>) => {
             if (response.status === 200) {
