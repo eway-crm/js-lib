@@ -10,15 +10,18 @@ import { OAuthSessionHandler } from './OAuthSessionHandler';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { ITokenData } from './interfaces/ITokenData';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type TInputData = Record<string, Object | null>;
+
 export class ApiConnection {
     private readonly svcUri: string;
     private readonly baseUri: string;
     private readonly sessionHandler: ISessionHandler;
-    private readonly errorCallback: ((error: TUnionError, data?: any) => void) | undefined;
+    private readonly errorCallback: ((error: TUnionError, data?: TInputData | null) => void) | undefined;
 
     private sessionId: string | null;
 
-    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: TUnionError, data?: any) => void) {
+    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: TUnionError, data?: TInputData | null) => void) {
         if (!apiServiceUri) {
             throw new Error("The argument 'apiServiceUri' cannot be empty.");
         }
@@ -83,8 +86,9 @@ export class ApiConnection {
         return this.baseUri;
     }
 
-    readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void) => {
+    readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void): void => {
         const address = this.baseUri + '/WA/Content/Images/loading.gif';
+        let rethrowInPromiseCatch = false;
         Axios.head(address)
             .then((response: AxiosResponse) => {
                 try {
@@ -107,15 +111,13 @@ export class ApiConnection {
                     if (this.errorCallback) {
                         this.errorCallback(clbError);
                     } else {
-                        throw {
-                            rethrowInPromiseCatch: true,
-                            originalError: clbError,
-                        };
+                        rethrowInPromiseCatch = true;
+                        throw clbError;
                     }
                 }
             })
             .catch((error) => {
-                if (!error.rethrowInPromiseCatch && error.originalError) {
+                if (!rethrowInPromiseCatch && error.originalError) {
                     throw error.originalError;
                 }
                 callback({
@@ -134,10 +136,10 @@ export class ApiConnection {
      * @param httpMethod Optional. The used HTTP method. POST or GET. Default is POST.
      * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
      */
-    readonly askMethod = <TResult extends IApiResult>(methodName: string, data: object & any, httpMethod?: HttpMethod, catchGlobally?: boolean): Promise<TResult> => {
+    readonly askMethod = <TResult extends IApiResult>(methodName: string, data: TInputData, httpMethod?: HttpMethod, catchGlobally?: boolean): Promise<TResult> => {
         return new Promise<TResult>((resolve, reject) => {
             const errClb = catchGlobally
-                ? (e: any) => {
+                ? (e: TUnionError | TResult): void => {
                       reject(e);
                       throw e;
                   }
@@ -157,16 +159,16 @@ export class ApiConnection {
      */
     readonly callMethod = <TResult extends IApiResult>(
         methodName: string,
-        data: object & any,
+        data: TInputData,
         successCallback: (result: TResult) => void,
         unsuccessCallback?: (result: TResult) => void,
         httpMethod?: HttpMethod,
         errorCallback?: (error: TUnionError) => void
-    ) => {
+    ): void => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
         }
-        const noSessionCallback = () => {
+        const noSessionCallback = (): void => {
             this.sessionHandler.getSessionId(this, (newSessionId) => {
                 this.sessionId = newSessionId;
                 this.callMethod(methodName, data, successCallback, unsuccessCallback, httpMethod, errorCallback);
@@ -180,7 +182,7 @@ export class ApiConnection {
         }
 
         data.sessionId = sessionId;
-        const unsuccessClb = (result: TResult) => {
+        const unsuccessClb = (result: TResult): void => {
             if (result.ReturnCode === ReturnCodes.rcBadSession) {
                 this.sessionId = null;
                 if (methodName !== ApiMethods.logOut) {
@@ -203,7 +205,7 @@ export class ApiConnection {
         const successClb =
             methodName !== ApiMethods.logOut
                 ? successCallback
-                : (result: TResult) => {
+                : (result: TResult): void => {
                       this.sessionId = null;
                       successCallback(result);
                   };
@@ -213,13 +215,13 @@ export class ApiConnection {
 
     readonly callWithoutSession = <TResult extends IApiResult>(
         methodName: string,
-        data: object | null,
+        data: TInputData | null,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
-        headers?: any,
+        headers?: Record<string, string> | null,
         httpMethod?: HttpMethod,
         errorCallback?: (error: TUnionError) => void
-    ) => {
+    ): void => {
         if (!httpMethod) {
             httpMethod = HttpMethod.post;
         }
@@ -234,7 +236,7 @@ export class ApiConnection {
         let promise: Promise<AxiosResponse<TResult>>;
         switch (httpMethod) {
             case HttpMethod.get:
-                if (!data) {
+                if (data) {
                     throw new Error('Calling api get method with data specified does not make any sense.');
                 }
                 promise = Axios.get(methodUrl, config);
@@ -243,10 +245,10 @@ export class ApiConnection {
                 promise = Axios.post(methodUrl, data, config);
                 break;
             default:
-                throw new Error(`Unknown http method '${httpMethod}'.`);
+                throw new Error(`Unknown http method '${httpMethod as string}'.`);
         }
 
-        const errorClb = (error: TUnionError) => {
+        const errorClb = (error: TUnionError): void => {
             if (errorCallback) {
                 try {
                     errorCallback(error);
@@ -279,7 +281,7 @@ export class ApiConnection {
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
         errorCallback: (error: TUnionError) => void
-    ) {
+    ): void {
         call.then((response: AxiosResponse<TResult>) => {
             if (response.status === 200) {
                 if (response.data.ReturnCode === ReturnCodes.rcSuccess) {

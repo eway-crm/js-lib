@@ -30,14 +30,14 @@ export class CredentialsSessionHandler implements ISessionHandler {
         this.errorCallback = errorCallback;
     }
 
-    readonly invalidateSessionId = (_: string, callback: () => void) => {
+    readonly invalidateSessionId = (_: string, callback: () => void): void => {
         // Nothing to invalidate.
         if (callback) {
             callback();
         }
     };
 
-    readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void) => {
+    readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void): void => {
         connection.callWithoutSession(
             'LogIn',
             {
