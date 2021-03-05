@@ -27,4 +27,4 @@ class GlobalSettingsNames {
     static applyGeneralDataProtectionRules = 'ApplyGeneralDataProtectionRules';
 }
 
-export default GlobalSettingsNames
+export default GlobalSettingsNames;

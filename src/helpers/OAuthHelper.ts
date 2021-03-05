@@ -15,7 +15,7 @@ export class OAuthHelper {
         params.append('grant_type', 'authorization_code');
 
         OAuthHelper.callTokenEndpoint(wsUrl, params, callback);
-    }
+    };
 
     static refreshToken = (wsUrl: string, clientId: string, clientSecret: string, refreshToken: string, callback: (tokenData: ITokenData) => void) => {
         const params = new URLSearchParams();
@@ -25,7 +25,7 @@ export class OAuthHelper {
         params.append('grant_type', 'refresh_token');
 
         OAuthHelper.callTokenEndpoint(wsUrl, params, callback);
-    }
+    };
 
     static getWebServiceUrl = (refreshToken: string) => {
         const parts = refreshToken.split('.');
@@ -34,13 +34,13 @@ export class OAuthHelper {
         }
 
         return base64url.decode(parts[1]);
-    }
+    };
 
     static getUserName = (accessToken: string) => {
         const parts = jwt_decode<IEWJwtPayload>(accessToken);
 
         return parts.username;
-    }
+    };
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
         Axios.post(wsUrl + '/auth/connect/token', params, {
@@ -53,5 +53,5 @@ export class OAuthHelper {
         }, () => {
             throw new Error('Token request failed');
         });
-    }
+    };
 }

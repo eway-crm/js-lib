@@ -100,8 +100,14 @@ export class OAuthSessionHandler implements ISessionHandler {
     readonly getNewAccessToken = (connection: ApiConnection, callback: (tokenData: ITokenData) => void) => {
         OAuthHelper.refreshToken(connection.wsUrl, this.clientId, this.clientSecret, this.refreshToken, (tokenData) =>
         {
-            if (this.refreshTokenCallback) {
-                this.refreshTokenCallback(tokenData);
+            try {
+                if (this.refreshTokenCallback) {
+                    this.refreshTokenCallback(tokenData);
+                }
+            } catch (error) {
+                if (this.errorCallback) {
+                    this.errorCallback(new Error('Refresh token callback failed.\n' + JSON.stringify(error)));
+                }
             }
 
             callback(tokenData);
