@@ -1,5 +1,5 @@
 import { TokenizedServiceConnection } from './TokenizedServiceConnection';
-import { ApiConnection } from '../ApiConnection';
+import { ApiConnection, TInputData } from '../ApiConnection';
 import { ITokenizedApiResult } from './ITokenizedApiResult';
 import { HttpMethod } from '../HttpMethod';
 import { IApiResult } from '../data/IApiResult';
@@ -22,7 +22,7 @@ export class CommonDataConnection {
 
     readonly callCommonDataApi = <TResult extends ITokenizedApiResult>(
         methodName: string,
-        data: any,
+        data: TInputData,
         successCallback: (data: TResult) => void,
         unsuccessCallback?: ((data: TResult | null) => void) | null
     ) => {

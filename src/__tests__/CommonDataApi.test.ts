@@ -21,7 +21,7 @@ test('Base ComonDataApi Test', (done) => {
 
             commonDataConnection.callCommonDataApi(
                 'GetAdminFeaturedVideos',
-                {},
+                { },
                 (response: ITokenizedApiResult) => {
                     expect(response).toBeTruthy();
                     expect(response.ReturnCodeString).toBe('Success');

@@ -1,5 +1,5 @@
 import { ApiConnection } from '../ApiConnection';
-import { IApiResult } from '../IApiResult';
+import { IApiResult } from '../data/IApiResult';
 import 'jest';
 
 jest.setTimeout(30000);

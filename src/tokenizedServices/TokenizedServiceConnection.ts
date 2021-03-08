@@ -1,8 +1,9 @@
 import Axios, { AxiosResponse } from 'axios';
 import { HttpMethod } from '../HttpMethod';
-import { ApiConnection } from '../ApiConnection';
+import { ApiConnection, TInputData } from '../ApiConnection';
 import { ITokenizedApiResult } from './ITokenizedApiResult';
 import { IApiResult } from '../data/IApiResult';
+import { HttpRequestError, TUnionError } from '..';
 
 export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     private readonly obtainTokenMethodName: string;
@@ -57,7 +58,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
 
     readonly callTokenizedApi = <TResult extends ITokenizedApiResult>(
         methodName: string,
-        data: any,
+        data: TInputData,
         successCallback: (data: TResult) => void,
         unsuccessCallback?: ((data: TResult | null) => void) | null
     ) => {
@@ -85,7 +86,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                             }
                         }
                     },
-                    (error: any) => {
+                    (error: TUnionError) => {
                         if (!!this.generalErrorCallback) {
                             const err = new Error('Unhandled tokenized service connection communication error: ' + error);
                             this.generalErrorCallback(err);
@@ -133,17 +134,17 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
         if (this.needsSession) {
             this.connection.callMethod(this.obtainTokenMethodName, {}, successClb, unsuccessClb, this.obtainTokenMethodType);
         } else {
-            this.connection.callWithoutSession(this.obtainTokenMethodName, {}, successClb, unsuccessClb, null, this.obtainTokenMethodType);
+            this.connection.callWithoutSession(this.obtainTokenMethodName, null, successClb, unsuccessClb, null, this.obtainTokenMethodType);
         }
     };
 
     private static call<TResult extends ITokenizedApiResult>(
         serviceUrl: string,
         methodName: string,
-        data: object,
+        data: TInputData,
         successCallback: (result: TResult) => void,
         unsuccessCallback: (result: TResult) => void,
-        errorCallback: (error: any) => void
+        errorCallback: (error: TUnionError) => void
     ) {
         // We count on that we are in Admin/Subdirectory.
         const address = serviceUrl + '/' + methodName;
@@ -156,10 +157,15 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                         unsuccessCallback(response.data);
                     }
                 } else {
-                    errorCallback(response);
+                    errorCallback(new HttpRequestError(response.status, response.statusText));
                 }
             })
             .catch((error) => {
+                if (error.response) {
+                    errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
+                    return;
+                }
+    
                 errorCallback(error);
             });
     }
