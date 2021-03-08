@@ -1,6 +1,6 @@
 import { ISessionHandler } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
-import { IApiResult } from './IApiResult';
+import { IApiResult } from './data/IApiResult';
 import { TUnionError } from './exceptions/HttpRequestError';
 
 type TLoginResponse = IApiResult & {

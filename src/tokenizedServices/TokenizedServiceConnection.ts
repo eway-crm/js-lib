@@ -2,7 +2,7 @@ import Axios, { AxiosResponse } from 'axios';
 import { HttpMethod } from '../HttpMethod';
 import { ApiConnection } from '../ApiConnection';
 import { ITokenizedApiResult } from './ITokenizedApiResult';
-import { IApiResult } from '../IApiResult';
+import { IApiResult } from '../data/IApiResult';
 
 export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     private readonly obtainTokenMethodName: string;

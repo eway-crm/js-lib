@@ -1,7 +1,6 @@
 import * as Promise from 'es6-promise';
 import { ApiConnection } from './ApiConnection';
 import { HttpMethod } from './HttpMethod';
-import { IApiResult } from './IApiResult';
 import { ISessionHandler } from './ISessionHandler';
 import { ReturnCodes } from './ReturnCodes';
 import { ITokenizedApiResult } from './tokenizedServices/ITokenizedApiResult';
@@ -17,4 +16,31 @@ Promise.polyfill();
 
 export default ApiConnection;
 
-export { HttpMethod, IApiResult, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods, GlobalSettingsNames, FolderNames, TFolderName, OAuthHelper, HttpRequestError, TUnionError };
+export * from './data/IApiAdditionalField';
+export * from './data/IApiAvailableBundle';
+export * from './data/IApiAvailableVersionResponse';
+export * from './data/IApiCapacityAvailableBundle';
+export * from './data/IApiColumn';
+export * from './data/IApiColumnPermission';
+export * from './data/IApiDataResponse';
+export * from './data/IApiDatumResponse';
+export * from './data/IApiEnumType';
+export * from './data/IApiEnumValue';
+export * from './data/IApiFeature';
+export * from './data/IApiGlobalSetting';
+export * from './data/IApiGroup';
+export * from './data/IApiItemBase';
+export * from './data/IApiItemUsageStatus';
+export * from './data/IApiLicense';
+export * from './data/IApiLicenseBundleBase';
+export * from './data/IApiLocalizedLicenseBundle';
+export * from './data/IApiModulePermission';
+export * from './data/IApiObjectType';
+export * from './data/IApiPasswordStrength';
+export * from './data/IApiResult';
+export * from './data/IApiSaveResponse';
+export * from './data/IApiUser';
+export * from './data/IApiUserSetting';
+export * from './data/IApiWorkflowModel';
+
+export { HttpMethod, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods, GlobalSettingsNames, FolderNames, TFolderName, OAuthHelper, HttpRequestError, TUnionError };

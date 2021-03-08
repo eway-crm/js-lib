@@ -1,6 +1,6 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { ReturnCodes } from './ReturnCodes';
-import { IApiResult } from './IApiResult';
+import { IApiResult } from './data/IApiResult';
 import { ISessionHandler } from './ISessionHandler';
 import { HttpMethod } from './HttpMethod';
 import { CredentialsSessionHandler } from './CredentialsSessionHandler';

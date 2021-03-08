@@ -1,6 +1,6 @@
 import { ISessionHandler } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
-import { IApiResult } from './IApiResult';
+import { IApiResult } from './data/IApiResult';
 import { OAuthHelper } from '.';
 import { ITokenData } from './interfaces/ITokenData';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
