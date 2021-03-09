@@ -9,6 +9,8 @@ import { ApiMethods } from './ApiMethods';
 import { OAuthSessionHandler } from './OAuthSessionHandler';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { ITokenData } from './interfaces/ITokenData';
+import base64url from 'base64url';
+import { TFolderName } from './constants/FolderNames';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type TInputData = Record<string, Object | null>;
@@ -85,6 +87,23 @@ export class ApiConnection {
     get wsUrl(): string {
         return this.baseUri;
     }
+
+    readonly createOpenLink = (folderName: TFolderName, guid?: string, fileAs?: string): string => {
+        const ws = base64url.encode(this.baseUri);
+        let legacyLink = "eway://" + folderName;
+        if (guid) {
+            legacyLink +=  "/" + guid?.toLowerCase();
+        }
+
+        legacyLink = base64url.encode(legacyLink);
+        let url = "https://open.eway-crm.com/?ws=" + ws + "&l=" + legacyLink;
+
+        if (fileAs) {
+            url += "&n=" + encodeURIComponent(fileAs);
+        }
+
+        return url;
+    };
 
     readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void): void => {
         const address = this.baseUri + '/WA/Content/Images/loading.gif';
