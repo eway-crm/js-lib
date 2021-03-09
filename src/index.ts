@@ -43,4 +43,6 @@ export * from './data/IApiUser';
 export * from './data/IApiUserSetting';
 export * from './data/IApiWorkflowModel';
 
+export * from './interfaces/ITranslatableString';
+
 export { HttpMethod, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods, GlobalSettingsNames, FolderNames, TFolderName, OAuthHelper, HttpRequestError, TUnionError };
