@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/eway-crm/js-lib#readme",
   "devDependencies": {
+    "@eway-crm/eslint-config": "^1.0.6",
     "@types/jest": "^26.0.19",
     "jest": "^26.6.3",
     "prettier": "^2.1.2",
@@ -45,7 +46,6 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "@eway-crm/eslint-config": "^1.0.4",
     "axios": "^0.21.1",
     "base64url": "^3.0.1",
     "es6-promise": "^4.2.8",
