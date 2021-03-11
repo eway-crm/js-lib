@@ -4,3 +4,6 @@ export interface ITokenData {
     token_type: string;
     refresh_token: string;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type TInputData = Record<string, Object | null>;

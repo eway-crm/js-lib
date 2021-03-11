@@ -1,8 +1,9 @@
 import { TokenizedServiceConnection } from './TokenizedServiceConnection';
-import { ApiConnection, TInputData } from '../ApiConnection';
+import { ApiConnection } from '../ApiConnection';
 import { ITokenizedApiResult } from './ITokenizedApiResult';
 import { HttpMethod } from '../HttpMethod';
 import { IApiResult } from '../data/IApiResult';
+import { TInputData } from '../interfaces/ITokenData';
 
 type TObtainResponse = { ServiceUrl: string | null; Token: string | null } & IApiResult;
 const obtainer = (result: TObtainResponse) => {

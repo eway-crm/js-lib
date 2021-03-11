@@ -8,12 +8,9 @@ import { AnonymousSessionHandler } from './AnonymousSessionHandler';
 import { ApiMethods } from './ApiMethods';
 import { OAuthSessionHandler } from './OAuthSessionHandler';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
-import { ITokenData } from './interfaces/ITokenData';
+import { ITokenData, TInputData } from './interfaces/ITokenData';
 import base64url from 'base64url';
 import { TFolderName } from './constants/FolderNames';
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type TInputData = Record<string, Object | null>;
 
 export class ApiConnection {
     private readonly svcUri: string;
