@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
+import Axios, { AxiosError } from 'axios';
 import { HttpMethod } from '../HttpMethod';
 import { ApiConnection } from '../ApiConnection';
 import { ITokenizedApiResult } from './ITokenizedApiResult';
@@ -89,7 +89,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                     },
                     (error: TUnionError) => {
                         if (!!this.generalErrorCallback) {
-                            const err = new Error('Unhandled tokenized service connection communication error: ' + error);
+                            const err = new Error('Unhandled tokenized service connection communication error: ' + JSON.stringify(error));
                             this.generalErrorCallback(err);
                         }
                     }
@@ -149,8 +149,8 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     ) {
         // We count on that we are in Admin/Subdirectory.
         const address = serviceUrl + '/' + methodName;
-        Axios.post(address, data)
-            .then((response: AxiosResponse<TResult>) => {
+        Axios.post<TResult>(address, data)
+            .then((response) => {
                 if (response.status === 200) {
                     if (response.data.ReturnCodeString === 'Success') {
                         successCallback(response.data);
@@ -161,7 +161,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                     errorCallback(new HttpRequestError(response.status, response.statusText));
                 }
             })
-            .catch((error) => {
+            .catch((error: AxiosError) => {
                 if (error.response) {
                     errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
                     return;

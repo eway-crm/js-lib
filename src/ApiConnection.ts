@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 import { ReturnCodes } from './ReturnCodes';
 import { IApiResult } from './data/IApiResult';
 import { ISessionHandler } from './ISessionHandler';
@@ -132,9 +132,9 @@ export class ApiConnection {
                     }
                 }
             })
-            .catch((error) => {
-                if (!rethrowInPromiseCatch && error.originalError) {
-                    throw error.originalError;
+            .catch((error: Error) => {
+                if (!rethrowInPromiseCatch && error) {
+                    throw error;
                 }
                 callback({
                     isAvailable: false,
@@ -276,7 +276,7 @@ export class ApiConnection {
                     }
                 }
             } else {
-                const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + error);
+                const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + JSON.stringify(error));
                 if (this.errorCallback) {
                     this.errorCallback(err, data);
                 } else {
@@ -289,7 +289,7 @@ export class ApiConnection {
     };
 
     readonly getItemPreviewGetMethodUrl = (folderName: string, itemGuid: string, itemVersion?: number): string => {
-        return this.svcUri + '/' + ApiMethods.getItemPreview + '?folderName=' + folderName + '&itemGuid=' + itemGuid + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + itemVersion : '');
+        return this.svcUri + '/' + ApiMethods.getItemPreview + '?folderName=' + folderName + '&itemGuid=' + itemGuid + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + itemVersion.toString() : '');
     };
 
     private static handleCallPromise<TResult extends IApiResult>(
@@ -308,7 +308,7 @@ export class ApiConnection {
             } else {
                 errorCallback(new HttpRequestError(response.status, response.statusText));
             }
-        }).catch((error) => {
+        }).catch((error: AxiosError) => {
             if (error.response) {
                 errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
                 return;

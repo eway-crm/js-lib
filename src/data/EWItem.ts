@@ -1,4 +1,4 @@
-import { FolderNames, IApiCompany, IApiContact, IApiLead, TFolderName, TInputData } from "..";
+import { FolderNames, IApiCompany, IApiContact, IApiLead, TFolderName } from "..";
 import { IApiItemBase } from "./IApiItemBase";
 import { IApiUser } from "./IApiUser";
 
