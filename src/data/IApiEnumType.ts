@@ -1,6 +1,12 @@
 import { IApiItemBase } from "./IApiItemBase";
 import { IApiEnumValue } from "./IApiEnumValue";
 
+export enum EnumTypeAdminEditMode {
+    Readonly,
+    VisibleRankDefaultOnly,
+    Editable,
+}
+
 export interface IApiEnumType extends IApiItemBase {
     EnumName: string;
     IsSystem: boolean;
@@ -17,5 +23,6 @@ export interface IApiEnumType extends IApiItemBase {
     NameNo: string;
     IsAdditionalField: boolean;
     AssociatedAdditionalFieldId: number | null;
+    EnumTypeAdminEditMode: EnumTypeAdminEditMode | null;
     EnumValuesInEnumType: IApiEnumValue[] | null;
 }
