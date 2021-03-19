@@ -276,7 +276,7 @@ export class ApiConnection {
                     }
                 }
             } else {
-                const err = new Error('Unhandled connection error when calling ' + methodUrl + ':' + JSON.stringify(error));
+                const err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
                 if (this.errorCallback) {
                     this.errorCallback(err, data);
                 } else {
