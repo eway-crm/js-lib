@@ -31,5 +31,6 @@ export interface IApiColumn {
     NameNo: string;
     NameRu: string;
     NameSk: string;
+    OriginalCurrencyColumn: string | null;
     Type: string;
 }
