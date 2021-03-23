@@ -9,6 +9,7 @@ export interface IApiUser extends IApiItemBase {
     Email1Address: string | null;
     Email2Address: string | null;
     IsSystem: boolean;
+    IsApiUser: boolean;
     Server_Password: string;
     Server_LicensingBundlesList: IApiLicenseBundleBase[] | null;
     Server_ForcePasswordChange: boolean;
