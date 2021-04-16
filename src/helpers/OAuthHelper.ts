@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios, { AxiosError } from 'axios';
 import { ITokenData } from '../interfaces/ITokenData';
 import base64url from 'base64url';
 import jwt_decode from 'jwt-decode';
@@ -50,7 +50,15 @@ export class OAuthHelper {
         })
         .then((response) => {
             callback(response.data);
-        }, () => {
+        })
+        .catch((error: AxiosError) => {
+            if (error.response) {
+                if (error.response.status == 400) {
+                    callback(error.response.data);
+                    return;
+                }
+            }
+
             throw new Error('Token request failed');
         });
     };

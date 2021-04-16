@@ -83,7 +83,9 @@ export class OAuthSessionHandler implements ISessionHandler {
                 if ((error as HttpRequestError)?.statusCode === 401) {
                     this.getNewAccessToken(connection, (tokenData) => {
                         this.accessToken = tokenData.access_token;
-                        this.getSessionId(connection, callback);
+                        if (!tokenData.error) {
+                            this.getSessionId(connection, callback);
+                        }
                     });
 
                     return;

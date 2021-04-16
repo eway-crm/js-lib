@@ -3,6 +3,7 @@ export interface ITokenData {
     expires_in: number;
     token_type: string;
     refresh_token: string;
+    error: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
