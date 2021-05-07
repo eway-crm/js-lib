@@ -9,7 +9,7 @@ export interface IApiModulePermission extends IApiItemBase {
     View: TApiModulePermissionOptions;
     Edit: TApiModulePermissionOptions;
     Delete: TApiModulePermissionOptions;
-    RowsRestriction: number;
+    RowsRestriction: number | null;
     FolderName: string;
     GroupGuid: string;
     IsSystem: boolean;
