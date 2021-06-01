@@ -25,6 +25,7 @@ export interface IApiColumn {
     IsAdditionalField: boolean;
     IsPermissionEnabled: boolean;
     IsUniqueConstraintSupported: boolean;
+    LinkType: 'Phone' | 'URL' | 'Email';
     NameCs: string;
     NameDe: string;
     NameEn: string;
