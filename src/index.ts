@@ -8,6 +8,7 @@ import { TokenizedServiceConnection } from './tokenizedServices/TokenizedService
 import { CommonDataConnection } from './tokenizedServices/CommonDataConnection';
 import { ApiMethods } from './ApiMethods';
 import GlobalSettingsNames from './constants/GlobalSettingsNames';
+import FieldNames from './constants/FieldNames';
 import { FolderNames, TFolderName } from './constants/FolderNames';
 import { OAuthHelper } from './helpers/OAuthHelper';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
@@ -50,4 +51,20 @@ export * from './data/IApiWorkflowModel';
 
 export * from './interfaces/ITranslatableString';
 
-export { HttpMethod, ISessionHandler, ReturnCodes, ITokenizedApiResult, TokenizedServiceConnection, CommonDataConnection, ApiMethods, GlobalSettingsNames, FolderNames, TFolderName, OAuthHelper, HttpRequestError, TUnionError, TInputData };
+export {
+    HttpMethod,
+    ISessionHandler,
+    ReturnCodes,
+    ITokenizedApiResult,
+    TokenizedServiceConnection,
+    CommonDataConnection,
+    ApiMethods,
+    GlobalSettingsNames,
+    FolderNames,
+    TFolderName,
+    OAuthHelper,
+    HttpRequestError,
+    TUnionError,
+    TInputData,
+    FieldNames
+};
