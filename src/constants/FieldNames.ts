@@ -126,7 +126,7 @@ export default class FieldNames {
         LastActivity: 'LastActivity',
     } as const;
 
-    static readonly Deals = {
+    static readonly Leads = {
         ID: 'ID',
         FileAs: 'FileAs',
         HumanID: 'HID',
@@ -231,7 +231,7 @@ export default class FieldNames {
         Phone: 'Phone',
     } as const;
 
-    static readonly Leaves = {
+    static readonly Vacation = {
         StartDate: 'StartDate',
         EndDate: 'EndDate',
         User: 'User',
@@ -373,7 +373,7 @@ export default class FieldNames {
         StateEn: 'StateEn',
     } as const;
 
-    static readonly Timesheets = {
+    static readonly WorkReports = {
         Task: 'Task',
         SuperiorItem: 'SuperiorItem',
         User: 'User',
