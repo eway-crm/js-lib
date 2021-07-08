@@ -1,9 +1,16 @@
 export default class FieldNames {
     static readonly Common = {
         CurrencyEn: 'CurrencyEn',
+        FileAs: 'FileAs',
+        ItemGUID: 'ItemGUID',
         DefaultCurrencySuffix: 'DefaultCurrency',
         ParentCurrencySuffix: 'ParentCurrency',
-    };
+    } as const;
+
+    static readonly Calendar = {
+        EndDate: 'EndDate',
+        Note: 'Note',
+    } as const;
 
     static readonly Carts = {
         SuperiorItem: 'SuperiorItem',
@@ -21,7 +28,7 @@ export default class FieldNames {
         IdentificationNumber: 'IdentificationNumber',
         VatNumber: 'VatNumber',
         Sales: 'Reversal',
-        NumberOfEmployees: 'NumberOfEmployees',
+        EmployeesCount: 'EmployeesCount',
         Purchaser: 'Purchaser',
         Suppliers: 'Suppliers',
         Competitor: 'Competitor',
@@ -62,9 +69,9 @@ export default class FieldNames {
         Skype: 'Skype',
 
         ImportanceEn: 'ImportanceEn',
-        FirstContact: 'FirstContact',
+        FirstContactEn: 'FirstContactEn',
         LineOfBusiness: 'LineOfBusiness',
-        NotificationByEmail: 'NotificationByEmail',
+        EmailOptOut: 'EmailOptOut',
         MailingListOther: 'MailingListOther',
         MailingListOtherValue: 'MailingListOtherValue',
 
@@ -108,8 +115,8 @@ export default class FieldNames {
         BusinessPhoneNumber: 'TelephoneNumber1',
         BusinessPhoneNumber2: 'TelephoneNumber5',
         BusinessFaxNumber: 'TelephoneNumber6',
-        MobilePhoneNumber: 'TelephoneNumber2',
-        HomePhoneNumber: 'TelephoneNumber3',
+        MobilePhoneNumber: 'TelephoneNumber3',
+        HomePhoneNumber: 'TelephoneNumber2',
         OtherPhoneNumber: 'TelephoneNumber4',
 
         ICQ: 'ICQ',
@@ -166,6 +173,7 @@ export default class FieldNames {
         NextStep: 'NextStep',
         LastActivity: 'LastActivity',
         ItemVersion: 'ItemVersion',
+        EstimatedRevenueDefaultCurrency: 'EstimatedRevenueDefaultCurrency'
     } as const;
 
     static readonly Documents = {
@@ -210,7 +218,7 @@ export default class FieldNames {
         Code: 'Code',
         Structure: 'Structure',
         Note: 'Note',
-        Description: 'Description',
+        Description: 'Description'
     } as const;
 
     static readonly Journal = {
@@ -245,7 +253,7 @@ export default class FieldNames {
         StateEn: 'StateEn',
 
         IsPrivate: 'Private',
-    };
+    } as const;
 
     static readonly Marketing = {
         HumanID: 'HumanID',
@@ -317,7 +325,7 @@ export default class FieldNames {
         Customer: 'Customer',
         ContactPerson: 'ContactPerson',
 
-        Team: 'Team',
+        Users: 'Users',
         ProjectManager: 'ProjectManager',
 
         InvoicePaymentDate: 'InvoicePaymentDate',
@@ -375,8 +383,8 @@ export default class FieldNames {
 
     static readonly WorkReports = {
         Task: 'Task',
-        SuperiorItem: 'SuperiorItem',
-        User: 'User',
+        ProjectName: 'ProjectName',
+        UserName: 'UserName',
         Subject: 'Subject',
 
         Date: 'Date',
