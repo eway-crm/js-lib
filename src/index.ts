@@ -13,6 +13,7 @@ import { FolderNames, TFolderName } from './constants/FolderNames';
 import { OAuthHelper } from './helpers/OAuthHelper';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { TInputData } from './interfaces/ITokenData';
+import EnumTypes from './constants/EnumTypes'; 
 
 Promise.polyfill();
 
@@ -66,5 +67,6 @@ export {
     HttpRequestError,
     TUnionError,
     TInputData,
-    FieldNames
+    FieldNames,
+    EnumTypes
 };

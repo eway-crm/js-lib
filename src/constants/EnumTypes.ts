@@ -1,4 +1,4 @@
-export class EnumTypes {
+export default class EnumTypes {
     static readonly busyStatus = 'BusyStatus';
     static readonly cartType = 'CartType';
     static readonly companyType = 'CompanyType';
