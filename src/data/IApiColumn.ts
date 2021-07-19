@@ -1,3 +1,5 @@
+import { TFolderName } from "../constants/FolderNames";
+
 type TAdditionalFieldItem = {
     Comment: string;
     FieldId: number;
@@ -7,6 +9,11 @@ type TAdditionalFieldItem = {
 type EnumTypeItem = {
     EnumName: string;
     ItemGUID: string;
+};
+
+type TForeignKeyRelationInfo = {
+    RelatedFolders: TFolderName[];
+    RelationType: string;
 };
 
 export interface IApiColumn {
@@ -22,6 +29,7 @@ export interface IApiColumn {
     ColumnName: string;
     EnumTypeItem: EnumTypeItem | null;
     FolderName: string;
+    ForeignKeyRelationInfo: TForeignKeyRelationInfo | null;
     IsAdditionalField: boolean;
     IsPermissionEnabled: boolean;
     IsUniqueConstraintSupported: boolean;
