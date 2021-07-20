@@ -1,6 +1,7 @@
 import { TFolderName } from "../constants/FolderNames";
 
 type TAdditionalFieldItem = {
+    CategoryEn: string | null;
     Comment: string;
     FieldId: number;
     ItemGUID: string;
