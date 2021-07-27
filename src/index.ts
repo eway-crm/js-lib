@@ -13,7 +13,8 @@ import { FolderNames, TFolderName } from './constants/FolderNames';
 import { OAuthHelper } from './helpers/OAuthHelper';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { TInputData } from './interfaces/ITokenData';
-import EnumTypes from './constants/EnumTypes'; 
+import EnumTypes from './constants/EnumTypes';
+import RelationTypes from './constants/RelationTypes';
 
 Promise.polyfill();
 
@@ -68,5 +69,6 @@ export {
     TUnionError,
     TInputData,
     FieldNames,
-    EnumTypes
+    EnumTypes,
+    RelationTypes
 };
