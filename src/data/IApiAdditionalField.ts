@@ -1,4 +1,5 @@
-import { IApiItemBase } from "./IApiItemBase";
+import { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
+import { IApiItemBase } from './IApiItemBase';
 
 export interface IApiAdditionalField extends IApiItemBase {
     ObjectTypeFolderName: string;
@@ -11,7 +12,7 @@ export interface IApiAdditionalField extends IApiItemBase {
     Rank: number;
     Data_RelatedFolderName: string | null;
     Data_IsDateTime: boolean | null;
-    Data_FormatType: string | null;
+    Data_FormatType: TNumericValidatorType | null;
     Data_EditMask: string | null;
     Data_MemoBoxLines: number | null;
     Data_SummaryType: string | null;

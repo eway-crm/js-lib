@@ -1,4 +1,5 @@
-import { TFolderName } from "../constants/FolderNames";
+import { TFolderName } from '../constants/FolderNames';
+import { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
 
 type TAdditionalFieldItem = {
     CategoryEn: string | null;
@@ -17,30 +18,37 @@ type TForeignKeyRelationInfo = {
     RelationType: string;
 };
 
+type TNumericInfo = {
+    FormatType: TNumericValidatorType;
+    CurrencyEnColumnName?: string;
+};
+
 export interface IApiColumn {
-    AdditionalFieldItem: TAdditionalFieldItem | null;
+    AdditionalFieldItem?: TAdditionalFieldItem;
     AllowedColumnMandatoryTypes: string[] | null;
     AllowedColumnPermissionTypes: string[] | null;
-    AltNameCs: string | null;
-    AltNameDe: string | null;
-    AltNameEn: string | null;
-    AltNameNo: string | null;
-    AltNameRu: string | null;
-    AltNameSk: string | null;
+    AltNameCs?: string;
+    AltNameDe?: string;
+    AltNameEn?: string;
+    AltNameNo?: string;
+    AltNameRu?: string;
+    AltNameSk?: string;
     ColumnName: string;
-    EnumTypeItem: EnumTypeItem | null;
+    EnumTypeItem?: EnumTypeItem;
     FolderName: string;
-    ForeignKeyRelationInfo: TForeignKeyRelationInfo | null;
+    ForeignKeyRelationInfo?: TForeignKeyRelationInfo;
     IsAdditionalField: boolean;
     IsPermissionEnabled: boolean;
     IsUniqueConstraintSupported: boolean;
-    LinkType: 'Phone' | 'URL' | 'Email' | 'Custom';
+    LinkType?: 'Phone' | 'URL' | 'Email' | 'Custom';
     NameCs: string;
     NameDe: string;
     NameEn: string;
     NameNo: string;
     NameRu: string;
     NameSk: string;
-    OriginalCurrencyColumn: string | null;
+    NumericInfo?: TNumericInfo;
+    DateTimeEnum?: 'Date' | 'DateTime' | 'DateTimeSeconds';
+    OriginalCurrencyColumn?: string;
     Type: string;
 }
