@@ -48,7 +48,7 @@ export interface IApiColumn {
     NameRu: string;
     NameSk: string;
     NumericInfo?: TNumericInfo;
-    DateTimeEnum?: 'Date' | 'DateTime' | 'DateTimeSeconds';
+    DateTimeType?: 'Date' | 'DateTime' | 'DateTimeSeconds';
     OriginalCurrencyColumn?: string;
     Type: string;
 }
