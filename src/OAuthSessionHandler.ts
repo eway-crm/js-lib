@@ -4,6 +4,7 @@ import { IApiResult } from './data/IApiResult';
 import { OAuthHelper } from '.';
 import { ITokenData } from './interfaces/ITokenData';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
+import { WebServiceError } from './exceptions/WebServiceError';
 
 type TLoginResponse = IApiResult & {
     SessionId: string | null;
@@ -68,7 +69,7 @@ export class OAuthSessionHandler implements ISessionHandler {
                 }
             },
             (result) => {
-                const error = new Error('Unable to login. Error response follows.\n' + JSON.stringify(result));
+                const error = new WebServiceError(result.ReturnCode, 'Unable to login. Error response follows.\n' + JSON.stringify(result));
                 if (this.errorCallback) {
                     this.errorCallback(error);
                 } else {
