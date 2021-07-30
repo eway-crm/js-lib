@@ -1,9 +1,15 @@
 export default class FieldNames {
     static readonly Common = {
+        CreatedByGUID: 'CreatedByGUID',
         CurrencyEn: 'CurrencyEn',
-        FileAs: 'FileAs',
-        ItemGUID: 'ItemGUID',
         DefaultCurrencySuffix: 'DefaultCurrency',
+        FileAs: 'FileAs',
+        ItemCreated: 'ItemCreated',
+        ItemChanged: 'ItemChanged',
+        ItemGUID: 'ItemGUID',
+        ItemVersion: 'ItemVersion',
+        ModifiedByGUID: 'ModifiedByGUID',
+        OwnerGUID: 'OwnerGUID',
         ParentCurrencySuffix: 'ParentCurrency',
     } as const;
 

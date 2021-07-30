@@ -50,6 +50,8 @@ export * from './data/IApiSaveResponse';
 export * from './data/IApiUser';
 export * from './data/IApiUserSetting';
 export * from './data/IApiWorkflowModel';
+export * from './data/query/IApiQuery';
+export * from './data/query/IApiQueryFilters';
 
 export * from './interfaces/ITranslatableString';
 
