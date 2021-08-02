@@ -1,3 +1,4 @@
+import { TFieldType } from '../constants/FieldTypes';
 import { TFolderName } from '../constants/FolderNames';
 import { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
 
@@ -50,5 +51,5 @@ export interface IApiColumn {
     NumericInfo?: TNumericInfo;
     DateTimeType?: 'Date' | 'DateTime' | 'DateTimeSeconds';
     OriginalCurrencyColumn?: string;
-    Type: string;
+    Type: TFieldType;
 }
