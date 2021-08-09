@@ -28,6 +28,7 @@ class GlobalSettingsNames {
     static nextStepAttributes = 'NextStepAttributes';
     static notifyAboutInvoicedInvoiceInPohodaGroup = 'NotifyAboutInvoicedInvoiceInPohodaGroup';
     static notifyAboutPaidInvoiceInPohodaGroup = 'NotifyAboutPaidInvoiceInPohodaGroup';
+    static numberOfDecimalPlaces = 'NumberOfDecimalPlaces';
     static phoneListTaskSolverGroup = 'PhoneListTaskSolverGroup';
     static projectDeadlineAlert = 'ProjectDeadlineAlert';
     static serverUpdateProgressNotificationGroup = 'ServerUpdateProgressNotificationGroup';
