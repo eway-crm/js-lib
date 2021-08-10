@@ -179,6 +179,8 @@ export default class FieldNames {
         NextStep: 'NextStep',
         LastActivity: 'LastActivity',
         ItemVersion: 'ItemVersion',
+
+        EstimatedRevenue: 'EstimatedRevenue',
         EstimatedRevenueDefaultCurrency: 'EstimatedRevenueDefaultCurrency'
     } as const;
 
