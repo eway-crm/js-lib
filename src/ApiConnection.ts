@@ -17,10 +17,11 @@ export class ApiConnection {
     private readonly baseUri: string;
     private readonly sessionHandler: ISessionHandler;
     private readonly errorCallback: ((error: TUnionError, data?: TInputData | null) => void) | undefined;
+    private readonly supportGetItemPreviewMethod: boolean;
 
     private sessionId: string | null;
 
-    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: TUnionError, data?: TInputData | null) => void) {
+    constructor(apiServiceUri: string, sessionHandler: ISessionHandler, errorCallback?: (error: TUnionError, data?: TInputData | null) => void, supportGetItemPreviewMethod?: boolean) {
         if (!apiServiceUri) {
             throw new Error("The argument 'apiServiceUri' cannot be empty.");
         }
@@ -49,6 +50,12 @@ export class ApiConnection {
         this.sessionHandler = sessionHandler;
         this.errorCallback = errorCallback;
         this.sessionId = null;
+        this.supportGetItemPreviewMethod = supportGetItemPreviewMethod ?? false;
+    }
+
+    get SupportsGetItemPreviewMethod()
+    {
+        return this.supportGetItemPreviewMethod;
     }
 
     static create(
@@ -58,9 +65,10 @@ export class ApiConnection {
         appVersion: string,
         clientMachineIdentifier: string,
         clientMachineName: string,
-        errorCallback?: (error: TUnionError) => void
+        errorCallback?: (error: TUnionError) => void,
+        supportGetItemPreviewMethod?: boolean
     ): ApiConnection {
-        return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback), errorCallback);
+        return new ApiConnection(apiServiceUri, new CredentialsSessionHandler(username, passwordHash, appVersion, clientMachineIdentifier, clientMachineName, errorCallback), errorCallback, supportGetItemPreviewMethod);
     }
 
     static createAnonymous(apiServiceUri: string, errorCallback?: (error: TUnionError) => void): ApiConnection {
@@ -76,9 +84,10 @@ export class ApiConnection {
         accessToken: string,
         appVersion: string,
         errorCallback?: (error: TUnionError) => void,
-        refreshTokenCallback?: (tokenData: ITokenData) => void
+        refreshTokenCallback?: (tokenData: ITokenData) => void,
+        supportGetItemPreviewMethod?: boolean
     ): ApiConnection {
-        return new ApiConnection(apiServiceUri, new OAuthSessionHandler(username, clientId, clientSecret, refreshToken, accessToken, appVersion, errorCallback, refreshTokenCallback), errorCallback);
+        return new ApiConnection(apiServiceUri, new OAuthSessionHandler(username, clientId, clientSecret, refreshToken, accessToken, appVersion, errorCallback, refreshTokenCallback), errorCallback, supportGetItemPreviewMethod);
     }
 
     get wsUrl(): string {
@@ -247,6 +256,7 @@ export class ApiConnection {
         if (!!headers) {
             config = {
                 headers,
+                withCredentials: this.supportGetItemPreviewMethod ?? methodName == "LogIn"
             };
         }
         let promise: Promise<AxiosResponse<TResult>>;

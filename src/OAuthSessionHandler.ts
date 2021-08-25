@@ -51,7 +51,8 @@ export class OAuthSessionHandler implements ISessionHandler {
             'LogIn',
             {
                 userName: this.username,
-                appVersion: this.appVersion
+                appVersion: this.appVersion,
+                createSessionCookie: connection.SupportsGetItemPreviewMethod
             },
             (result: TLoginResponse) => {
                 const newSessionId = result.SessionId;
