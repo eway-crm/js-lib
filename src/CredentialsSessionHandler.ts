@@ -46,7 +46,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
                 appVersion: this.appVersion,
                 clientMachineIdentifier: this.clientMachineIdentifier,
                 clientMachineName: this.clientMachineName,
-                createSessionCookie: connection.SupportsGetItemPreviewMethod
+                createSessionCookie: connection.supportsGetItemPreviewMethod
             },
             (result: TLoginResponse) => {
                 const newSessionId = result.SessionId;
