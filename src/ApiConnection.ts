@@ -111,6 +111,9 @@ export class ApiConnection {
         return url;
     };
 
+    /**
+     * @deprecated
+     */
     readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void): void => {
         const address = this.baseUri + '/WA/Content/Images/loading.gif';
         let rethrowInPromiseCatch = false;
