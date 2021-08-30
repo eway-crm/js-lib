@@ -12,13 +12,18 @@ export type TApiAction = IApiWriteJournalEntryAction;
 export interface IApiAction {
     Name: string | null;
     ExecuteOnlyOnce: boolean;
-    ActionRelevantList: IApiActionRelevant[];
+    Relevance: TApiActionRelevant[];
 }
 
-interface IApiActionRelevant {
+type TApiActionRelevant = ({
+    GroupName: null;
+    IsForAllGroups: true;
+} | {
     GroupName: string;
+    IsForAllGroups: false;
+}) & {
     CompletionLevelName: TCompletionLevel;
-}
+};
 
 export type TCompletionLevel = 'DoNothing' | 'CanIgnore' | 'CannotIgnore';
 
