@@ -112,52 +112,6 @@ export class ApiConnection {
     };
 
     /**
-     * @deprecated
-     */
-    readonly getWebAccessStatus = (callback: (result: { isAvailable: boolean; statusCode: number | null; statusText: string; address: string }) => void): void => {
-        const address = this.baseUri + '/WA/Content/Images/loading.gif';
-        let rethrowInPromiseCatch = false;
-        Axios.head(address)
-            .then((response: AxiosResponse) => {
-                try {
-                    if (response.status >= 200 && response.status < 400) {
-                        callback({
-                            isAvailable: true,
-                            statusCode: response.status,
-                            statusText: response.statusText,
-                            address,
-                        });
-                    } else {
-                        callback({
-                            isAvailable: false,
-                            statusCode: response.status,
-                            statusText: response.statusText,
-                            address,
-                        });
-                    }
-                } catch (clbError) {
-                    if (this.errorCallback) {
-                        this.errorCallback(clbError);
-                    } else {
-                        rethrowInPromiseCatch = true;
-                        throw clbError;
-                    }
-                }
-            })
-            .catch((error: Error) => {
-                if (!rethrowInPromiseCatch && error) {
-                    throw error;
-                }
-                callback({
-                    isAvailable: false,
-                    statusCode: null,
-                    statusText: error.message,
-                    address,
-                });
-            });
-    };
-
-    /**
      * Creates a promise for async API method call.
      * @param methodName API method name. Ex. 'GetUsers'.
      * @param data Input data or empty object. Ex. {transmitObject: {FileAs: 'Peter File'}} or {itemGuids: ['9ac561be-9b7d-4938-8e55-4cce97142483']}.
