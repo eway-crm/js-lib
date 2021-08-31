@@ -7,7 +7,17 @@ export interface IApiEvent {
 
 export type TActionEventType = 'OnValueChanging' | 'OnValueChanged' | 'OnSaving' | 'OnSaved' | 'OnLoad' | 'OnLoading';
 
-export type TApiAction = IApiWriteJournalEntryAction;
+export type TApiAction = IApiAreEqualAction
+    | IApiCreateRelationAction
+    | IApiCreateTaskAction
+    | IApiDatabaseFieldIsNotEmptyAction
+    | IApiCheckPresenceOfRelationAction
+    | IApiLockFieldAction
+    | IApiLockFormAction
+    | IApiSendEmailAction
+    | IApiSetFieldValueAction
+    | IApiSetItemOwnerAction
+    | IApiWriteJournalEntryAction;
 
 export interface IApiAction {
     Name: string | null;

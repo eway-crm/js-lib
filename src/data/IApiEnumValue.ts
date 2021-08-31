@@ -15,5 +15,5 @@ export interface IApiEnumValue extends IApiItemBase {
     Sk: string | null;
     Ru: string | null;
     No: string | null;
-    AllActionEvents: IApiEvent[];
+    AllActionEvents: IApiEvent[] | null;
 }
