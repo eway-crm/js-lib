@@ -2,7 +2,7 @@ import { TFolderName } from "../../constants/FolderNames";
 
 export interface IApiEvent {
     TypeName: TActionEventType;
-    Actions: TApiAction[]
+    Actions: TApiAction[];
 }
 
 export type TActionEventType = 'OnValueChanging' | 'OnValueChanged' | 'OnSaving' | 'OnSaved' | 'OnLoad' | 'OnLoading';
