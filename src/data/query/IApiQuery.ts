@@ -22,12 +22,17 @@ interface IApiQueryField {
     Alias?: string;
 }
 
-export type TApiQueryField = IApiQueryColumn | IApiQueryVariatedColumn | IApiQueryToken;
+export type TApiQueryField = IApiQueryColumn | IApiQuerySubstituableColumn |IApiQueryVariatedColumn | IApiQueryToken;
 
 export interface IApiQueryColumn extends IApiQueryField {
     __type: 'Column:#EQ';
     Name: string;
     Transformation?: string;
+}
+
+export interface IApiQuerySubstituableColumn extends Omit<IApiQueryColumn, '__type'> {
+    __type: 'SubstituableColumn:#EQ';
+    Substitute: TApiQueryField;
 }
 
 export interface IApiQueryColumnVariation {
