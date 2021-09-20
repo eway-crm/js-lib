@@ -1,7 +1,7 @@
 import { ISessionHandler } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
 import { IApiResult } from './data/IApiResult';
-import { OAuthHelper } from '.';
+import { ApiMethods, OAuthHelper } from '.';
 import { ITokenData } from './interfaces/ITokenData';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { WebServiceError } from './exceptions/WebServiceError';
@@ -48,7 +48,7 @@ export class OAuthSessionHandler implements ISessionHandler {
 
     readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void) => {
         connection.callWithoutSession(
-            'LogIn',
+            ApiMethods.logIn,
             {
                 userName: this.username,
                 appVersion: this.appVersion,

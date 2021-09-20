@@ -2,6 +2,7 @@ import { ISessionHandler } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
 import { IApiResult } from './data/IApiResult';
 import { TUnionError } from './exceptions/HttpRequestError';
+import { ApiMethods } from './ApiMethods';
 
 type TLoginResponse = IApiResult & {
     SessionId: string | null;
@@ -39,7 +40,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
 
     readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void): void => {
         connection.callWithoutSession(
-            'LogIn',
+            ApiMethods.logIn,
             {
                 userName: this.username,
                 passwordHash: this.passwordHash,
