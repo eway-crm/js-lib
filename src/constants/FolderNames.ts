@@ -76,6 +76,10 @@ export type TFolderName = 'Actions'
     | 'XsltTransformations';
 
 export class FolderNames {
+    static isValidFolderName = (folderName: string): boolean => {
+        return Object.values(FolderNames).includes(folderName);
+    };
+    
     static readonly actions: TFolderName = "Actions";
     static readonly additionalFields: TFolderName = "AdditionalFields";
     static readonly bonuses: TFolderName = "Bonuses";
