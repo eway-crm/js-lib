@@ -297,6 +297,7 @@ export default class FieldNames {
         CurrencyEn: FieldNames.Common.CurrencyEn,
         DefaultCurrencyEn: 'DefaultCurrencyEn',
 
+        EstimatedMargin: 'EstimatedMargin',
         EstimatedPeopleExpenses: 'EstimatedPeopleExpenses',
         EstimatedPeopleExpensesDefaultCurrency: 'EstimatedPeopleExpensesDefaultCurrency',
         EstimatedOtherExpenses: 'EstimatedOtherExpenses',
@@ -327,6 +328,7 @@ export default class FieldNames {
 
         Profit: 'Profit',
         ProfitDefaultCurrency: 'ProfitDefaultCurrency',
+        Margin: 'Margin',
 
         PriceChanged: 'PriceChanged',
         SuperiorProject: 'SuperiorProject',
