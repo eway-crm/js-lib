@@ -12,6 +12,7 @@ class GlobalSettingsNames {
     static cartSalesVoucherIssuedState = 'CartSalesVoucherIssuedState';
     static cartToBeInvoicedState = 'CartToBeInvoicedState';
     static cartVoidedState = 'CartVoidedState';
+    static clickToCallScheme = 'ClickToCallScheme';
     static completedStateName = 'CompletedStateName';
     static createCompanyWhileImportingContactFromOutlook = 'CreateCompanyWhileImportingContactFromOutlook';
     static deadStateName = 'DeadStateName';
