@@ -1,8 +1,10 @@
 import { TApiQueryField } from './IApiQuery';
 
+type TFilterValue = string | number | boolean | null; 
+
 interface IApiQueryFilterExpressionPredicateBase {
     Field: TApiQueryField;
-    Value: string | number | boolean | null;
+    Value: TFilterValue;
 }
 
 export type TApiQueryFilterExpression =
@@ -12,6 +14,7 @@ export type TApiQueryFilterExpression =
     | IApiQueryGreaterFilterExpressionPredicate
     | IApiQueryGreaterOrEqualFilterExpressionPredicate
     | IApiQueryLikeFilterExpressionPredicate
+    | IApiQueryInFilterExpressionPredicate
     | IApiQueryOrFilterExpressionOperator
     | IApiQueryNotFilterExpression
     | IApiQueryAndFilterExpressionOperator;
@@ -38,6 +41,12 @@ export interface IApiQueryGreaterOrEqualFilterExpressionPredicate extends IApiQu
 
 export interface IApiQueryLikeFilterExpressionPredicate extends IApiQueryFilterExpressionPredicateBase {
     __type: 'LikeFilterExpressionPredicate:#EQ';
+}
+
+export interface IApiQueryInFilterExpressionPredicate {
+    __type: 'InFilterExpressionPredicate:#EQ';
+    Field: TApiQueryField;
+    Value: TFilterValue[];
 }
 
 export interface IApiQueryNotFilterExpression {
