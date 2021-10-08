@@ -1,4 +1,5 @@
 class GlobalSettingsNames {
+    static acceptableBackwardWorkReportDays = 'AcceptableBackwardWorkReportDays';
     static adminAppInactiveLogoutTime = 'AdminAppInactiveLogoutTime';
     static applyGeneralDataProtectionRules = 'ApplyGeneralDataProtectionRules';
     static bonusesCompletedState = 'BonusesCompletedState';
