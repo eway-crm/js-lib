@@ -15,6 +15,7 @@ import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { TInputData } from './interfaces/ITokenData';
 import EnumTypes from './constants/EnumTypes';
 import RelationTypes from './constants/RelationTypes';
+import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from './constants/ColumnPermissionRules';
 
 Promise.polyfill();
 
@@ -72,5 +73,7 @@ export {
     TInputData,
     FieldNames,
     EnumTypes,
-    RelationTypes
+    RelationTypes,
+    ColumnPermissionPermissionRules,
+    ColumnPermissionMandatoryRules
 };
