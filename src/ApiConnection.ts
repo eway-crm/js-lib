@@ -112,6 +112,73 @@ export class ApiConnection {
     };
 
     /**
+     * Asynchronously uploads file using binary stream
+     * @param itemGuid Item identificator. Ex. '9ac561be-9b7d-4938-8e55-4cce97142483'.
+     * @param fileName File name, ex. 'picture.img'.
+     * @param data Single file to be uploaded.
+     * @param successCallback Handler callback when the method executes well. Gets the whole response JSON object as the only argument.
+     * @param unsuccessCallback Optional. Handler callback for eWay-API app level failures. Gets the whole response JSON object as the only argument. If not supplied, the global error handler is used.
+     * @param config Optional. Additional config for the request.
+     * @param catchGlobally Optional. If true, it raises the global error handler each time the promise is rejected.
+     */
+
+    readonly uploadMethod = (
+        itemGuid: string,
+        fileName: string,
+        data: File,
+        successCallback: (res: IApiResult) => void,
+        unsuccessCallback?: (e: IApiResult | Error) => void,
+        config?: AxiosRequestConfig,
+        catchGlobally?: boolean
+    ) => {
+        const noSessionCallback = (): void => {
+            this.sessionHandler.getSessionId(this, (newSessionId) => {
+                this.sessionId = newSessionId;
+                this.uploadMethod(itemGuid, fileName, data, successCallback, unsuccessCallback, config, catchGlobally);
+            });
+        };
+
+        const sessionId = this.sessionId;
+        if (!sessionId) {
+            noSessionCallback();
+            return;
+        }
+
+        const unsuccessClb = <TResult extends IApiResult>(result: TResult): void => {
+            if (result.ReturnCode === ReturnCodes.rcBadSession) {
+                this.sessionId = null;
+                this.sessionHandler.invalidateSessionId(sessionId, noSessionCallback);
+                return;
+            }
+
+            if (unsuccessCallback) {
+                unsuccessCallback(result);
+            } else {
+                const error = new Error('Unhandled connection return code ' + result.ReturnCode + ': ' + result.Description);
+                if (this.errorCallback && catchGlobally) {
+                    this.errorCallback(error);
+                } else {
+                    throw error;
+                }
+            }
+        };
+
+        const errorClb = (error: TUnionError): void => {
+            const err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
+            if (this.errorCallback && catchGlobally) {
+                this.errorCallback(err);
+            } else {
+                throw err;
+            }
+        };
+
+        const methodUrl = `${this.svcUri}/SaveBinaryAttachment?sessionId=${this.sessionId}&itemGuid=${itemGuid}&fileName=${fileName}`;
+        const promise = Axios.post<IApiResult>(methodUrl, data, config);
+
+        ApiConnection.handleCallPromise(promise, successCallback, unsuccessClb, errorClb);
+    };
+
+    /**
      * Creates a promise for async API method call.
      * @param methodName API method name. Ex. 'GetUsers'.
      * @param data Input data or empty object. Ex. {transmitObject: {FileAs: 'Peter File'}} or {itemGuids: ['9ac561be-9b7d-4938-8e55-4cce97142483']}.
@@ -237,7 +304,7 @@ export class ApiConnection {
                     errorCallback(error);
                 } catch (e) {
                     if (this.errorCallback) {
-                        this.errorCallback(e, data);
+                        this.errorCallback(e as TUnionError, data);
                     } else {
                         throw e;
                     }
