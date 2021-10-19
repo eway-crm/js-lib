@@ -185,7 +185,6 @@ export default class FieldNames {
     } as const;
 
     static readonly Documents = {
-        File: 'File',
         FileAs: 'FileAs',
         DocName: 'DocName',
         Preview: 'Preview',

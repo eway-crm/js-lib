@@ -112,29 +112,51 @@ export class ApiConnection {
     };
 
     /**
+     * Creates a promise for async file upload using binary stream
+     * @param itemGuid Item identificator. Ex. '9ac561be-9b7d-4938-8e55-4cce97142483'.
+     * @param fileName File name, ex. 'picture.img'.
+     * @param data Single file to be uploaded.
+     * @param config Optional. Additional config for the request.
+     * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
+     */
+
+     readonly askUploadMethod = (itemGuid: string, fileName: string, data: File, config?: AxiosRequestConfig, catchGlobally?: boolean): Promise<IApiResult> => {
+        return new Promise<IApiResult>((resolve, reject) => {
+            const errClb = catchGlobally
+                ? (e: TUnionError | IApiResult): void => {
+                      reject(e);
+                      throw e;
+                  }
+                : reject;
+
+            this.callUploadMethod(itemGuid, fileName, data, resolve, errClb, errClb, config);
+        });
+    };
+
+    /**
      * Asynchronously uploads file using binary stream
      * @param itemGuid Item identificator. Ex. '9ac561be-9b7d-4938-8e55-4cce97142483'.
      * @param fileName File name, ex. 'picture.img'.
      * @param data Single file to be uploaded.
      * @param successCallback Handler callback when the method executes well. Gets the whole response JSON object as the only argument.
      * @param unsuccessCallback Optional. Handler callback for eWay-API app level failures. Gets the whole response JSON object as the only argument. If not supplied, the global error handler is used.
+     * @param errorCallback Optional. Handler callback for any other failures. If not supplied, the global error handler is used.
      * @param config Optional. Additional config for the request.
-     * @param catchGlobally Optional. If true, it raises the global error handler each time the promise is rejected.
      */
 
-    readonly uploadMethod = (
+    readonly callUploadMethod = (
         itemGuid: string,
         fileName: string,
         data: File,
         successCallback: (res: IApiResult) => void,
-        unsuccessCallback?: (e: IApiResult | Error) => void,
+        unsuccessCallback?: (e: IApiResult) => void,
+        errorCallback?: (e: TUnionError) => void,
         config?: AxiosRequestConfig,
-        catchGlobally?: boolean
     ) => {
         const noSessionCallback = (): void => {
             this.sessionHandler.getSessionId(this, (newSessionId) => {
                 this.sessionId = newSessionId;
-                this.uploadMethod(itemGuid, fileName, data, successCallback, unsuccessCallback, config, catchGlobally);
+                this.callUploadMethod(itemGuid, fileName, data, successCallback, unsuccessCallback, errorCallback, config);
             });
         };
 
@@ -144,7 +166,7 @@ export class ApiConnection {
             return;
         }
 
-        const unsuccessClb = <TResult extends IApiResult>(result: TResult): void => {
+        const unsuccessClb = (result: IApiResult): void => {
             if (result.ReturnCode === ReturnCodes.rcBadSession) {
                 this.sessionId = null;
                 this.sessionHandler.invalidateSessionId(sessionId, noSessionCallback);
@@ -155,7 +177,7 @@ export class ApiConnection {
                 unsuccessCallback(result);
             } else {
                 const error = new Error('Unhandled connection return code ' + result.ReturnCode + ': ' + result.Description);
-                if (this.errorCallback && catchGlobally) {
+                if (this.errorCallback) {
                     this.errorCallback(error);
                 } else {
                     throw error;
@@ -165,7 +187,9 @@ export class ApiConnection {
 
         const errorClb = (error: TUnionError): void => {
             const err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
-            if (this.errorCallback && catchGlobally) {
+            if (errorCallback) {
+                errorCallback(err);
+            } else if (this.errorCallback) {
                 this.errorCallback(err);
             } else {
                 throw err;
