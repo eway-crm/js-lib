@@ -20,6 +20,7 @@ class GlobalSettingsNames {
     static exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
     static forcedEmailTrackingGroups = 'ForcedEmailTrackingGroups';
     static groupsForAllUnpaidInvoicesNotification = 'GroupsForAllUnpaidInvoicesNotification';
+    static itemPreviewMaxHeight = 'ItemPreviewMaxHeight';
     static lastActivityAttributes = 'LastActivityAttributes';
     static leadsCompletedState = 'LeadsCompletedState';
     static leadDeadlineAlertGroups = 'LeadDeadlineAlertGroups';
