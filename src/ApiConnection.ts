@@ -186,7 +186,11 @@ export class ApiConnection {
         };
 
         const errorClb = (error: TUnionError): void => {
-            const err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
+            let err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
+            if ('statusCode' in error && error.statusCode === 413) {
+                err = new Error('The file has exceeded the maximum allowed file size for uploading. You can contact eWay-CRM support if you wish to increase the limit.');
+            }
+
             if (errorCallback) {
                 errorCallback(err);
             } else if (this.errorCallback) {
