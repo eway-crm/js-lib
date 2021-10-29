@@ -188,7 +188,7 @@ export class ApiConnection {
         const errorClb = (error: TUnionError): void => {
             let err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
             if ('statusCode' in error && error.statusCode === 413) {
-                err = new Error('The file has exceeded the maximum allowed file size for uploading. You can contact eWay-CRM support if you wish to increase the limit.');
+                err = new Error('The file has exceeded the maximum allowed file size for uploading. You can contact your IT administrator or eWay-CRM support if you would like to increase the limit.');
             }
 
             if (errorCallback) {
