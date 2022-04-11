@@ -16,8 +16,8 @@ import { TInputData } from './interfaces/ITokenData';
 import EnumTypes from './constants/EnumTypes';
 import RelationTypes from './constants/RelationTypes';
 import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from './constants/ColumnPermissionRules';
-import { Edition } from '../src/constants/Edition';
-import { Feature } from '../src/constants/Feature';
+import { Edition } from './constants/Edition';
+import { Feature } from './constants/Feature';
 
 Promise.polyfill();
 
