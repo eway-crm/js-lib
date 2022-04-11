@@ -16,6 +16,8 @@ import { TInputData } from './interfaces/ITokenData';
 import EnumTypes from './constants/EnumTypes';
 import RelationTypes from './constants/RelationTypes';
 import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from './constants/ColumnPermissionRules';
+import { Edition } from '../src/constants/Edition';
+import { Feature } from '../src/constants/Feature';
 
 Promise.polyfill();
 
@@ -40,6 +42,7 @@ export * from './data/IApiEnumType';
 export * from './data/IApiEnumValue';
 export * from './data/IApiEnumValuesRelation';
 export * from './data/IApiFeature';
+export * from './data/IApiFeaturesLicenseBundle';
 export * from './data/IApiFlow';
 export * from './data/IApiGlobalSetting';
 export * from './data/IApiGoal';
@@ -93,5 +96,7 @@ export {
     EnumTypes,
     RelationTypes,
     ColumnPermissionPermissionRules,
-    ColumnPermissionMandatoryRules
+    ColumnPermissionMandatoryRules,
+    Edition,
+    Feature
 };

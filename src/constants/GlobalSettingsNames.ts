@@ -14,9 +14,15 @@ class GlobalSettingsNames {
     static cartToBeInvoicedState = 'CartToBeInvoicedState';
     static cartVoidedState = 'CartVoidedState';
     static clickToCallScheme = 'ClickToCallScheme';
+    static companyDuplicityCheckEnabled = 'CompanyDuplicityCheckEnabled';
     static completedStateName = 'CompletedStateName';
+    static contactDuplicityCheckEnabled = 'ContactDuplicityCheckEnabled';
     static createCompanyWhileImportingContactFromOutlook = 'CreateCompanyWhileImportingContactFromOutlook';
     static deadStateName = 'DeadStateName';
+    static enableCompaniesSyncIntoMobileDeviceContacts = 'EnableCompaniesSyncIntoMobileDeviceContacts';
+    static enableContactsSyncIntoMobileDevice = 'EnableContactsSyncIntoMobileDevice';
+    static enableLeadsSyncIntoMobileDeviceContacts = 'EnableLeadsSyncIntoMobileDeviceContacts';
+    static enableUsersSyncIntoMobileDeviceContacts = 'EnableUsersSyncIntoMobileDeviceContacts';
     static exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
     static forcedEmailTrackingGroups = 'ForcedEmailTrackingGroups';
     static groupsForAllUnpaidInvoicesNotification = 'GroupsForAllUnpaidInvoicesNotification';
