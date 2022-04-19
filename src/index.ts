@@ -18,6 +18,7 @@ import RelationTypes from './constants/RelationTypes';
 import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from './constants/ColumnPermissionRules';
 import { Edition } from './constants/Edition';
 import { Feature } from './constants/Feature';
+import Functionality from './constants/Functionality';
 
 Promise.polyfill();
 
@@ -98,5 +99,6 @@ export {
     ColumnPermissionPermissionRules,
     ColumnPermissionMandatoryRules,
     Edition,
-    Feature
+    Feature,
+    Functionality
 };
