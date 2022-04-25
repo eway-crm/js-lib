@@ -16,7 +16,7 @@ interface IApiRestrictionBase {
 interface IApiRestrictionsClass {
     Functionalities: (IApiRestrictionBase & {
         Functionality: TFunctionality;
-        CurrentLimit?: number | null;
+        CurrentLimit?: number;
     })[];
     GlobalSettings: (IApiRestrictionBase & {
         GlobalSettingName: string;
