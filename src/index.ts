@@ -19,6 +19,7 @@ import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from 
 import { Edition } from './constants/Edition';
 import { Feature } from './constants/Feature';
 import Functionality from './constants/Functionality';
+import CustomizationStatsItemKeys from './constants/CustomizationStatsItemKeys';
 
 Promise.polyfill();
 
@@ -34,6 +35,7 @@ export * from './data/IApiColumn';
 export * from './data/IApiColumnPermission';
 export * from './data/IApiCompany';
 export * from './data/IApiContact';
+export * from './data/IApiCustomizationStatsItem';
 export * from './data/IApiCurrencyExchangeRate';
 export * from './data/IApiDataResponse';
 export * from './data/IApiDatumResponse';
@@ -100,5 +102,6 @@ export {
     ColumnPermissionMandatoryRules,
     Edition,
     Feature,
-    Functionality
+    Functionality,
+    CustomizationStatsItemKeys
 };
