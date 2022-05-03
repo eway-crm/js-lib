@@ -20,6 +20,7 @@ import { Edition } from './constants/Edition';
 import { Feature } from './constants/Feature';
 import Functionality from './constants/Functionality';
 import CustomizationStatsItemKeys from './constants/CustomizationStatsItemKeys';
+import LicenseRestrictionKeys from './constants/LicenseRestrictionKeys';
 
 Promise.polyfill();
 
@@ -103,5 +104,6 @@ export {
     Edition,
     Feature,
     Functionality,
-    CustomizationStatsItemKeys
+    CustomizationStatsItemKeys,
+    LicenseRestrictionKeys
 };
