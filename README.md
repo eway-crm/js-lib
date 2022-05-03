@@ -42,6 +42,8 @@ const passwordHash = '470AE7216203E23E1983EF1851E72947';
 const connection = ApiConnection.create(serviceUrl, username, passwordHash, 'JSSample1', '00:00:00:00:00', 'SampleTestMachine', (err) => console.error(err));
 ```
 
+⚠️ The code above does not support [Microsoft Account Authenticaion](https://kb.eway-crm.com/documentation/2-installation/2-3-installation-the-server-part/adjust-eway-crm-web-service-for-azure-login-office-365?set_language=en). If you log into eWay-CRM with your Microsoft account, you need to implement your own OAuth2 client.
+
 ## CORS
 
 If you are developing a web app running on a different host than your eWay-CRM web service, you need to configure your eWay-CRM web service to allow cross-origin requests. To achieve that, put the following setting into `appSettings` section of your web service's web.config file.
