@@ -89,8 +89,8 @@ export default class Functionality {
     static readonly userRoles = 'UserRoles';
     static readonly modulePermissions = 'ModulePermissions';
     static readonly columnPermissions = 'ColumnPermissions';
-    static readonly eWayCrmAPI = 'eWayCrmAPI';
-    static readonly commonDataAPI = 'CommonDataAPI';
+    static readonly api = 'API';
+    static readonly gate = 'Gate';
     static readonly threeCXIntegration = 'ThreeCXIntegration';
     static readonly tapiIntegration = 'TapiIntegration';
     static readonly pohodaIntegration = 'PohodaIntegration';
