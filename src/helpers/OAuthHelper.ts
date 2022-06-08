@@ -43,7 +43,7 @@ export class OAuthHelper {
     };
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
-        Axios.post(wsUrl + '/auth/connect/token', params, {
+        Axios.post<ITokenData>(wsUrl + '/auth/connect/token', params, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
