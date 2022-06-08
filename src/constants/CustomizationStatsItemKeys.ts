@@ -1,5 +1,5 @@
 export default class CustomizationStatsItemKeys {
-    static additionalFieldsCount = 'AdditionalFieldsCount';
+    static customAdditionalFieldsCount = 'CustomAdditionalFieldsCount';
     static customEnabledAdvancedWorkflowsCount = 'CustomEnabledAdvancedWorkflowsCount';
     static customEnabledBasicWorkflowsCount = 'CustomEnabledBasicWorkflowsCount';
     static customMandatoryFieldsCount = 'CustomMandatoryFieldsCount';

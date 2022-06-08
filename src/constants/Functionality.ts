@@ -1,53 +1,3 @@
-export type TFunctionality =
-    | 'ContactsSynchronizationWithOutlook'
-    | 'WordAddin'
-    | 'ExcelAddin'
-    | 'TasksRecurrentTasks'
-    | 'TasksSubtasks'
-    | 'TasksSynchronizationWithOutlook'
-    | 'CalendarSynchronizationWithOutlook'
-    | 'EmailsAutomaticTracking'
-    | 'ConvertEmailToProject'
-    | 'DuplicityChecker'
-    | 'NextStepAndLastActivityCustomization'
-    | 'SubProjects'
-    | 'ResourceAndPlanning'
-    | 'ProfessionalEmailCampaigns'
-    | 'ProfessionalEmailCampaignsAdvancedStatistics'
-    | 'WordEmailMerge'
-    | 'PrintLabels'
-    | 'PrintEnvelopes'
-    | 'UserViews'
-    | 'SharedUserViews'
-    | 'GridConditionalFormating'
-    | 'MultipleCurrencies'
-    | 'HistoryTracking'
-    | 'PrivateItems'
-    | 'ItemTypes'
-    | 'FormLayoutCustomization'
-    | 'WorkflowBasicDefinitions'
-    | 'WorkflowAdvancedDefinitions'
-    | 'WorkflowAdvancedDefinitionsRules'
-    | 'WorkflowAdvancedDefinitionsActions'
-    | 'WorkflowGroupLevelActions'
-    | 'CustomFields'
-    | 'ImportantFields'
-    | 'MandatoryFields'
-    | 'UniqueFields'
-    | 'ReadOnlyFields'
-    | 'TransformationCustomTemplates'
-    | 'UserRoles'
-    | 'ModulePermissions'
-    | 'ColumnPermissions'
-    | 'eWayCrmAPI'
-    | 'CommonDataAPI'
-    | 'ThreeCXIntegration'
-    | 'TapiIntegration'
-    | 'PohodaIntegration'
-    | 'PohodaSynchronizationIntervalCustomization'
-    | 'PohodaSynchronizationFieldMappingCustomization'
-    | 'QuickBooksIntegration';
-
 export default class Functionality {
     static readonly contactsSynchronizationWithOutlook = 'ContactsSynchronizationWithOutlook';
     static readonly wordAddin = 'WordAddin';
@@ -97,4 +47,6 @@ export default class Functionality {
     static readonly pohodaSynchronizationIntervalCustomization = 'PohodaSynchronizationIntervalCustomization';
     static readonly pohodaSynchronizationFieldMappingCustomization = 'PohodaSynchronizationFieldMappingCustomization';
     static readonly quickBooksIntegration = 'QuickBooksIntegration';
+    static readonly saveBinaryDataOnDisk = 'SaveBinaryDataOnDisk';
+    static readonly activeDirectoryLogin = 'ActiveDirectoryLogin';
 }

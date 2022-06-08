@@ -3,7 +3,6 @@ import { ITranslatableString } from '../interfaces/ITranslatableString';
 import { TFeatureWithEdition } from './IApiFeaturesLicenseBundle';
 import { Edition } from '../constants/Edition';
 import { Feature } from '../constants/Feature';
-import { TFunctionality } from '../constants/Functionality';
 import { TFolderName } from '../constants/FolderNames';
 
 type LicenceBusinessType = 'Premium' | 'Trial' | 'Free';
@@ -15,7 +14,7 @@ interface IApiRestrictionBase {
 
 interface IApiRestrictionsClass {
     Functionalities: (IApiRestrictionBase & {
-        Functionality: TFunctionality;
+        Functionality: string;
         CurrentLimit: number | null;
     })[];
     GlobalSettings: (IApiRestrictionBase & {
