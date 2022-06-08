@@ -4,5 +4,7 @@
   },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   "moduleFileExtensions": [ "ts", "tsx", "js", "jsx", "json", "node" ],
-  "testURL": "https://trial.eway-crm.com/31994"
+  "testEnvironmentOptions": {
+      "url": "https://trial.eway-crm.com/31994"
+  }
 }

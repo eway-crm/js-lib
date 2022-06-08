@@ -51,7 +51,7 @@ export class OAuthHelper {
         .then((response) => {
             callback(response.data);
         })
-        .catch((error: AxiosError) => {
+        .catch((error: AxiosError<ITokenData>) => {
             if (error.response) {
                 if (error.response.status == 400) {
                     callback(error.response.data);
