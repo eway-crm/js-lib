@@ -49,4 +49,6 @@ export default class Functionality {
     static readonly quickBooksIntegration = 'QuickBooksIntegration';
     static readonly saveBinaryDataOnDisk = 'SaveBinaryDataOnDisk';
     static readonly activeDirectoryLogin = 'ActiveDirectoryLogin';
+    static readonly callerIdentificationOnApple = 'CallerIdentificationOnApple'; 
+    static readonly legacyAdministration = 'LegacyAdministration';
 }
