@@ -2,6 +2,7 @@ class GlobalSettingsNames {
     static acceptableBackwardWorkReportDays = 'AcceptableBackwardWorkReportDays';
     static adminAppInactiveLogoutTime = 'AdminAppInactiveLogoutTime';
     static applyGeneralDataProtectionRules = 'ApplyGeneralDataProtectionRules';
+    static automaticallyCreateJournalAfterCallDuration = 'AutomaticallyCreateJournalAfterCallDuration';
     static bonusesCompletedState = 'BonusesCompletedState';
     static cartInvoicedState = 'CartInvoicedState';
     static cartOrderCanceledState = 'CartOrderCanceledState';
