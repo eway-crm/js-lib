@@ -21,6 +21,8 @@ import { Feature } from './constants/Feature';
 import Functionality from './constants/Functionality';
 import CustomizationStatsItemKeys from './constants/CustomizationStatsItemKeys';
 import LicenseRestrictionKeys from './constants/LicenseRestrictionKeys';
+import ExpirationReason from './constants/ExpirationReason';
+import LicenseKeyInvoiceSeverity from './constants/LicenseKeyInvoiceSeverity';
 
 Promise.polyfill();
 
@@ -105,5 +107,7 @@ export {
     Feature,
     Functionality,
     CustomizationStatsItemKeys,
-    LicenseRestrictionKeys
+    LicenseRestrictionKeys,
+    ExpirationReason,
+    LicenseKeyInvoiceSeverity
 };
