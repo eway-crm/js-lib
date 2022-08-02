@@ -30,6 +30,10 @@ interface IApiRestrictionsClass {
 interface IApiLicenseExpiration {
     ExpiresOn: string;
     Reason: ExpirationReason;
+    IsLicenseKeyExpiredAndSystemLocked: boolean;
+    IsLicenseKeyInExpireTimePeriod: boolean;
+    IsLicenseKeyInSilentExpireTimePeriod: boolean;
+    NumberOfDaysToLockSystem: number | null;
 }
 
 interface IApiCurrentUserLicenseInfo {
@@ -58,4 +62,5 @@ export interface IApiLicense {
     CurrentUserLicenseInfo: IApiCurrentUserLicenseInfo;
     Expiration: IApiLicenseExpiration | null;
     Invoices: IApiLicenseKeyInvoices | null;
+    GeneratedDate: string;
 }
