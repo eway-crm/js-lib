@@ -5,4 +5,5 @@ export interface IApiWorkflowModel extends IApiItemBase {
     IsSystem: boolean;
     ParentEn: string | null;
     IsUsingFlows: boolean;
+    AllowEditItems: boolean;
 }

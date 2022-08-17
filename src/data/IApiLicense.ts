@@ -27,7 +27,7 @@ interface IApiRestrictionsClass {
     })[];
 }
 
-interface IApiLicenseExpiration {
+export interface IApiLicenseExpiration {
     ExpiresOn: string;
     Reason: ExpirationReason;
     IsLicenseKeyExpiredAndSystemLocked: boolean;
@@ -36,7 +36,7 @@ interface IApiLicenseExpiration {
     NumberOfDaysToLockSystem: number | null;
 }
 
-interface IApiCurrentUserLicenseInfo {
+export interface IApiCurrentUserLicenseInfo {
     ReceivesAdminLicenseNotifications: boolean;
     ReceivesBillingLicenseNotifications: boolean;
 }
@@ -46,7 +46,7 @@ interface IApiLicenseKeyInvoices {
     BillingEmails: string[] | null;
 }
 
-interface IApiLicenseKeyInvoice {
+export interface IApiLicenseKeyInvoice {
     Name: string;
     Url: string;
     DueDate: string;
