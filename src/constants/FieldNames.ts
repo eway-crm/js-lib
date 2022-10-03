@@ -461,5 +461,5 @@ export default class FieldNames {
         IsSystem: 'IsSystem',
     } as const;
 
-    static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'] as string[];
+    static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'];
 }
