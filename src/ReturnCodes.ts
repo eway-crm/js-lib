@@ -3,4 +3,6 @@ export class ReturnCodes {
     static readonly rcBadSession = 'rcBadSession';
     static readonly rcWebServiceMoved = 'rcWebServiceMoved';
     static readonly rcAccessDenied = 'rcAccessDenied';
+    static readonly rcLoginUserNameChanged = 'rcLoginUserNameChanged';
+    static readonly rcLicenseExpired = 'rcLicenseExpired';
 }

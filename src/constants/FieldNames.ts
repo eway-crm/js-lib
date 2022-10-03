@@ -390,6 +390,10 @@ export default class FieldNames {
         StateEn: 'StateEn',
     } as const;
 
+    static readonly Training = {
+        TitleEn: 'TitleEn'
+    };
+
     static readonly WorkReports = {
         Task: 'Task',
         ProjectName: 'ProjectName',
@@ -456,4 +460,6 @@ export default class FieldNames {
         Note: 'Note',
         IsSystem: 'IsSystem',
     } as const;
+
+    static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'] as const;
 }
