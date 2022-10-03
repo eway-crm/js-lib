@@ -63,4 +63,9 @@ export interface IApiLicense {
     Expiration: IApiLicenseExpiration | null;
     Invoices: IApiLicenseKeyInvoices | null;
     GeneratedDate: string;
+    DbSize: IApiLicenseDbSizeModel;
+}
+
+export interface IApiLicenseDbSizeModel {
+    IsFull: boolean;
 }
