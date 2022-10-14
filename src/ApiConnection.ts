@@ -53,8 +53,7 @@ export class ApiConnection {
         this.supportGetItemPreviewMethod = supportGetItemPreviewMethod ?? false;
     }
 
-    get supportsGetItemPreviewMethod()
-    {
+    get supportsGetItemPreviewMethod() {
         return this.supportGetItemPreviewMethod;
     }
 
@@ -98,7 +97,7 @@ export class ApiConnection {
         const ws = base64url.encode(this.baseUri);
         let legacyLink = "eway://" + folderName;
         if (guid) {
-            legacyLink +=  "/" + guid?.toLowerCase();
+            legacyLink += "/" + guid?.toLowerCase();
         }
 
         legacyLink = base64url.encode(legacyLink);
@@ -120,13 +119,13 @@ export class ApiConnection {
      * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
      */
 
-     readonly askUploadMethod = (itemGuid: string, fileName: string, data: File, config?: AxiosRequestConfig, catchGlobally?: boolean): Promise<IApiResult> => {
+    readonly askUploadMethod = (itemGuid: string, fileName: string, data: File, config?: AxiosRequestConfig, catchGlobally?: boolean): Promise<IApiResult> => {
         return new Promise<IApiResult>((resolve, reject) => {
             const errClb = catchGlobally
                 ? (e: TUnionError | IApiResult): void => {
-                      reject(e);
-                      throw e;
-                  }
+                    reject(e);
+                    throw e;
+                }
                 : reject;
 
             this.callUploadMethod(itemGuid, fileName, data, resolve, errClb, errClb, config);
@@ -217,9 +216,9 @@ export class ApiConnection {
         return new Promise<TResult>((resolve, reject) => {
             const errClb = catchGlobally
                 ? (e: TUnionError | TResult): void => {
-                      reject(e);
-                      throw e;
-                  }
+                    reject(e);
+                    throw e;
+                }
                 : reject;
             this.callMethod<TResult>(methodName, data, resolve, errClb, httpMethod, errClb);
         });
@@ -283,9 +282,9 @@ export class ApiConnection {
             methodName !== ApiMethods.logOut
                 ? successCallback
                 : (result: TResult): void => {
-                      this.sessionId = null;
-                      successCallback(result);
-                  };
+                    this.sessionId = null;
+                    successCallback(result);
+                };
 
         this.callWithoutSession(methodName, data, successClb, unsuccessClb, null, httpMethod, errorCallback);
     };
@@ -351,7 +350,11 @@ export class ApiConnection {
     };
 
     readonly getItemPreviewGetMethodUrl = (folderName: string, itemGuid: string, itemVersion?: number): string => {
-        return this.svcUri + '/' + ApiMethods.getItemPreview + '?folderName=' + folderName + '&itemGuid=' + itemGuid + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + itemVersion.toString() : '');
+        return this.svcUri + '/' + ApiMethods.getItemPreview + '?folderName=' + encodeURIComponent(folderName) + '&itemGuid=' + encodeURIComponent(itemGuid) + (!!itemVersion || itemVersion === 0 ? '&itemVersion=' + encodeURIComponent(itemVersion.toString()) : '');
+    };
+
+    readonly getEmailAttachmentGetMethodUrl = (itemGuid: string, contentId: string): string => {
+        return this.svcUri + '/' + ApiMethods.getEmailAttachment + '?itemGuid=' + encodeURIComponent(itemGuid) + '&contentId=' + encodeURIComponent(contentId);
     };
 
     private static handleCallPromise<TResult extends IApiResult>(
