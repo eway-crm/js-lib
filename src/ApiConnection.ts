@@ -357,6 +357,10 @@ export class ApiConnection {
         return this.svcUri + '/' + ApiMethods.getEmailAttachment + '?itemGuid=' + encodeURIComponent(itemGuid) + '&contentId=' + encodeURIComponent(contentId);
     };
 
+    readonly getAllEmailAttachmentsZipGetMethodUrl = (itemGuid: string): string => {
+        return this.svcUri + '/' + ApiMethods.getAllEmailAttachments + '?itemGuid=' + encodeURIComponent(itemGuid);
+    };
+
     private static handleCallPromise<TResult extends IApiResult>(
         call: Promise<AxiosResponse<TResult>>,
         successCallback: (result: TResult) => void,
