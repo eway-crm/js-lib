@@ -15,7 +15,7 @@ import { TFolderName } from './constants/FolderNames';
 export class ApiConnection {
     private readonly svcUri: string;
     private readonly baseUri: string;
-    private readonly sessionHandler: ISessionHandler;
+    public readonly sessionHandler: ISessionHandler;
     private readonly errorCallback: ((error: TUnionError, data?: TInputData | null) => void) | undefined;
     private readonly supportGetItemPreviewMethod: boolean;
 

@@ -1,14 +1,7 @@
-import { ISessionHandler } from './ISessionHandler';
+import { ISessionHandler, TLoginResponse } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
-import { IApiResult } from './data/IApiResult';
 import { TUnionError } from './exceptions/HttpRequestError';
 import { ApiMethods } from './ApiMethods';
-
-type TLoginResponse = IApiResult & {
-    SessionId: string | null;
-    UserItemGuid: string | null;
-    IsAdmin: boolean | null;
-};
 
 export class CredentialsSessionHandler implements ISessionHandler {
     private readonly username: string;
@@ -17,6 +10,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
     private readonly clientMachineIdentifier: string;
     private readonly clientMachineName: string;
     private readonly errorCallback: ((error: TUnionError) => void) | undefined;
+    public loginResponse?: TLoginResponse;
 
     constructor (username: string, passwordHash: string, appVersion: string, clientMachineIdentifier: string, clientMachineName: string, errorCallback?: (error: TUnionError) => void) {
         if (!username || !passwordHash) {
@@ -50,6 +44,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
                 createSessionCookie: connection.supportsGetItemPreviewMethod
             },
             (result: TLoginResponse) => {
+                this.loginResponse = result;
                 const newSessionId = result.SessionId;
                 if (!newSessionId) {
                     const error = new Error('Successful login but no session came.');

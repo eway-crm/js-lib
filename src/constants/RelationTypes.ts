@@ -4,6 +4,7 @@ export type TRelationType = 'GENERAL'
     | 'CONTACT'
     | 'CUSTOMER'
     | 'COMPANY'
+    | 'OUTLOOKPROJECT'
     | 'SUPERVISOR';
 
 export default class RelationTypes {
@@ -13,5 +14,6 @@ export default class RelationTypes {
     static readonly contact: TRelationType = 'CONTACT';
     static readonly customer: TRelationType = 'CUSTOMER';
     static readonly company: TRelationType = 'COMPANY';
+    static readonly outlookProject: TRelationType = 'OUTLOOKPROJECT';
     static readonly supervisor: TRelationType = 'SUPERVISOR';
 }
