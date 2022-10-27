@@ -24,6 +24,7 @@ class GlobalSettingsNames {
     static enableContactsSyncIntoMobileDevice = 'EnableContactsSyncIntoMobileDevice';
     static enableLeadsSyncIntoMobileDeviceContacts = 'EnableLeadsSyncIntoMobileDeviceContacts';
     static enableUsersSyncIntoMobileDeviceContacts = 'EnableUsersSyncIntoMobileDeviceContacts';
+    static emailsActiveProjectsLeadsFilter = 'EmailsActiveProjectsLeadsFilter';
     static exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
     static forcedEmailTrackingGroups = 'ForcedEmailTrackingGroups';
     static groupsForAllUnpaidInvoicesNotification = 'GroupsForAllUnpaidInvoicesNotification';

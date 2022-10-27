@@ -1,9 +1,10 @@
-import { ISessionHandler, TLoginResponse } from './ISessionHandler';
+import { ISessionHandler } from './ISessionHandler';
 import { ApiConnection } from './ApiConnection';
 import { ApiMethods, OAuthHelper } from '.';
 import { ITokenData } from './interfaces/ITokenData';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { WebServiceError } from './exceptions/WebServiceError';
+import { IApiLoginResponse } from './data/IApiLoginResponse';
 
 export class OAuthSessionHandler implements ISessionHandler {
     private readonly username: string;
@@ -13,7 +14,7 @@ export class OAuthSessionHandler implements ISessionHandler {
     private readonly clientSecret: string;
     private readonly errorCallback: ((error: TUnionError) => void) | undefined;
     private readonly refreshTokenCallback?: ((tokenData: ITokenData) => void) | undefined;
-    public loginResponse?: TLoginResponse;
+    public lastSuccessfulLoginResponse?: IApiLoginResponse;
 
     private accessToken: string;
 
@@ -48,8 +49,8 @@ export class OAuthSessionHandler implements ISessionHandler {
                 appVersion: this.appVersion,
                 createSessionCookie: connection.supportsGetItemPreviewMethod
             },
-            (result: TLoginResponse) => {
-                this.loginResponse = result;
+            (result: IApiLoginResponse) => {
+                this.lastSuccessfulLoginResponse = result;
                 const newSessionId = result.SessionId;
                 if (!newSessionId) {
                     const error = new Error('Successful login but no session came.');

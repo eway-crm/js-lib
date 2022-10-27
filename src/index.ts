@@ -63,6 +63,7 @@ export * from './data/IApiLead';
 export * from './data/IApiLicense';
 export * from './data/IApiLicenseBundleBase';
 export * from './data/IApiLocalizedLicenseBundle';
+export * from './data/IApiLoginResponse';
 export * from './data/IApiMarketingList';
 export * from './data/IApiModulePermission';
 export * from './data/IApiObjectType';
