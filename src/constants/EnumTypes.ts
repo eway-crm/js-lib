@@ -15,9 +15,11 @@ export default class EnumTypes {
     static readonly leadType = 'LeadType';
     static readonly marketingType = 'MarketingType';
     static readonly paymentType = 'PaymentType';
+    static readonly prefixType = 'PrefixType';
     static readonly productType = 'ProductType';
     static readonly projectType = 'ProjectType';
     static readonly salaryType = 'SalaryType';
+    static readonly suffixType = 'SuffixType';
     static readonly taskType = 'TaskType';
     static readonly usStatesDistrictsTerritories = 'USStatesDistrictsTerritories';
     static readonly vacationType = 'VacationType';

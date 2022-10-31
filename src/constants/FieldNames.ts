@@ -97,6 +97,12 @@ export default class FieldNames {
         DoNotSendNewsletter: 'DoNotSendNewsletter',
         ImportanceEn: 'ImportanceEn',
 
+        PrefixEn: 'PrefixEn',
+        FirstName: 'FirstName',
+        MiddleName: 'MiddleName',
+        LastName: 'LastName',
+        SuffixEn: 'SuffixEn',
+
         BusinessAddressStreet: 'BusinessAddressStreet',
         BusinessAddressCity: 'BusinessAddressCity',
         BusinessAddressPostalCode: 'BusinessAddressPostalCode',
