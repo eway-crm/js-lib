@@ -29,7 +29,6 @@ export interface IApiGlobalSetting extends IApiItemBase {
     DependsOnValue: string | null;
     DependsOnValueInverted: boolean;
     KbUrlShortCode: string | null;
-    IsPremium: boolean;
     DisabledValue: string | null;
     UnlimitedValue: string | null;
 }
