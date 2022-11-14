@@ -11,6 +11,7 @@ import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { ITokenData, TInputData } from './interfaces/ITokenData';
 import base64url from 'base64url';
 import { TFolderName } from './constants/FolderNames';
+import ErrorHelper from './helpers/ErrorHelper';
 
 export class ApiConnection {
     private readonly svcUri: string;
@@ -185,7 +186,7 @@ export class ApiConnection {
         };
 
         const errorClb = (error: TUnionError): void => {
-            let err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
+            let err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + ErrorHelper.stringifyError(error));
             if ('statusCode' in error && error.statusCode === 413) {
                 err = new Error('The file has exceeded the maximum allowed file size for uploading. You can contact your IT administrator or eWay-CRM support if you would like to increase the limit.');
             }
@@ -337,7 +338,7 @@ export class ApiConnection {
                     }
                 }
             } else {
-                const err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + JSON.stringify(error));
+                const err = new Error('Unhandled connection error when calling ' + methodUrl + ': ' + ErrorHelper.stringifyError(error));
                 if (this.errorCallback) {
                     this.errorCallback(err, data);
                 } else {
