@@ -5,4 +5,5 @@ export interface IApiLoginResponse extends IApiResult {
     UserItemGuid: string | null;
     IsAdmin: boolean | null;
     WcfVersion: string;
+    Debug?: boolean;
 }
