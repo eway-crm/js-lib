@@ -9,7 +9,7 @@ import { ApiMethods } from './ApiMethods';
 import { OAuthSessionHandler } from './OAuthSessionHandler';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { ITokenData, TInputData } from './interfaces/ITokenData';
-import base64url from 'base64url';
+import * as base64url from 'universal-base64url';
 import { TFolderName } from './constants/FolderNames';
 import ErrorHelper from './helpers/ErrorHelper';
 

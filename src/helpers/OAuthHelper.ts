@@ -1,6 +1,6 @@
 import Axios, { AxiosError } from 'axios';
 import { ITokenData } from '../interfaces/ITokenData';
-import base64url from 'base64url';
+import * as base64url from 'universal-base64url';
 import jwt_decode from 'jwt-decode';
 import { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
 
