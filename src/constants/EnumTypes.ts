@@ -1,4 +1,5 @@
 export default class EnumTypes {
+    static readonly bonusType = 'BonusType';
     static readonly busyStatus = 'BusyStatus';
     static readonly cartType = 'CartType';
     static readonly companyType = 'CompanyType';
@@ -8,6 +9,7 @@ export default class EnumTypes {
     static readonly documentOfflineState = 'DocumentOfflineState';
     static readonly documentType = 'DocumentType';
     static readonly emailOfflineState = 'EmailOfflineState';
+    static readonly emailType = 'EmailType';
     static readonly globalSettingsCategory = 'GlobalSettingsCategory';
     static readonly goalType = 'GoalType';
     static readonly journalType = 'JournalType';
@@ -19,8 +21,11 @@ export default class EnumTypes {
     static readonly productType = 'ProductType';
     static readonly projectType = 'ProjectType';
     static readonly salaryType = 'SalaryType';
+    static readonly salePriceType = 'SalePriceType';
     static readonly suffixType = 'SuffixType';
     static readonly taskType = 'TaskType';
+    static readonly trainingTitle = 'TrainingTitle';
+    static readonly userType = 'UserType';
     static readonly usStatesDistrictsTerritories = 'USStatesDistrictsTerritories';
     static readonly vacationType = 'VacationType';
     static readonly workReportType = 'WorkReportType';
