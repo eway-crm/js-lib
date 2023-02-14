@@ -24,6 +24,7 @@ import LicenseRestrictionKeys from './constants/LicenseRestrictionKeys';
 import ExpirationReason from './constants/ExpirationReason';
 import LicenseKeyInvoiceSeverity from './constants/LicenseKeyInvoiceSeverity';
 import ErrorHelper from './helpers/ErrorHelper';
+import VersionHelperBase from './helpers/VersionHelperBase';
 
 Promise.polyfill();
 
@@ -113,5 +114,6 @@ export {
     LicenseRestrictionKeys,
     ExpirationReason,
     LicenseKeyInvoiceSeverity,
-    ErrorHelper
+    ErrorHelper,
+    VersionHelperBase
 };
