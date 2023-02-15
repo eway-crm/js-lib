@@ -1,4 +1,4 @@
-import { compare, CompareOperator } from "compare-versions";
+import { compare } from "compare-versions";
 import { ApiConnection } from "../ApiConnection";
 
 export default class VersionHelperBase {
@@ -6,12 +6,12 @@ export default class VersionHelperBase {
         return !!connection?.sessionHandler.lastSuccessfulLoginResponse?.Debug;
     };
 
-    protected static readonly compare = (connection: ApiConnection, version: string, operator: CompareOperator) => {
+    protected static readonly supportsFeaturesOf = (connection: ApiConnection, version: string) => {
         const wcfVersion = connection.sessionHandler.lastSuccessfulLoginResponse?.WcfVersion;
         if (!wcfVersion) {
             return false;
         }
 
-        return compare(wcfVersion, version, operator) || compare(wcfVersion, "1", "=" );
+        return compare(wcfVersion, version, ">=") || compare(wcfVersion, "1.0.0.0", "=" );
     };
 }
