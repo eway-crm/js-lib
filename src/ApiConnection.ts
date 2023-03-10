@@ -362,6 +362,10 @@ export class ApiConnection {
         return this.svcUri + '/' + ApiMethods.getAllEmailAttachments + '?itemGuid=' + encodeURIComponent(itemGuid);
     };
 
+    readonly getActiveSessionId = (): string | null => {
+        return this.sessionId;
+    };
+
     private static handleCallPromise<TResult extends IApiResult>(
         call: Promise<AxiosResponse<TResult>>,
         successCallback: (result: TResult) => void,
