@@ -200,7 +200,7 @@ export class ApiConnection {
             }
         };
 
-        const methodUrl = `${this.svcUri}/SaveBinaryAttachment?sessionId=${this.sessionId}&itemGuid=${itemGuid}&fileName=${fileName}`;
+        const methodUrl = `${this.svcUri}/SaveBinaryAttachment?sessionId=${this.sessionId}&itemGuid=${itemGuid}&fileName=${encodeURIComponent(fileName)}`;
         const promise = Axios.post<IApiResult>(methodUrl, data, config);
 
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessClb, errorClb);
