@@ -79,6 +79,7 @@ export * from './data/IApiSaveResponse';
 export * from './data/IApiTask';
 export * from './data/IApiUser';
 export * from './data/IApiUserSetting';
+export * from './data/IApiWebServiceTaskStatus';
 export * from './data/IApiWorkflowActionDerivedItem';
 export * from './data/IApiWorkflowModel';
 export * from './data/IApiWorkReport';
