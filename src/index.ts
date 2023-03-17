@@ -25,6 +25,7 @@ import ExpirationReason from './constants/ExpirationReason';
 import LicenseKeyInvoiceSeverity from './constants/LicenseKeyInvoiceSeverity';
 import ErrorHelper from './helpers/ErrorHelper';
 import VersionHelperBase from './helpers/VersionHelperBase';
+import { EwayBrowserWithBoundObjectSessionHandler } from './EwayBrowserWithBoundObjectSessionHandler'
 
 Promise.polyfill();
 
@@ -87,6 +88,7 @@ export * from './data/query/IApiQuery';
 export * from './data/query/IApiQueryFilters';
 
 export * from './interfaces/ITranslatableString';
+export * from './interfaces/IAccessTokenProvidingEwayBrowserBoundObject';
 
 export {
     HttpMethod,
@@ -116,5 +118,6 @@ export {
     ExpirationReason,
     LicenseKeyInvoiceSeverity,
     ErrorHelper,
-    VersionHelperBase
+    VersionHelperBase,
+    EwayBrowserWithBoundObjectSessionHandler
 };
