@@ -12,8 +12,11 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
     private readonly username: string;
     private readonly appVersion: string;
     protected readonly errorCallback: ((error: TUnionError) => void) | undefined;
+    private readonly getNewAccessTokenCallback: ((connection: ApiConnection, callback: (accessToken: string, error?: string) => void) => void);
 
-    constructor (username: string, accessToken: string, appVersion: string, errorCallback?: (error: TUnionError) => void) {
+    constructor (username: string, accessToken: string, appVersion: string, 
+        getNewAccessTokenCallback: ((connection: ApiConnection, callback: (accessToken: string, error?: string) => void) => void),
+        errorCallback?: (error: TUnionError) => void) {
         if (!username) {
             throw new Error("Non of the arguments 'username', 'clientId', 'clientSecret', 'refreshToken' can be empty.");
         }
@@ -21,6 +24,7 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
         this.username = username;
         this.accessToken = accessToken;
         this.appVersion = appVersion;
+        this.getNewAccessTokenCallback = getNewAccessTokenCallback;
         this.errorCallback = errorCallback;
     }
 
@@ -60,7 +64,7 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
 
 		const errorCallbackHandler = (error: TUnionError) => {
             if ((error as HttpRequestError)?.statusCode === 401) {
-                this.getNewAccessToken(connection, (accessToken, error) => {
+                this.getNewAccessTokenCallback(connection, (accessToken, error) => {
                     this.accessToken = accessToken;
                     if (!error) {
                         this.getSessionId(connection, callback);
@@ -96,6 +100,6 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
             errorCallbackHandler
         );
     };
-
-    abstract getNewAccessToken(connection: ApiConnection, callback: (accessToken: string, error?: string) => void): void;
 }
+
+export default OAuthSessionHandlerBase;

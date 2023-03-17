@@ -18,28 +18,28 @@ export class OAuthSessionHandler extends OAuthSessionHandlerBase {
             throw new Error("Non of the arguments 'username', 'clientId', 'clientSecret', 'refreshToken' can be empty.");
         }
 
-        super(username, accessToken, appVersion, errorCallback);
+        const getNewAccessToken = (connection: ApiConnection, callback: (accessToken: string, error?: string) => void): void => {
+            OAuthHelper.refreshToken(connection.wsUrl, this.clientId, this.clientSecret, this.refreshToken, (tokenData) =>
+            {
+                try {
+                    if (this.refreshTokenCallback) {
+                        this.refreshTokenCallback(tokenData);
+                    }
+                } catch (error) {
+                    if (this.errorCallback) {
+                        this.errorCallback(new Error('Refresh token callback failed.\n' + JSON.stringify(error)));
+                    }
+                }
+    
+                callback(tokenData.access_token, tokenData.error);
+            });        
+        }
+
+        super(username, accessToken, appVersion, getNewAccessToken, errorCallback);
 
         this.refreshToken = refreshToken;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.refreshTokenCallback = refreshTokenCallback;
-    }
-
-    getNewAccessToken(connection: ApiConnection, callback: (accessToken: string, error?: string) => void): void {
-        OAuthHelper.refreshToken(connection.wsUrl, this.clientId, this.clientSecret, this.refreshToken, (tokenData) =>
-        {
-            try {
-                if (this.refreshTokenCallback) {
-                    this.refreshTokenCallback(tokenData);
-                }
-            } catch (error) {
-                if (this.errorCallback) {
-                    this.errorCallback(new Error('Refresh token callback failed.\n' + JSON.stringify(error)));
-                }
-            }
-
-            callback(tokenData.access_token, tokenData.error);
-        });        
     }
 }
