@@ -25,7 +25,7 @@ import ExpirationReason from './constants/ExpirationReason';
 import LicenseKeyInvoiceSeverity from './constants/LicenseKeyInvoiceSeverity';
 import ErrorHelper from './helpers/ErrorHelper';
 import VersionHelperBase from './helpers/VersionHelperBase';
-import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase'
+import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
 
 Promise.polyfill();
 

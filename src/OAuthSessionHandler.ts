@@ -33,7 +33,7 @@ export class OAuthSessionHandler extends OAuthSessionHandlerBase {
     
                 callback(tokenData.access_token, tokenData.error);
             });        
-        }
+        };
 
         super(username, accessToken, appVersion, getNewAccessToken, errorCallback);
 
