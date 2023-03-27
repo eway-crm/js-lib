@@ -58,4 +58,5 @@ export default class LicenseRestrictionKeys {
     static pohodaSynchronizationIntervalCustomization = 'PohodaSynchronizationIntervalCustomization';
     static pohodaSynchronizationFieldMappingCustomization = 'PohodaSynchronizationFieldMappingCustomization';
     static quickBooksIntegration = 'QuickBooksIntegration';
+    static shareByTeams = "ShareByTeams";
 }
