@@ -27,7 +27,7 @@ export default class FieldNames {
     } as const;
 
     static readonly Companies = {
-        CID: 'CID',
+        ID: 'ID',
         CompanyName: 'CompanyName',
         Department: 'Department',
         AccountNumber: 'AccountNumber',
