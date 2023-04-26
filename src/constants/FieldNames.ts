@@ -1,3 +1,5 @@
+import { FolderNames, TFolderName } from "./FolderNames";
+
 export default class FieldNames {
     static readonly Common = {
         CreatedByGUID: 'CreatedByGUID',
@@ -187,7 +189,9 @@ export default class FieldNames {
         ItemVersion: 'ItemVersion',
 
         EstimatedRevenue: 'EstimatedRevenue',
-        EstimatedRevenueDefaultCurrency: 'EstimatedRevenueDefaultCurrency'
+        EstimatedRevenueDefaultCurrency: 'EstimatedRevenueDefaultCurrency',
+
+        CompletedDate: 'CompletedDate',
     } as const;
 
     static readonly Documents = {
@@ -468,4 +472,38 @@ export default class FieldNames {
     } as const;
 
     static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'];
+
+    static getFolderFileAs = (folderName: TFolderName) => {
+        switch (folderName) {
+            case FolderNames.leads:
+                return FieldNames.Common.FileAs;
+            case FolderNames.projects:
+                return FieldNames.Projects.ProjectName;
+            case FolderNames.documents:
+                return FieldNames.Documents.DocName;
+            case FolderNames.companies:
+                return FieldNames.Companies.CompanyName;
+            case FolderNames.contacts:
+                return FieldNames.Common.FileAs;
+            case FolderNames.users:
+                return FieldNames.Common.FileAs;
+            case FolderNames.emails:
+                return FieldNames.Emails.Subject;
+            case FolderNames.journal:
+                return FieldNames.Journal.FileAs;
+            case FolderNames.tasks:
+                return FieldNames.Tasks.Subject;
+            case FolderNames.workReports:
+                return FieldNames.WorkReports.Subject;
+            case FolderNames.vacation:
+                return FieldNames.Vacation.TypeEn;
+            case FolderNames.carts:
+                return FieldNames.Common.FileAs;
+            case FolderNames.goods:
+                return FieldNames.Common.FileAs;
+            default:
+                console.warn(`FileAs col name not defined for folderName ${folderName}`);
+                return FieldNames.Common.FileAs;
+        }
+    };
 }
