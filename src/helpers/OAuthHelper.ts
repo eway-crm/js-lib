@@ -1,9 +1,8 @@
-import { AxiosError } from 'axios';
+import Axios, { AxiosError } from 'axios';
 import { ITokenData } from '../interfaces/ITokenData';
 import * as base64url from 'universal-base64url';
 import jwt_decode from 'jwt-decode';
 import { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
-import axiosInstance from '../axios/AxiosInstance';
 
 export class OAuthHelper {
     static finishAuthorization = (wsUrl: string, clientId: string, clientSecret: string, codeVerifier: string, authorizationCode: string, redirectUrl: string, callback: (tokenData: ITokenData) => void) => {
@@ -44,7 +43,7 @@ export class OAuthHelper {
     };
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
-        axiosInstance.post<ITokenData>(wsUrl + '/auth/connect/token', params, {
+        Axios.post<ITokenData>(wsUrl + '/auth/connect/token', params, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }

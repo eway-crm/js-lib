@@ -1,4 +1,4 @@
-import { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 import { ReturnCodes } from './ReturnCodes';
 import { IApiResult } from './data/IApiResult';
 import { ISessionHandler } from './ISessionHandler';
@@ -12,7 +12,6 @@ import { ITokenData, TInputData } from './interfaces/ITokenData';
 import * as base64url from 'universal-base64url';
 import { TFolderName } from './constants/FolderNames';
 import ErrorHelper from './helpers/ErrorHelper';
-import axiosInstance from './axios/AxiosInstance';
 
 export class ApiConnection {
     private readonly svcUri: string;
@@ -202,7 +201,7 @@ export class ApiConnection {
         };
 
         const methodUrl = `${this.svcUri}/SaveBinaryAttachment?sessionId=${this.sessionId}&itemGuid=${itemGuid}&fileName=${encodeURIComponent(fileName)}`;
-        const promise = axiosInstance.post<IApiResult>(methodUrl, data, config);
+        const promise = Axios.post<IApiResult>(methodUrl, data, config);
 
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessClb, errorClb);
     };
@@ -318,10 +317,10 @@ export class ApiConnection {
                 if (data) {
                     throw new Error('Calling api get method with data specified does not make any sense.');
                 }
-                promise = axiosInstance.get(methodUrl, config);
+                promise = Axios.get(methodUrl, config);
                 break;
             case HttpMethod.post:
-                promise = axiosInstance.post(methodUrl, data, config);
+                promise = Axios.post(methodUrl, data, config);
                 break;
             default:
                 throw new Error(`Unknown http method '${httpMethod as string}'.`);
