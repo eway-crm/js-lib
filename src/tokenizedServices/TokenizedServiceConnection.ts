@@ -1,10 +1,11 @@
-import Axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { HttpMethod } from '../HttpMethod';
 import { ApiConnection } from '../ApiConnection';
 import { ITokenizedApiResult } from './ITokenizedApiResult';
 import { IApiResult } from '../data/IApiResult';
 import { HttpRequestError, TUnionError } from '..';
 import { TInputData } from '../interfaces/ITokenData';
+import axiosInstance from '../axios/AxiosInstance';
 
 export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     private readonly obtainTokenMethodName: string;
@@ -149,7 +150,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     ) {
         // We count on that we are in Admin/Subdirectory.
         const address = serviceUrl + '/' + methodName;
-        Axios.post<TResult>(address, data)
+        axiosInstance.post<TResult>(address, data)
             .then((response) => {
                 if (response.status === 200) {
                     if (response.data.ReturnCodeString === 'Success') {
@@ -166,7 +167,7 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                     errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
                     return;
                 }
-    
+
                 errorCallback(error);
             });
     }

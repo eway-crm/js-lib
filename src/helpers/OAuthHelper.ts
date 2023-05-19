@@ -1,8 +1,9 @@
-import Axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { ITokenData } from '../interfaces/ITokenData';
 import * as base64url from 'universal-base64url';
 import jwt_decode from 'jwt-decode';
 import { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
+import axiosInstance from '../axios/AxiosInstance';
 
 export class OAuthHelper {
     static finishAuthorization = (wsUrl: string, clientId: string, clientSecret: string, codeVerifier: string, authorizationCode: string, redirectUrl: string, callback: (tokenData: ITokenData) => void) => {
@@ -30,7 +31,7 @@ export class OAuthHelper {
     static getWebServiceUrl = (refreshToken: string) => {
         const parts = refreshToken.split('.');
         if (parts.length !== 2) {
-          throw new Error('Invalid token supplied');
+            throw new Error('Invalid token supplied');
         }
 
         return base64url.decode(parts[1]);
@@ -43,15 +44,13 @@ export class OAuthHelper {
     };
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
-        Axios.post<ITokenData>(wsUrl + '/auth/connect/token', params, {
+        axiosInstance.post<ITokenData>(wsUrl + '/auth/connect/token', params, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        })
-        .then((response) => {
+        }).then((response) => {
             callback(response.data);
-        })
-        .catch((error: AxiosError<ITokenData>) => {
+        }).catch((error: AxiosError<ITokenData>) => {
             if (error.response) {
                 if (error.response.status == 400) {
                     callback(error.response.data);
