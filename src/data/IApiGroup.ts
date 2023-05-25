@@ -14,4 +14,5 @@ export interface IApiGroup extends IApiItemBase {
     DisallowControlModulePermissions: boolean;
     DisallowControlColumnPermissions: boolean;
     ContainsAnyUneditablePermission: boolean;
+    Color: string | null;
 }
