@@ -26,6 +26,7 @@ import LicenseKeyInvoiceSeverity from './constants/LicenseKeyInvoiceSeverity';
 import ErrorHelper from './helpers/ErrorHelper';
 import VersionHelperBase from './helpers/VersionHelperBase';
 import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
+import FieldTypes, { TFieldType } from './constants/FieldTypes';
 
 Promise.polyfill();
 
@@ -119,5 +120,7 @@ export {
     LicenseKeyInvoiceSeverity,
     ErrorHelper,
     VersionHelperBase,
-    OAuthSessionHandlerBase
+    OAuthSessionHandlerBase,
+    FieldTypes,
+    TFieldType
 };
