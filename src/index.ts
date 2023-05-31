@@ -27,6 +27,8 @@ import ErrorHelper from './helpers/ErrorHelper';
 import VersionHelperBase from './helpers/VersionHelperBase';
 import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
 import FieldTypes, { TFieldType } from './constants/FieldTypes';
+import { TNumericValidatorType } from './interfaces/TNumericValidatorType';
+import { IApiEvent, IApiSetFieldValueAction } from './data/workflowActions/IApiAction';
 
 Promise.polyfill();
 
@@ -122,5 +124,8 @@ export {
     VersionHelperBase,
     OAuthSessionHandlerBase,
     FieldTypes,
-    TFieldType
+    TFieldType,
+    TNumericValidatorType,
+    IApiEvent,
+    IApiSetFieldValueAction
 };
