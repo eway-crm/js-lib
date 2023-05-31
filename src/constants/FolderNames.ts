@@ -1,3 +1,5 @@
+import EnumTypes from "./EnumTypes";
+
 export type TFolderName = 'Actions'
     | 'AdditionalFields'
     | 'Bonuses'
@@ -79,7 +81,7 @@ export class FolderNames {
     static isValidFolderName = (folderName: string): boolean => {
         return Object.values(FolderNames).includes(folderName);
     };
-    
+
     static readonly actions: TFolderName = "Actions";
     static readonly additionalFields: TFolderName = "AdditionalFields";
     static readonly bonuses: TFolderName = "Bonuses";
@@ -156,4 +158,52 @@ export class FolderNames {
     static readonly workReports: TFolderName = "WorkReports";
     static readonly wrongClientVersions: TFolderName = "WrongClientVersions";
     static readonly xsltTransformations: TFolderName = "XsltTransformations";
+
+    static getEnumTypeName = (folderName?: string) => {
+        if (folderName === FolderNames.bonuses) return EnumTypes.bonusType;
+        if (folderName === FolderNames.carts) return EnumTypes.cartType;
+        if (folderName === FolderNames.companies) return EnumTypes.companyType;
+        if (folderName === FolderNames.contacts) return EnumTypes.contactType;
+        if (folderName === FolderNames.documents) return EnumTypes.documentType;
+        if (folderName === FolderNames.emails) return EnumTypes.emailType;
+        if (folderName === FolderNames.goals) return EnumTypes.goalType;
+        if (folderName === FolderNames.goods) return EnumTypes.productType;
+        if (folderName === FolderNames.journal) return EnumTypes.journalType;
+        if (folderName === FolderNames.knowledge) return EnumTypes.knowledgeType;
+        if (folderName === FolderNames.leads) return EnumTypes.leadType;
+        if (folderName === FolderNames.marketing) return EnumTypes.marketingType;
+        if (folderName === FolderNames.projects) return EnumTypes.projectType;
+        if (folderName === FolderNames.salaries) return EnumTypes.salaryType;
+        if (folderName === FolderNames.salePrices) return EnumTypes.salePriceType;
+        if (folderName === FolderNames.tasks) return EnumTypes.taskType;
+        if (folderName === FolderNames.training) return EnumTypes.trainingTitle;
+        if (folderName === FolderNames.users) return EnumTypes.userType;
+        if (folderName === FolderNames.vacation) return EnumTypes.vacationType;
+        if (folderName === FolderNames.workReports) return EnumTypes.workReportType;
+        return null;
+    };
+
+    static getFolderNameByEnumTypeName = (enumTypeName?: string) => {
+        if (enumTypeName === EnumTypes.bonusType) return FolderNames.bonuses;
+        if (enumTypeName === EnumTypes.cartType) return FolderNames.carts;
+        if (enumTypeName === EnumTypes.companyType) return FolderNames.companies;
+        if (enumTypeName === EnumTypes.contactType) return FolderNames.contacts;
+        if (enumTypeName === EnumTypes.documentType) return FolderNames.documents;
+        if (enumTypeName === EnumTypes.emailType) return FolderNames.emails;
+        if (enumTypeName === EnumTypes.goalType) return FolderNames.goals;
+        if (enumTypeName === EnumTypes.journalType) return FolderNames.journal;
+        if (enumTypeName === EnumTypes.knowledgeType) return FolderNames.knowledge;
+        if (enumTypeName === EnumTypes.leadType) return FolderNames.leads;
+        if (enumTypeName === EnumTypes.marketingType) return FolderNames.marketing;
+        if (enumTypeName === EnumTypes.productType) return FolderNames.goods;
+        if (enumTypeName === EnumTypes.projectType) return FolderNames.projects;
+        if (enumTypeName === EnumTypes.salaryType) return FolderNames.salaries;
+        if (enumTypeName === EnumTypes.salePriceType) return FolderNames.salePrices;
+        if (enumTypeName === EnumTypes.taskType) return FolderNames.tasks;
+        if (enumTypeName === EnumTypes.trainingTitle) return FolderNames.training;
+        if (enumTypeName === EnumTypes.userType) return FolderNames.users;
+        if (enumTypeName === EnumTypes.vacationType) return FolderNames.vacation;
+        if (enumTypeName === EnumTypes.workReportType) return FolderNames.workReports;
+        return null;
+    };
 }
