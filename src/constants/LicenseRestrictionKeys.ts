@@ -1,4 +1,5 @@
 export default class LicenseRestrictionKeys {
+    static contactsAutomaticSynchronizationWithOutlook = 'ContactsAutomaticSynchronizationWithOutlook';
     static contactsSynchronizationWithOutlook = 'ContactsSynchronizationWithOutlook';
     static contactsSynchronizationWithAndroid = 'ContactsSynchronizationWithAndroid';
     static documentsRevisions = 'DocumentsRevisions';
