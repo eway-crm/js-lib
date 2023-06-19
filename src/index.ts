@@ -29,6 +29,7 @@ import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
 import FieldTypes, { TFieldType } from './constants/FieldTypes';
 import { TNumericValidatorType } from './interfaces/TNumericValidatorType';
 import { IApiEvent, IApiSetFieldValueAction } from './data/workflowActions/IApiAction';
+import ObjectTypeIds from './constants/ObjectTypeIds';
 
 Promise.polyfill();
 
@@ -127,5 +128,6 @@ export {
     TFieldType,
     TNumericValidatorType,
     IApiEvent,
-    IApiSetFieldValueAction
+    IApiSetFieldValueAction,
+    ObjectTypeIds
 };

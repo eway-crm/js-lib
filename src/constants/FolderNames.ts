@@ -66,6 +66,7 @@ export type TFolderName = 'Actions'
     | 'TeamRoles'
     | 'Templates'
     | 'Training'
+    | 'UnifiedRelations'
     | 'Users'
     | 'UserSettings'
     | 'Vacation'
@@ -148,6 +149,7 @@ export class FolderNames {
     static readonly teamRoles: TFolderName = "TeamRoles";
     static readonly templates: TFolderName = "Templates";
     static readonly training: TFolderName = "Training";
+    static readonly unifiedRelations: TFolderName = "UnifiedRelations";
     static readonly users: TFolderName = "Users";
     static readonly userSettings: TFolderName = "UserSettings";
     static readonly vacation: TFolderName = "Vacation";
