@@ -1,6 +1,12 @@
 import { FolderNames, TFolderName } from "./FolderNames";
 
 export default class FieldNames {
+    static readonly ServerCommon = {
+        Server_ID: 'Server_ID',
+        Server_ItemCreated: 'Server_ItemCreated',
+        Server_ItemChanged: 'Server_ItemChanged'
+    } as const;
+
     static readonly Common = {
         CreatedByGUID: 'CreatedByGUID',
         CurrencyEn: 'CurrencyEn',
