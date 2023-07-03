@@ -1,6 +1,7 @@
 
 export interface IApiWebServiceTaskStatus {
     TaskGuid: string;
+    TaskName: string;
     IsRunning: boolean;
     FinishedSuccessfully: boolean;
     CurrentIndex: number;
