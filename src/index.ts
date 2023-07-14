@@ -30,6 +30,8 @@ import FieldTypes, { TFieldType } from './constants/FieldTypes';
 import { TNumericValidatorType } from './interfaces/TNumericValidatorType';
 import { IApiEvent, IApiSetFieldValueAction } from './data/workflowActions/IApiAction';
 import ObjectTypeIds from './constants/ObjectTypeIds';
+import { IApiHubItemsCountsQueryResponseItem } from './data/query/IApiHubItemsCountsQueryResponseItem';
+import QueryHelper from './helpers/QueryHelper';
 
 Promise.polyfill();
 
@@ -129,5 +131,7 @@ export {
     TNumericValidatorType,
     IApiEvent,
     IApiSetFieldValueAction,
-    ObjectTypeIds
+    ObjectTypeIds,
+    IApiHubItemsCountsQueryResponseItem,
+    QueryHelper
 };

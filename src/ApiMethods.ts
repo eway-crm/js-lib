@@ -13,6 +13,7 @@ export class ApiMethods {
     static readonly getWorkflowHistoryRecordsByItemGuids = 'GetWorkflowHistoryRecordsByItemGuids';
     static readonly logIn = 'LogIn';
     static readonly logOut = 'LogOut';
+    static readonly query = 'Query';
 
     static readonly getGetFolderNameByItemGuidsMethodName = (folderName: TFolderName) => {
         switch (folderName) {
