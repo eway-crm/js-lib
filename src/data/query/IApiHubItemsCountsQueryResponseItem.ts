@@ -5,4 +5,5 @@ export interface IApiHubItemsCountsQueryResponseItem {
     ObjectTypeID: number;
     NumberOrItems: number;
     FolderName: TFolderName;
+    IsComplete: boolean;
 }
