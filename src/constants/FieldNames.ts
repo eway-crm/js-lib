@@ -477,6 +477,22 @@ export default class FieldNames {
         IsSystem: 'IsSystem',
     } as const;
 
+    static readonly Groups = {
+        IsAdmin: 'IsAdmin',
+        GroupName: 'GroupName',
+        Description: 'Description',
+        IsPM: 'IsPM',
+        System: 'System',
+        IsRole: 'IsRole',
+        IsCategory: 'IsCategory',
+        DisallowControlModulePermissions: 'DisallowControlModulePermissions',
+        DisallowControlColumnPermissions: 'DisallowControlColumnPermissions',
+        IsOutlookCategory: 'IsOutlookCategory',
+        DisallowControlUserAssignment: 'DisallowControlUserAssignment',
+        ColorEn: 'ColorEn',
+        Picture: 'Picture'
+    } as const;
+
     static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'];
 
     static getFolderFileAs = (folderName: TFolderName) => {
