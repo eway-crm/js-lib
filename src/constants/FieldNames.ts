@@ -198,6 +198,7 @@ export default class FieldNames {
         EstimatedRevenueDefaultCurrency: 'EstimatedRevenueDefaultCurrency',
 
         CompletedDate: 'CompletedDate',
+        LostDate: 'LostDate'
     } as const;
 
     static readonly Documents = {
