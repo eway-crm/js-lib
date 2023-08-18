@@ -19,6 +19,7 @@ class GlobalSettingsNames {
     static completedStateName = 'CompletedStateName';
     static contactDuplicityCheckEnabled = 'ContactDuplicityCheckEnabled';
     static createCompanyWhileImportingContactFromOutlook = 'CreateCompanyWhileImportingContactFromOutlook';
+    static enableContactsTwoWaySyncWithM365 = 'EnableContactsTwoWaySyncWithM365';
     static deadStateName = 'DeadStateName';
     static enableCompaniesSyncIntoMobileDeviceContacts = 'EnableCompaniesSyncIntoMobileDeviceContacts';
     static enableContactsSyncIntoMobileDevice = 'EnableContactsSyncIntoMobileDevice';
