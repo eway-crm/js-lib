@@ -481,6 +481,7 @@ export default class FieldNames {
     static readonly Groups = {
         IsAdmin: 'IsAdmin',
         GroupName: 'GroupName',
+        FileAs: 'FileAs',
         Description: 'Description',
         IsPM: 'IsPM',
         System: 'System',
@@ -499,7 +500,7 @@ export default class FieldNames {
     static getFolderFileAs = (folderName: TFolderName) => {
         switch (folderName) {
             case FolderNames.leads:
-                return FieldNames.Common.FileAs;
+                return FieldNames.Leads.FileAs;
             case FolderNames.projects:
                 return FieldNames.Projects.ProjectName;
             case FolderNames.documents:
@@ -524,6 +525,8 @@ export default class FieldNames {
                 return FieldNames.Common.FileAs;
             case FolderNames.goods:
                 return FieldNames.Common.FileAs;
+            case FolderNames.groups:
+                return FieldNames.Groups.FileAs;
             default:
                 console.warn(`FileAs col name not defined for folderName ${folderName}`);
                 return FieldNames.Common.FileAs;
