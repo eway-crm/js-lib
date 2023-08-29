@@ -526,7 +526,7 @@ export default class FieldNames {
             case FolderNames.goods:
                 return FieldNames.Common.FileAs;
             case FolderNames.groups:
-                return FieldNames.Groups.FileAs;
+                return FieldNames.Groups.GroupName;
             default:
                 console.warn(`FileAs col name not defined for folderName ${folderName}`);
                 return FieldNames.Common.FileAs;
