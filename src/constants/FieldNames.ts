@@ -369,6 +369,9 @@ export default class FieldNames {
 
         LicensePriceChanged: 'LicensePriceChanged',
         Note: 'Note',
+
+        CompletedDate: 'CompletedDate',
+        LostDate: 'LostDate'
     } as const;
 
     static readonly Tasks = {
