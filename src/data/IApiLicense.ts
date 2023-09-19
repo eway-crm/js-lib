@@ -64,6 +64,7 @@ export interface IApiLicense {
     Invoices: IApiLicenseKeyInvoices | null;
     GeneratedDate: string;
     DbSize: IApiLicenseDbSizeModel;
+    IsCloudHosted: boolean;
 }
 
 export interface IApiLicenseDbSizeModel {
