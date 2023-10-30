@@ -1,7 +1,15 @@
 export interface IApiItemBase {
+    Server_ItemCreated: string | null;
+    Server_ItemChanged: string | null;
+    ItemCreated: string;
+    ItemChanged: string;
+    FileAs: string | null | undefined;
+    OwnerGUID: string;
+    CreatedByGUID: string;
+    ModifiedByGUID: string;
+    IsPrivate: boolean;
     ItemGUID: string;
     ItemVersion: number;
-    FileAs: string | null | undefined;
 }
 
 export interface IApiBoundRelation {
