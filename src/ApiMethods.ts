@@ -11,6 +11,7 @@ export class ApiMethods {
     static readonly getRevisionHistoryRecordsByItemGuids = 'GetRevisionHistoryRecordsByItemGuids';
     static readonly getVacationsByItemGuids = 'GetVacationsByItemGuids';
     static readonly getWorkflowHistoryRecordsByItemGuids = 'GetWorkflowHistoryRecordsByItemGuids';
+    static readonly getCompanyInformationFromTaxRegister = 'GetCompanyInformationFromTaxRegister';
     static readonly logIn = 'LogIn';
     static readonly logOut = 'LogOut';
     static readonly query = 'Query';
@@ -40,6 +41,5 @@ export class ApiMethods {
             default:
                 return `Get${folderName}ByItemGuids`;
         }
-
     };
 }
