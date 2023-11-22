@@ -37,9 +37,12 @@ export class OAuthHelper {
     };
 
     static getUserName = (accessToken: string) => {
-        const parts = jwt_decode<IEWJwtPayload>(accessToken);
-
+        const parts = OAuthHelper.decodeAccessToken(accessToken);
         return parts.username;
+    };
+
+    static decodeAccessToken = (accessToken: string) => {
+        return jwt_decode<IEWJwtPayload>(accessToken);
     };
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
