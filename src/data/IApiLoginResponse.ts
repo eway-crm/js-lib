@@ -5,5 +5,6 @@ export interface IApiLoginResponse extends IApiResult {
     UserItemGuid: string | null;
     IsAdmin: boolean | null;
     WcfVersion: string;
+    OutlookClientVersion: string;
     Debug?: boolean;
 }

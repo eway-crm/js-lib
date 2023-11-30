@@ -7,4 +7,8 @@ export interface IApiAvailableVersionResponse extends IApiResult {
     KnowledgeBaseLink: string | null;
     ReleaseDate: string | null;
     IsNewVersionAvailable: boolean;
+    UpdateBlockingTodayMaintenance: null | {
+        Start: string;
+        End: string;
+    };
 }

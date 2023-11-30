@@ -15,6 +15,7 @@ export class ApiMethods {
     static readonly logIn = 'LogIn';
     static readonly logOut = 'LogOut';
     static readonly query = 'Query';
+    static readonly getServiceAuthSettings = 'GetServiceAuthSettings';
 
     static readonly getGetFolderNameByItemGuidsMethodName = (folderName: TFolderName) => {
         switch (folderName) {
