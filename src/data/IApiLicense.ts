@@ -55,6 +55,7 @@ export interface IApiLicenseKeyInvoice {
 
 export interface IApiLicense {
     AvailableBundles: (IApiCapacityAvailableBundle & { Name: ITranslatableString })[];
+    CustomerName: string;
     BusinessType: LicenceBusinessType;
     Features: TFeatureWithEdition[] | null;
     CurrentUserRestrictions: IApiRestrictionsClass;
