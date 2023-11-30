@@ -32,6 +32,7 @@ import { IApiEvent, IApiSetFieldValueAction } from './data/workflowActions/IApiA
 import ObjectTypeIds from './constants/ObjectTypeIds';
 import { IApiHubItemsCountsQueryResponseItem } from './data/query/IApiHubItemsCountsQueryResponseItem';
 import QueryHelper from './helpers/QueryHelper';
+import { IApiServiceAuthSettingsResponse } from './data/IApiServiceAuthSettingsResponse';
 
 Promise.polyfill();
 
@@ -133,5 +134,6 @@ export {
     IApiSetFieldValueAction,
     ObjectTypeIds,
     IApiHubItemsCountsQueryResponseItem,
-    QueryHelper
+    QueryHelper,
+    IApiServiceAuthSettingsResponse
 };

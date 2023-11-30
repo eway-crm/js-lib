@@ -1,6 +1,6 @@
 import { IApiResult } from "./IApiResult";
 
-export interface IApiAvailableVersionResponse extends IApiResult {
+export interface IApiServiceAuthSettingsResponse extends IApiResult {
     IsActiveDirectory: boolean;
     IsAzureAuth: boolean;
 }
