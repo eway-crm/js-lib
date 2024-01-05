@@ -33,7 +33,7 @@ export default [
             //peerDepsExternal(), // We need to specify what external to include
             resolve({ browser: true }),
             commonjs(),
-            typescript({ tsconfig: "./tsconfig.json" }),
+            typescript({ noEmitOnError: true, tsconfig: "./tsconfig.json" }),
             terser(), // Comment to disable minification
             json()
         ],
