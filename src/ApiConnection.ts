@@ -362,6 +362,14 @@ export class ApiConnection {
         return this.svcUri + '/' + ApiMethods.getAllEmailAttachments + '?itemGuid=' + encodeURIComponent(itemGuid);
     };
 
+    readonly getBinaryAttachmentGetMethodUrl = (itemGuid: string, revision?: number): string => {
+        let url = this.svcUri + '/' + ApiMethods.getBinaryAttachment + '?itemGuid=' + encodeURIComponent(itemGuid);
+        if (typeof revision === 'number') {
+            url += `&revision=${revision}`;
+        }
+        return url;
+    };
+
     readonly getActiveSessionId = (): string | null => {
         return this.sessionId;
     };
