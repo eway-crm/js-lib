@@ -363,11 +363,11 @@ export class ApiConnection {
     };
 
     readonly getBinaryAttachmentGetMethodUrl = (itemGuid: string, revision?: number): string => {
-        let url = this.svcUri + '/' + ApiMethods.getBinaryAttachment + '?itemGuid=' + encodeURIComponent(itemGuid);
         if (typeof revision === 'number') {
-            url += `&revision=${revision}`;
+            return this.svcUri + '/' + ApiMethods.getBinaryAttachment + '?itemGuid=' + encodeURIComponent(itemGuid) + `&revision=${revision}`;
         }
-        return url;
+
+        return this.svcUri + '/' + ApiMethods.getBinaryAttachmentLatestRevision + '?itemGuid=' + encodeURIComponent(itemGuid);
     };
 
     readonly getActiveSessionId = (): string | null => {
