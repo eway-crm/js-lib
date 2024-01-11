@@ -94,15 +94,17 @@ export class ApiConnection {
         return this.baseUri;
     }
 
-    readonly createOpenLink = (folderName: TFolderName, guid?: string, fileAs?: string): string => {
+    readonly createOpenLink = (isDevEnvironment: boolean, folderName: TFolderName, guid?: string, fileAs?: string): string => {
         const ws = base64url.encode(this.baseUri);
         let legacyLink = "eway://" + folderName;
         if (guid) {
             legacyLink += "/" + guid?.toLowerCase();
         }
 
+        const domain = isDevEnvironment ? 'open.eway-crm.dev' : 'open.eway-crm.com';
+
         legacyLink = base64url.encode(legacyLink);
-        let url = "https://open.eway-crm.com/?ws=" + ws + "&l=" + legacyLink;
+        let url = "https://" + domain + "/?ws=" + ws + "&l=" + legacyLink;
 
         if (fileAs) {
             url += "&n=" + encodeURIComponent(fileAs);
