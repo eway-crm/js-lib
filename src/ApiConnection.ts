@@ -87,7 +87,7 @@ export class ApiConnection {
         return new ApiConnection(apiServiceUri, new OAuthSessionHandler(username, clientId, clientSecret, refreshToken, accessToken, appVersion, errorCallback, refreshTokenCallback), errorCallback, supportGetItemPreviewMethod);
     }
 
-    static normalizeWsUrl(wsUrl: string): string {
+    static normalizeWsUrl(wsUrl: string | null): string | null {
         if (wsUrl && wsUrl.endsWith('/')) {
             wsUrl = wsUrl.substring(0, wsUrl.length - 1);
         }
