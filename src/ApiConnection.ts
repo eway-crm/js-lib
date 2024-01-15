@@ -36,7 +36,7 @@ export class ApiConnection {
             const apiOption = apiServiceOptions.find((option) => option.toLowerCase() === apiServiceUri.substr(apiServiceUri.length - option.length).toLowerCase()) || '';
             this.baseUri = apiServiceUri.substr(0, apiServiceUri.length - apiOption.length);
         } else {
-            this.baseUri = ApiConnection.normalizeWsUrl(apiServiceUri);
+            this.baseUri = ApiConnection.normalizeWsUrl(apiServiceUri) || apiServiceUri;
 
             if (apiServiceUri.substr(0, 8).toLowerCase() === 'https://') {
                 this.svcUri = this.baseUri + '/API.svc';
