@@ -36,10 +36,7 @@ export class ApiConnection {
             const apiOption = apiServiceOptions.find((option) => option.toLowerCase() === apiServiceUri.substr(apiServiceUri.length - option.length).toLowerCase()) || '';
             this.baseUri = apiServiceUri.substr(0, apiServiceUri.length - apiOption.length);
         } else {
-            this.baseUri = apiServiceUri;
-            if (this.baseUri.substr(this.baseUri.length - 1) === '/') {
-                this.baseUri = this.baseUri.substr(0, this.baseUri.length - 1);
-            }
+            this.baseUri = ApiConnection.normalizeWsUrl(apiServiceUri);
 
             if (apiServiceUri.substr(0, 8).toLowerCase() === 'https://') {
                 this.svcUri = this.baseUri + '/API.svc';
@@ -88,6 +85,14 @@ export class ApiConnection {
         supportGetItemPreviewMethod?: boolean
     ): ApiConnection {
         return new ApiConnection(apiServiceUri, new OAuthSessionHandler(username, clientId, clientSecret, refreshToken, accessToken, appVersion, errorCallback, refreshTokenCallback), errorCallback, supportGetItemPreviewMethod);
+    }
+
+    static normalizeWsUrl(wsUrl: string): string {
+        if (wsUrl && wsUrl.endsWith('/')) {
+            wsUrl = wsUrl.substring(0, wsUrl.length - 1);
+        }
+
+        return wsUrl;
     }
 
     get wsUrl(): string {
