@@ -381,6 +381,10 @@ export class ApiConnection {
         return this.sessionId;
     };
 
+    readonly setActiveSessionId = (sessionId: string | null) => {
+        this.sessionId = sessionId;
+    };
+
     private static handleCallPromise<TResult extends IApiResult>(
         call: Promise<AxiosResponse<TResult>>,
         successCallback: (result: TResult) => void,
