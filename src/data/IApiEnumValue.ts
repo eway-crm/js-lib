@@ -1,7 +1,7 @@
-import { IApiItemBase } from "./IApiItemBase";
+import { IApiItemBaseWithoutPrivate } from "./IApiItemBase";
 import { IApiEvent } from "./workflowActions/IApiAction";
 
-export interface IApiEnumValue extends IApiItemBase {
+export interface IApiEnumValue extends IApiItemBaseWithoutPrivate {
     EnumType: string;
     EnumTypeName: string;
     Rank: number;

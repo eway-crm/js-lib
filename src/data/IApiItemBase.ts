@@ -1,4 +1,4 @@
-export interface IApiItemBase {
+export interface IApiItemBaseWithoutPrivate {
     Server_ItemCreated: string | null;
     Server_ItemChanged: string | null;
     ItemCreated: string;
@@ -7,9 +7,12 @@ export interface IApiItemBase {
     OwnerGUID: string;
     CreatedByGUID: string;
     ModifiedByGUID: string;
-    IsPrivate: boolean;
     ItemGUID: string;
     ItemVersion: number;
+}
+
+export interface IApiItemBase extends IApiItemBaseWithoutPrivate {
+    IsPrivate: boolean;
 }
 
 export interface IApiBoundRelation {

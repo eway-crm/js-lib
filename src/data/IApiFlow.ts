@@ -5,10 +5,10 @@
 //                                        //
 ////////////////////////////////////////////
 
-import { IApiItemBase } from './IApiItemBase';
+import { IApiItemBaseWithoutPrivate } from './IApiItemBase';
 import { IApiEvent } from './workflowActions/IApiAction';
 
-export interface IApiFlow extends IApiItemBase {
+export interface IApiFlow extends IApiItemBaseWithoutPrivate {
     ModelGuid: string | null;
     PrecedentEn: string | null;
     SuccedentEn: string | null;
