@@ -28,6 +28,8 @@ class GlobalSettingsNames {
     static emailsActiveProjectsLeadsFilter = 'EmailsActiveProjectsLeadsFilter';
     static exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
     static forcedEmailTrackingGroups = 'ForcedEmailTrackingGroups';
+    static ignoreEmailsFromDomainsOnEmailsTracking = 'IgnoreEmailsFromDomainsOnEmailsTracking';
+    static trackEmailsFromDomains = 'TrackEmailsFromDomains';
     static groupsForAllUnpaidInvoicesNotification = 'GroupsForAllUnpaidInvoicesNotification';
     static itemPreviewMaxHeight = 'ItemPreviewMaxHeight';
     static lastActivityAttributes = 'LastActivityAttributes';
