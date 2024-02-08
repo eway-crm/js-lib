@@ -20,4 +20,5 @@ export interface IApiUser extends IApiItemBase {
     Server_IsAccountLocked: boolean;
     Server_LastLogin: string | null;
     Server_LastActivity: string | null;
+    Groups_Default_GroupGuid: string | null;
 }
