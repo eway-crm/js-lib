@@ -135,5 +135,6 @@ export {
     ObjectTypeIds,
     IApiHubItemsCountsQueryResponseItem,
     QueryHelper,
-    IApiServiceAuthSettingsResponse
+    IApiServiceAuthSettingsResponse,
+    ApiConnection as ApiConnectionAsNonDefaultExport
 };
