@@ -70,6 +70,8 @@ export * from './data/IApiItemBase';
 export * from './data/IApiItemIdentifier';
 export * from './data/IApiItemUsageStatus';
 export * from './data/IApiJournal';
+export * from './data/IApiLayout';
+export * from './data/IApiLayoutsModel';
 export * from './data/IApiLead';
 export * from './data/IApiLicense';
 export * from './data/IApiLicenseBundleBase';
