@@ -1,4 +1,4 @@
-import { TApiColumnPermissionMandatoryRuleOptions, TApiColumnPermissionPermissionRuleOptions } from "../data/IApiColumnPermission";
+import type { TApiColumnPermissionMandatoryRuleOptions, TApiColumnPermissionPermissionRuleOptions } from "../data/IApiColumnPermission";
 
 export class ColumnPermissionPermissionRules {
     static readonly all: TApiColumnPermissionPermissionRuleOptions = 'All';

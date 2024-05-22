@@ -1,4 +1,4 @@
-import { IApiCapacityAvailableBundle } from "./IApiCapacityAvailableBundle";
+import type { IApiCapacityAvailableBundle } from "./IApiCapacityAvailableBundle";
 
 export interface IApiLocalizedLicenseBundle extends IApiCapacityAvailableBundle {
     Name: string;

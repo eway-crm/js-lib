@@ -1,11 +1,11 @@
-import { IApiCapacityAvailableBundle } from './IApiCapacityAvailableBundle';
-import { ITranslatableString } from '../interfaces/ITranslatableString';
-import { TFeatureWithEdition } from './IApiFeaturesLicenseBundle';
-import { Edition } from '../constants/Edition';
-import { Feature } from '../constants/Feature';
-import { TFolderName } from '../constants/FolderNames';
-import ExpirationReason from '../constants/ExpirationReason';
-import LicenseKeyInvoiceSeverity from '../constants/LicenseKeyInvoiceSeverity';
+import type { IApiCapacityAvailableBundle } from './IApiCapacityAvailableBundle';
+import type { ITranslatableString } from '../interfaces/ITranslatableString';
+import type { TFeatureWithEdition } from './IApiFeaturesLicenseBundle';
+import type { Edition } from '../constants/Edition';
+import type { Feature } from '../constants/Feature';
+import type { TFolderName } from '../constants/FolderNames';
+import type ExpirationReason from '../constants/ExpirationReason';
+import type LicenseKeyInvoiceSeverity from '../constants/LicenseKeyInvoiceSeverity';
 
 type LicenceBusinessType = 'Premium' | 'Trial' | 'Free';
 

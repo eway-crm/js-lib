@@ -1,4 +1,4 @@
-import { TApiQueryField } from './IApiQuery';
+import type { TApiQueryField } from './IApiQuery';
 
 type TFilterValue = string | number | boolean | null; 
 

@@ -1,5 +1,5 @@
-import { ITranslatableString } from '../interfaces/ITranslatableString';
-import { IApiItemBase } from './IApiItemBase';
+import type { ITranslatableString } from '../interfaces/ITranslatableString';
+import type { IApiItemBase } from './IApiItemBase';
 
 type TAvailableValue = {
     Key: string;

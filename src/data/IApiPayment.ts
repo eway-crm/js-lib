@@ -5,7 +5,7 @@
 //                                        //
 ////////////////////////////////////////////
 
-import { IApiItemBase } from './IApiItemBase';
+import type { IApiItemBase } from './IApiItemBase';
 
 export interface IApiPayment extends IApiItemBase {
     Date: string | null;

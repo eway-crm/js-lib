@@ -1,4 +1,4 @@
-import { IApiItemBase } from "./IApiItemBase";
+import type { IApiItemBase } from "./IApiItemBase";
 
 export type TApiColumnPermissionPermissionRuleOptions = 'All' | 'Own' | 'Readonly' | 'Invisible' | 'None';
 export type TApiColumnPermissionMandatoryRuleOptions = 'Mandatory' | 'Optional' | 'Unique' | 'None';
@@ -10,8 +10,8 @@ export interface IApiColumnPermission extends IApiItemBase {
     IsAdditionalField: boolean;
     IsMandatoryRuleEditable: boolean;
     IsPermissionRuleEditable: boolean;
-    MandatoryRule: TApiColumnPermissionMandatoryRuleOptions | string;
-    PermissionRule: TApiColumnPermissionPermissionRuleOptions | string;
+    MandatoryRule: TApiColumnPermissionMandatoryRuleOptions;
+    PermissionRule: TApiColumnPermissionPermissionRuleOptions;
     NotFullyPermittedForGroupGuids: string[] | null;
     IsSetToUnique: boolean;
 }

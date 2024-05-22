@@ -5,7 +5,7 @@
 //                                        //
 ////////////////////////////////////////////
 
-import { IApiItemBase } from './IApiItemBase';
+import type { IApiItemBase } from './IApiItemBase';
 
 export interface IApiEmail extends IApiItemBase {
     Subject: string | null;

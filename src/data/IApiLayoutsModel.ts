@@ -5,7 +5,7 @@
 //                                        //
 ////////////////////////////////////////////
 
-import { IApiItemBaseWithoutPrivate } from './IApiItemBase';
+import type { IApiItemBaseWithoutPrivate } from './IApiItemBase';
 
 export interface IApiLayoutsModel extends IApiItemBaseWithoutPrivate {
     FolderName: string | null;

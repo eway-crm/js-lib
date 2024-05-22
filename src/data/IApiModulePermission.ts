@@ -1,4 +1,4 @@
-import { IApiItemBase } from "./IApiItemBase";
+import type { IApiItemBase } from "./IApiItemBase";
 
 export type TApiModulePermissionOptions = 'All' | 'Inherited' | 'Group' | 'Related' | 'Own' | 'None';
 

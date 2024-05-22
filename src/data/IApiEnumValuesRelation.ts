@@ -5,7 +5,7 @@
 //                                        //
 ////////////////////////////////////////////
 
-import { IApiItemBase } from './IApiItemBase';
+import type { IApiItemBase } from './IApiItemBase';
 
 export interface IApiEnumValuesRelation extends IApiItemBase {
     EnumValueGuid: string | null;

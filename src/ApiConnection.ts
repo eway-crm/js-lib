@@ -1,16 +1,18 @@
-import Axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
+import type { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
+import Axios from 'axios';
 import { ReturnCodes } from './ReturnCodes';
-import { IApiResult } from './data/IApiResult';
-import { ISessionHandler } from './ISessionHandler';
+import type { IApiResult } from './data/IApiResult';
+import type { ISessionHandler } from './ISessionHandler';
 import { HttpMethod } from './HttpMethod';
 import { CredentialsSessionHandler } from './CredentialsSessionHandler';
 import { AnonymousSessionHandler } from './AnonymousSessionHandler';
 import { ApiMethods } from './ApiMethods';
 import { OAuthSessionHandler } from './OAuthSessionHandler';
-import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
-import { ITokenData, TInputData } from './interfaces/ITokenData';
+import type { TUnionError } from './exceptions/HttpRequestError';
+import { HttpRequestError } from './exceptions/HttpRequestError';
+import type { ITokenData, TInputData } from './interfaces/ITokenData';
 import * as base64url from 'universal-base64url';
-import { TFolderName } from './constants/FolderNames';
+import type { TFolderName } from './constants/FolderNames';
 import ErrorHelper from './helpers/ErrorHelper';
 
 export class ApiConnection {

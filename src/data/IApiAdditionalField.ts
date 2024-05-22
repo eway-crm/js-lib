@@ -1,5 +1,5 @@
-import { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
-import { IApiItemBase } from './IApiItemBase';
+import type { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
+import type { IApiItemBase } from './IApiItemBase';
 
 export interface IApiAdditionalField extends IApiItemBase {
     ObjectTypeFolderName: string;

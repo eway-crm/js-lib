@@ -1,4 +1,4 @@
-import { IApiResult } from "./IApiResult";
+import type { IApiResult } from "./IApiResult";
 
 export interface IApiAvailableVersionResponse extends IApiResult {
     ClientVersion: string | null;

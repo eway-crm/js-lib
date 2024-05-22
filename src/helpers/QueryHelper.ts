@@ -1,4 +1,4 @@
-import { TFolderName } from "../constants/FolderNames";
+import type { TFolderName } from "../constants/FolderNames";
 
 export default class QueryHelper {
     static createHubItemsCountsQuery(parentItemGuids: string[], itemTypes: TFolderName[], excludeSystemItems?: boolean) {

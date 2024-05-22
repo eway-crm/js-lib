@@ -1,5 +1,5 @@
-import { IApiItemBase } from "./IApiItemBase";
-import { IApiEnumValue } from "./IApiEnumValue";
+import type { IApiItemBase } from "./IApiItemBase";
+import type { IApiEnumValue } from "./IApiEnumValue";
 
 export enum EnumTypeEditMode {
     Readonly = 'Readonly',

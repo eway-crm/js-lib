@@ -1,4 +1,4 @@
-import { TActionEventType } from "../data/workflowActions/IApiAction";
+import type { TActionEventType } from "../data/workflowActions/IApiAction";
 
 export default class ActionEventTypes {
     static readonly onValueChanging: TActionEventType = 'OnValueChanging';

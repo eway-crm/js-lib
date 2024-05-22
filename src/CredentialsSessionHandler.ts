@@ -1,8 +1,8 @@
-import { ISessionHandler } from './ISessionHandler';
-import { ApiConnection } from './ApiConnection';
-import { TUnionError } from './exceptions/HttpRequestError';
+import type { ISessionHandler } from './ISessionHandler';
+import type { ApiConnection } from './ApiConnection';
+import type { TUnionError } from './exceptions/HttpRequestError';
 import { ApiMethods } from './ApiMethods';
-import { IApiLoginResponse } from './data/IApiLoginResponse';
+import type { IApiLoginResponse } from './data/IApiLoginResponse';
 
 export class CredentialsSessionHandler implements ISessionHandler {
     private readonly username: string;

@@ -1,5 +1,5 @@
-import { IApiItemBase } from "./IApiItemBase";
-import { IApiLicenseBundleBase } from "./IApiLicenseBundleBase";
+import type { IApiItemBase } from "./IApiItemBase";
+import type { IApiLicenseBundleBase } from "./IApiLicenseBundleBase";
 
 export interface IApiUser extends IApiItemBase {
     Username: string;

@@ -1,4 +1,4 @@
-import { IApiItemBase } from './IApiItemBase';
+import type { IApiItemBase } from './IApiItemBase';
 
 export interface IApiItemIdentifier extends Omit<IApiItemBase, 'ItemGUID' | 'ItemVersion'> {
     ItemGUID: string | null;

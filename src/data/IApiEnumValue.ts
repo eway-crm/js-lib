@@ -1,5 +1,5 @@
-import { IApiItemBaseWithoutPrivate } from "./IApiItemBase";
-import { IApiEvent } from "./workflowActions/IApiAction";
+import type { IApiItemBaseWithoutPrivate } from "./IApiItemBase";
+import type { IApiEvent } from "./workflowActions/IApiAction";
 
 export interface IApiEnumValue extends IApiItemBaseWithoutPrivate {
     EnumType: string;

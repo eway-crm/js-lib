@@ -1,5 +1,5 @@
-import { IApiItemBase } from './IApiItemBase';
-import { IApiEvent } from './workflowActions/IApiAction';
+import type { IApiItemBase } from './IApiItemBase';
+import type { IApiEvent } from './workflowActions/IApiAction';
 
 export interface IApiWorkflowActionDerivedItem extends IApiItemBase {
     PerformsLockItemAction: boolean | null;

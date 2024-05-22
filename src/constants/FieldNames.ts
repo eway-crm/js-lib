@@ -1,4 +1,5 @@
-import { FolderNames, TFolderName } from "./FolderNames";
+import type { TFolderName } from "./FolderNames";
+import { FolderNames } from "./FolderNames";
 
 export default class FieldNames {
     static readonly ServerCommon = {

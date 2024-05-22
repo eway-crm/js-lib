@@ -1,20 +1,21 @@
-import { ISessionHandler } from './ISessionHandler';
-import { ApiConnection } from './ApiConnection';
-import { ApiMethods, IApiResult } from '.';
-import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
+import type { ISessionHandler } from './ISessionHandler';
+import type { ApiConnection } from './ApiConnection';
+import type { IApiResult } from './data/IApiResult';
+import { ApiMethods } from './ApiMethods';
+import type { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { WebServiceError } from './exceptions/WebServiceError';
-import { IApiLoginResponse } from './data/IApiLoginResponse';
+import type { IApiLoginResponse } from './data/IApiLoginResponse';
 
 export abstract class OAuthSessionHandlerBase implements ISessionHandler {
     public lastSuccessfulLoginResponse?: IApiLoginResponse;
-    
+
     private accessToken: string;
     private readonly username: string;
     private readonly appVersion: string;
     protected readonly errorCallback: ((error: TUnionError) => void) | undefined;
     private readonly getNewAccessTokenCallback: ((connection: ApiConnection, callback: (accessToken: string, error?: string) => void) => void);
 
-    constructor (username: string, accessToken: string, appVersion: string, 
+    constructor(username: string, accessToken: string, appVersion: string,
         getNewAccessTokenCallback: ((connection: ApiConnection, callback: (accessToken: string, error?: string) => void) => void),
         errorCallback?: (error: TUnionError) => void) {
         if (!username) {
@@ -36,7 +37,7 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
     };
 
     readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void) => {
-		const successCallbackHandler = (result: IApiLoginResponse) => {
+        const successCallbackHandler = (result: IApiLoginResponse) => {
             this.lastSuccessfulLoginResponse = result;
             const newSessionId = result.SessionId;
             if (!newSessionId) {
@@ -53,7 +54,7 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
             }
         };
 
-		const unsuccessCallbackHandler = (result: IApiResult) => {
+        const unsuccessCallbackHandler = (result: IApiResult) => {
             const error = new WebServiceError(result.ReturnCode, 'Unable to login. Error response follows.\n' + JSON.stringify(result));
             if (this.errorCallback) {
                 this.errorCallback(error);
@@ -62,7 +63,7 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
             }
         };
 
-		const errorCallbackHandler = (error: TUnionError) => {
+        const errorCallbackHandler = (error: TUnionError) => {
             if ((error as HttpRequestError)?.statusCode === 401) {
                 this.getNewAccessTokenCallback(connection, (accessToken, error) => {
                     this.accessToken = accessToken;
@@ -80,17 +81,17 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
             this.errorCallback(error);
         };
 
-		const loginInputData = {
+        const loginInputData = {
             userName: this.username,
             appVersion: this.appVersion,
             createSessionCookie: connection.supportsGetItemPreviewMethod
         };
 
-		const loginHeaders = {
-			'Authorization': 'Bearer ' + this.accessToken
-		};
+        const loginHeaders = {
+            'Authorization': 'Bearer ' + this.accessToken
+        };
 
-		connection.callWithoutSession(
+        connection.callWithoutSession(
             ApiMethods.logIn,
             loginInputData,
             successCallbackHandler,

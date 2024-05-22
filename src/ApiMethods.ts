@@ -1,4 +1,5 @@
-import { FolderNames, TFolderName } from "./constants/FolderNames";
+import type { TFolderName } from "./constants/FolderNames";
+import { FolderNames } from "./constants/FolderNames";
 
 export class ApiMethods {
     static readonly getAllEmailAttachments = 'GetAllEmailAttachments';

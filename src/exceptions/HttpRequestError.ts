@@ -1,4 +1,4 @@
-import { WebServiceError } from "./WebServiceError";
+import type { WebServiceError } from "./WebServiceError";
 
 export type TUnionError = Error | HttpRequestError | WebServiceError;
 

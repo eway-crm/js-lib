@@ -1,5 +1,5 @@
 import { compare } from "compare-versions";
-import { ApiConnection } from "../ApiConnection";
+import type { ApiConnection } from "../ApiConnection";
 
 export default class VersionHelperBase {
     protected static readonly getIsDebug = (connection?: ApiConnection | null) => {

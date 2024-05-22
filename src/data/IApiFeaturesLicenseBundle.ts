@@ -1,6 +1,6 @@
-import { Edition } from "../constants/Edition";
-import { Feature } from "../constants/Feature";
-import { IApiLicenseBundleBase } from "./IApiLicenseBundleBase";
+import type { Edition } from "../constants/Edition";
+import type { Feature } from "../constants/Feature";
+import type { IApiLicenseBundleBase } from "./IApiLicenseBundleBase";
 
 export type TFeatureWithEdition = {
     Edition: Edition;

@@ -1,10 +1,12 @@
-import Axios, { AxiosError } from 'axios';
-import { HttpMethod } from '../HttpMethod';
-import { ApiConnection } from '../ApiConnection';
-import { ITokenizedApiResult } from './ITokenizedApiResult';
-import { IApiResult } from '../data/IApiResult';
-import { HttpRequestError, TUnionError } from '..';
-import { TInputData } from '../interfaces/ITokenData';
+import type { AxiosError } from 'axios';
+import Axios from 'axios';
+import type { HttpMethod } from '../HttpMethod';
+import type { ApiConnection } from '../ApiConnection';
+import type { ITokenizedApiResult } from './ITokenizedApiResult';
+import type { IApiResult } from '../data/IApiResult';
+import type { TUnionError } from '../exceptions/HttpRequestError';
+import { HttpRequestError } from '../exceptions/HttpRequestError';
+import type { TInputData } from '../interfaces/ITokenData';
 
 export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
     private readonly obtainTokenMethodName: string;

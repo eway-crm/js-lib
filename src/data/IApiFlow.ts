@@ -5,8 +5,8 @@
 //                                        //
 ////////////////////////////////////////////
 
-import { IApiItemBaseWithoutPrivate } from './IApiItemBase';
-import { IApiEvent } from './workflowActions/IApiAction';
+import type { IApiItemBaseWithoutPrivate } from './IApiItemBase';
+import type { IApiEvent } from './workflowActions/IApiAction';
 
 export interface IApiFlow extends IApiItemBaseWithoutPrivate {
     ModelGuid: string | null;

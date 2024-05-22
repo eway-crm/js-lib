@@ -1,5 +1,5 @@
-import { ApiConnection } from './ApiConnection';
-import { IApiLoginResponse } from './data/IApiLoginResponse';
+import type { ApiConnection } from './ApiConnection';
+import type { IApiLoginResponse } from './data/IApiLoginResponse';
 
 export interface ISessionHandler {
     invalidateSessionId(sessionId: string, callback: () => void): void;

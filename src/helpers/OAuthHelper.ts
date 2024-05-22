@@ -1,8 +1,9 @@
-import Axios, { AxiosError } from 'axios';
-import { ITokenData } from '../interfaces/ITokenData';
+import type { AxiosError } from 'axios';
+import Axios from 'axios';
+import type { ITokenData } from '../interfaces/ITokenData';
 import * as base64url from 'universal-base64url';
 import jwt_decode from 'jwt-decode';
-import { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
+import type { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
 
 export class OAuthHelper {
     static finishAuthorization = (wsUrl: string, clientId: string, clientSecret: string, codeVerifier: string, authorizationCode: string, redirectUrl: string, callback: (tokenData: ITokenData) => void) => {

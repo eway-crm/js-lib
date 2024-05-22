@@ -1,4 +1,4 @@
-import { TFolderName } from "../../constants/FolderNames";
+import type { TFolderName } from "../../constants/FolderNames";
 
 export interface IApiHubItemsCountsQueryResponseItem {
     ParentItemGUID: string;

@@ -1,6 +1,6 @@
-import { TFieldType } from '../constants/FieldTypes';
-import { TFolderName } from '../constants/FolderNames';
-import { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
+import type { TFieldType } from '../constants/FieldTypes';
+import type { TFolderName } from '../constants/FolderNames';
+import type { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
 
 type TAdditionalFieldItem = {
     CategoryEn: string | null;
