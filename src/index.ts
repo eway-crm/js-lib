@@ -33,6 +33,8 @@ import ObjectTypeIds from './constants/ObjectTypeIds';
 import { IApiHubItemsCountsQueryResponseItem } from './data/query/IApiHubItemsCountsQueryResponseItem';
 import QueryHelper from './helpers/QueryHelper';
 import { IApiServiceAuthSettingsResponse } from './data/IApiServiceAuthSettingsResponse';
+import type IApiUnlinkInquiryResult from './data/IApiUnlinkInquiryResult';
+import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult';
 
 Promise.polyfill();
 
@@ -138,5 +140,7 @@ export {
     IApiHubItemsCountsQueryResponseItem,
     QueryHelper,
     IApiServiceAuthSettingsResponse,
-    ApiConnection as ApiConnectionAsNonDefaultExport
+    ApiConnection as ApiConnectionAsNonDefaultExport,
+    IApiUnlinkInquiryResult,
+    TApiUnlinkInquiryResultType,
 };

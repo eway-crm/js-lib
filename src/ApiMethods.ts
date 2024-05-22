@@ -20,6 +20,8 @@ export class ApiMethods {
     static readonly getVersion = 'GetVersion';
     static readonly getBinaryAttachment = 'GetBinaryAttachment';
     static readonly getBinaryAttachmentLatestRevision = 'GetBinaryAttachmentLatestRevision';
+    static readonly canUnlinkItems = 'CanUnlinkItems';
+    static readonly unlinkItems = 'UnlinkItems';
 
     static readonly getGetFolderNameByItemGuidsMethodName = (folderName: TFolderName) => {
         switch (folderName) {
