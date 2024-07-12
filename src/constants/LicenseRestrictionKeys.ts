@@ -13,6 +13,7 @@ export default class LicenseRestrictionKeys {
     static emailsManualTracking = 'EmailsManualTracking';
     static emailsAutomaticTracking = 'EmailsAutomaticTracking';
     static convertEmailToContact = 'ConvertEmailToContact';
+    static convertEmailToContactInBulk = 'ConvertEmailToContactInBulk';
     static convertEmailToDeal = 'ConvertEmailToDeal';
     static convertEmailToProject = 'ConvertEmailToProject';
     static convertEmailToTask = 'ConvertEmailToTask';
