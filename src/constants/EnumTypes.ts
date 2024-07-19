@@ -37,6 +37,7 @@ export default class EnumTypes {
     static readonly salaryDate = 'SalaryDate';
     static readonly salaryType = 'SalaryType';
     static readonly salePriceType = 'SalePriceType';
+    static readonly sentimentTone = 'SentimentTone';
     static readonly suffixType = 'SuffixType';
     static readonly taskImportance = 'TaskImportance';
     static readonly tasksSnoozePeriod = 'TasksSnoozePeriod';
