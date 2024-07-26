@@ -12,6 +12,7 @@ export default class LicenseRestrictionKeys {
     static calendarSynchronizationWithOutlook = 'CalendarSynchronizationWithOutlook';
     static emailsManualTracking = 'EmailsManualTracking';
     static emailsAutomaticTracking = 'EmailsAutomaticTracking';
+    static emailSummaryAndSentimentToneFromAi = "EmailSummaryAndSentimentToneFromAi";
     static convertEmailToContact = 'ConvertEmailToContact';
     static convertEmailToContactInBulk = 'ConvertEmailToContactInBulk';
     static convertEmailToDeal = 'ConvertEmailToDeal';
