@@ -18,6 +18,7 @@ import RelationTypes, { TRelationType } from './constants/RelationTypes';
 import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from './constants/ColumnPermissionRules';
 import { Edition } from './constants/Edition';
 import { Feature } from './constants/Feature';
+import { SentimentTone } from './constants/SentimentTone';
 import Functionality from './constants/Functionality';
 import CustomizationStatsItemKeys from './constants/CustomizationStatsItemKeys';
 import LicenseRestrictionKeys from './constants/LicenseRestrictionKeys';
@@ -101,6 +102,7 @@ export * from './data/query/IApiQueryFilters';
 export * from './interfaces/ITranslatableString';
 
 export {
+    SentimentTone,
     HttpMethod,
     ISessionHandler,
     ReturnCodes,

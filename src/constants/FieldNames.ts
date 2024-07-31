@@ -237,6 +237,8 @@ export default class FieldNames {
         FileSize: 'FileSize',
         AttachmentsCount: 'AttachmentsCount',
         Note: 'Note',
+        SentimentTone: 'SentimentTone',
+        Summary: 'Summary',
     } as const;
 
     static readonly Goods = {
