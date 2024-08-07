@@ -62,4 +62,7 @@ export default class LicenseRestrictionKeys {
     static pohodaSynchronizationFieldMappingCustomization = 'PohodaSynchronizationFieldMappingCustomization';
     static quickBooksIntegration = 'QuickBooksIntegration';
     static shareByTeams = "ShareByTeams";
+    static convertEmailToContactWithDataFromAi = "ConvertEmailToContactWithDataFromAi";
+    static convertEmailToDealWithDataFromAi = "ConvertEmailToDealWithDataFromAi";
+    static convertEmailToProjectWithDataFromAi = "ConvertEmailToProjectWithDataFromAi";
 }
