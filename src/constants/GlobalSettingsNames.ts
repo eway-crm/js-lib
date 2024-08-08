@@ -24,6 +24,7 @@ class GlobalSettingsNames {
     static enableCompaniesSyncIntoMobileDeviceContacts = 'EnableCompaniesSyncIntoMobileDeviceContacts';
     static enableContactsSyncIntoMobileDevice = 'EnableContactsSyncIntoMobileDevice';
     static enableLeadsSyncIntoMobileDeviceContacts = 'EnableLeadsSyncIntoMobileDeviceContacts';
+    static enableLlamaAiFeatures = 'EnableLlamaAiFeatures';
     static enableUsersSyncIntoMobileDeviceContacts = 'EnableUsersSyncIntoMobileDeviceContacts';
     static emailsActiveProjectsLeadsFilter = 'EmailsActiveProjectsLeadsFilter';
     static exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
