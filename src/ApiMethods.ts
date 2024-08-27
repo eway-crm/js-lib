@@ -24,30 +24,42 @@ export class ApiMethods {
     static readonly canUnlinkItems = 'CanUnlinkItems';
     static readonly unlinkItems = 'UnlinkItems';
 
-    static readonly getGetFolderNameByItemGuidsMethodName = (folderName: TFolderName) => {
+    /**
+     * Return folderName part of API method that is used in API calls. Some API methods have different names than the folder names they are associated with.
+     * For example module Calendar has method GetCalendarsByItemGuids, but the folder name is Calendar.
+     */
+    private static readonly getFolderNameForApiMethod = (folderName: TFolderName) => {
         switch (folderName) {
             case FolderNames.calendar:
-                return ApiMethods.getCalendarsByItemGuids;
+                return 'Calendars';
             case FolderNames.journal:
-                return ApiMethods.getJournalsByItemGuids;
-
+                return 'Journals';
             case FolderNames.marketing:
-                return ApiMethods.getMarketingCampaignsByItemGuids;
-
+                return 'MarketingCampaigns';
             case FolderNames.marketingList:
-                return ApiMethods.getMarketingListsRecordsByItemGuids;
-
+                return 'MarketingListsRecords';
             case FolderNames.revisionsHistory:
-                return ApiMethods.getRevisionHistoryRecordsByItemGuids;
-
+                return 'RevisionHistoryRecords';
             case FolderNames.vacation:
-                return ApiMethods.getVacationsByItemGuids;
-
+                return 'Vacations';
             case FolderNames.workflowHistory:
-                return ApiMethods.getWorkflowHistoryRecordsByItemGuids;
-
+                return 'WorkflowHistoryRecords';
             default:
-                return `Get${folderName}ByItemGuids`;
+                return folderName;
         }
+    };
+
+    static readonly getGetFolderNameByItemGuidsMethodName = (folderName: TFolderName) => {
+        const folderNameForApiMethod = ApiMethods.getFolderNameForApiMethod(folderName);
+        return `Get${folderNameForApiMethod}ByItemGuids`;
+    };
+
+    static readonly getGetFolderNameMethodName = (folderName: TFolderName) => {
+        const folderNameForApiMethod = ApiMethods.getFolderNameForApiMethod(folderName);
+        return `Get${folderNameForApiMethod}`;
+    };
+
+    static readonly getSearchFolderNameMethodName = (folderName: TFolderName) => {
+        return `Search${folderName}`;
     };
 }
