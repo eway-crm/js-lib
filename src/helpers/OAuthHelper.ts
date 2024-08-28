@@ -5,6 +5,10 @@ import * as base64url from 'universal-base64url';
 import jwt_decode from 'jwt-decode';
 import type { IEWJwtPayload } from '../interfaces/IEWJwtPayload';
 
+export type scope = "api" | "offline_access";
+
+export type codeChallengeMethod = "plain" | "S256";
+
 export class OAuthHelper {
     static finishAuthorization = (wsUrl: string, clientId: string, clientSecret: string, codeVerifier: string, authorizationCode: string, redirectUrl: string, callback: (tokenData: ITokenData) => void) => {
         const params = new URLSearchParams();
@@ -45,6 +49,33 @@ export class OAuthHelper {
     static decodeAccessToken = (accessToken: string) => {
         return jwt_decode<IEWJwtPayload>(accessToken);
     };
+
+    static constructOauthUrl(clientId: string, scopes: scope[], redirectUri: string, state?: string, codeChallenge?: string, codeChallengeMethod?: codeChallengeMethod, host: string = "eway-crm.com"): string {
+        if ((codeChallenge && !codeChallengeMethod) || (!codeChallenge && codeChallengeMethod)) {
+            throw new Error("If codeChallenge is defined, codeChallengeMethod must also be defined and vice versa");
+        }
+
+        let formatedScopes = "";
+
+        for (const scope of scopes) {
+            formatedScopes += `${scope} `;
+        }
+
+        formatedScopes.trim();
+
+        let oAuthUrl = `https://login.${host}?scope=${encodeURIComponent(formatedScopes)}` +
+            `prompt=login&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&client_id=${clientId}`;
+
+        if (state) {
+            oAuthUrl += `&state=${encodeURIComponent(state)}`
+        }
+
+        if (codeChallenge && codeChallengeMethod) {
+            oAuthUrl += `&code_challenge=${encodeURIComponent(codeChallenge)}&code_challenge_method=${encodeURIComponent(codeChallengeMethod)}`
+        }
+
+        return oAuthUrl;
+    }
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
         Axios.post<ITokenData>(wsUrl + '/auth/connect/token', params, {
