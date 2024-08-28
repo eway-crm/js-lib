@@ -56,7 +56,7 @@ export class OAuthHelper {
         }
 
         let authorizeUrl = `https://login.eway-crm.${isDev ? "dev" : "com"}?scope=${encodeURIComponent(scopes.join(" "))}` +
-            `prompt=login&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&client_id=${clientId}`;
+            `&prompt=login&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&client_id=${clientId}`;
 
         if (state) {
             authorizeUrl += `&state=${encodeURIComponent(state)}`;
