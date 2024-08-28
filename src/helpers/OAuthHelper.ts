@@ -59,11 +59,11 @@ export class OAuthHelper {
             `prompt=login&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&client_id=${clientId}`;
 
         if (state) {
-            authorizeUrl += `&state=${encodeURIComponent(state)}`
+            authorizeUrl += `&state=${encodeURIComponent(state)}`;
         }
 
         if (codeChallenge && codeChallengeMethod) {
-            authorizeUrl += `&code_challenge=${encodeURIComponent(codeChallenge)}&code_challenge_method=${encodeURIComponent(codeChallengeMethod)}`
+            authorizeUrl += `&code_challenge=${encodeURIComponent(codeChallenge)}&code_challenge_method=${encodeURIComponent(codeChallengeMethod)}`;
         }
 
         return authorizeUrl;
