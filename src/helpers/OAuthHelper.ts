@@ -50,31 +50,23 @@ export class OAuthHelper {
         return jwt_decode<IEWJwtPayload>(accessToken);
     };
 
-    static constructOauthUrl(clientId: string, scopes: scope[], redirectUri: string, state?: string, codeChallenge?: string, codeChallengeMethod?: codeChallengeMethod, host: string = "eway-crm.com"): string {
+    static createAuthorizeUrl(clientId: string, scopes: scope[], redirectUri: string, state?: string, codeChallenge?: string, codeChallengeMethod?: codeChallengeMethod, isDev: boolean = false): string {
         if ((codeChallenge && !codeChallengeMethod) || (!codeChallenge && codeChallengeMethod)) {
             throw new Error("If codeChallenge is defined, codeChallengeMethod must also be defined and vice versa");
         }
 
-        let formatedScopes = "";
-
-        for (const scope of scopes) {
-            formatedScopes += `${scope} `;
-        }
-
-        formatedScopes.trim();
-
-        let oAuthUrl = `https://login.${host}?scope=${encodeURIComponent(formatedScopes)}` +
+        let authorizeUrl = `https://login.eway-crm.${isDev ? "dev" : "com"}?scope=${encodeURIComponent(scopes.join(" "))}` +
             `prompt=login&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&client_id=${clientId}`;
 
         if (state) {
-            oAuthUrl += `&state=${encodeURIComponent(state)}`
+            authorizeUrl += `&state=${encodeURIComponent(state)}`
         }
 
         if (codeChallenge && codeChallengeMethod) {
-            oAuthUrl += `&code_challenge=${encodeURIComponent(codeChallenge)}&code_challenge_method=${encodeURIComponent(codeChallengeMethod)}`
+            authorizeUrl += `&code_challenge=${encodeURIComponent(codeChallenge)}&code_challenge_method=${encodeURIComponent(codeChallengeMethod)}`
         }
 
-        return oAuthUrl;
+        return authorizeUrl;
     }
 
     private static callTokenEndpoint = (wsUrl: string, params: URLSearchParams, callback: (tokenData: ITokenData) => void) => {
