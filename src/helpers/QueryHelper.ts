@@ -1,6 +1,5 @@
 import VersionHelper from './VersionHelper';
-import FieldNames from "../constants/FieldNames";
-import { type TFolderName, FolderNames } from "../constants/FolderNames";
+import { type TFolderName } from "../constants/FolderNames";
 import type { ApiConnection } from '../ApiConnection';
 import type {
     IApiQueryAndFilterExpressionOperator,
@@ -25,11 +24,6 @@ import type {
 } from "../data/query/IApiQuery";
 
 type TFilterValue = string | number | boolean | null;
-
-type TEmailAddressDetails = {
-    emailAddress: string;
-    displayName: string;
-};
 
 export default class QueryHelper {
     static createHubItemsCountsQuery(parentItemGuids: string[], itemTypes: TFolderName[], excludeSystemItems?: boolean) {
@@ -354,59 +348,5 @@ export default class QueryHelper {
         };
 
         return inFilterExpression;
-    };
-
-    static getSuggestedContactsQuery = (emailContact: TEmailAddressDetails, queryFields: TApiQueryField[]) => {
-        const variatedColumnSearchValuesFieldNames = [FieldNames.Contacts.FirstName, FieldNames.Contacts.LastName, FieldNames.Contacts.Email1Address] as string[];
-
-        // Search only in some fields
-        const fieldsForFiltering = queryFields.filter(f => {
-            if (f.__type === "VariatedColumn:#EQ") {
-                return variatedColumnSearchValuesFieldNames.includes(f.Variations[0].Field.Name);
-            } else if (f.Alias === FieldNames.Contacts.Company) {
-                return true;
-            } else if (f.__type === "Column:#EQ") {
-                return f.Name === FieldNames.Common.FileAs;
-            }
-
-            return false;
-        });
-
-        const searchValues = this.getContactSearchParts(emailContact);
-
-        return {
-            __type: 'MainTableQuery:#EQ',
-            ItemTypes: [FolderNames.contacts],
-            Fields: queryFields,
-            Filter: QueryHelper.orFilterExpression(searchValues.map(sv => (
-                QueryHelper.orFilterExpression(fieldsForFiltering.map((field) => QueryHelper.likeFilterExpression(field, sv)))
-            ))),
-            Paging: {
-                Skip: 0,
-                Take: 20
-            },
-        };
-    };
-
-    static getContactSearchParts = (emailContact: TEmailAddressDetails) => {
-        const parts: string[] = [];
-
-        if (emailContact.displayName.includes(" ")) {
-            parts.push(...emailContact.displayName.split(" "));
-        } else {
-            parts.push(emailContact.displayName);
-        }
-
-        const [local, domain] = emailContact.emailAddress.split("@");
-
-        if (local.includes(".")) {
-            parts.push(...local.split("."));
-        } else {
-            parts.push(local);
-        }
-
-        parts.push(domain.split(".")[0]);
-
-        return parts.filter(a => a.length > 2);
     };
 }
