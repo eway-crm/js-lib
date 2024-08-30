@@ -34,7 +34,7 @@ import ObjectTypeIds from './constants/ObjectTypeIds';
 import { IApiHubItemsCountsQueryResponseItem } from './data/query/IApiHubItemsCountsQueryResponseItem';
 import QueryHelper from './helpers/QueryHelper';
 import { IApiServiceAuthSettingsResponse } from './data/IApiServiceAuthSettingsResponse';
-import VersionHelper from './helpers/VersionHelper';
+import VersionHelper, { Version } from './helpers/VersionHelper';
 import type IApiUnlinkInquiryResult from './data/IApiUnlinkInquiryResult';
 import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult';
 
@@ -146,5 +146,6 @@ export {
     ApiConnection as ApiConnectionAsNonDefaultExport,
     IApiUnlinkInquiryResult,
     TApiUnlinkInquiryResultType,
-    VersionHelper
+    VersionHelper,
+    Version
 };
