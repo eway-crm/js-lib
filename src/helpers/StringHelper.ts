@@ -10,19 +10,22 @@ export default class StringHelper {
      *  //returns "I think..."
      *  StringHelper.trim("I think, therefore I am!", 10, true);
      * @static
-     * @param {string} value 
-     * @param {number} maxLength
-     * @param {boolean} [includeDots=false]
      */
-    static trim(value: string, maxLength: number, includeDots: boolean = false): string {
-        value = value.trim();
+    static trim<T extends string | null | undefined>(value: T, maxLength: number, includeDots: boolean = false): T {
+        if (value === null || typeof value === "undefined")
+            return value;
 
-        if (value.length <= maxLength) return value;
+        let trimmedValue = value.trim();
 
-        let trimmedValue = value.substring(0, maxLength - (includeDots ? 3 : 0));
+        if (trimmedValue.length <= maxLength)
+            return trimmedValue as T;
 
-        if (includeDots) trimmedValue += "...";
+        trimmedValue = trimmedValue.substring(0, maxLength - (includeDots ? 3 : 0));
 
-        return trimmedValue;
+        if (includeDots) {
+            trimmedValue += "...";
+        }
+
+        return trimmedValue as T;
     }
 }
