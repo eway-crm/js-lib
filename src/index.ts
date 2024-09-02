@@ -35,6 +35,7 @@ import { IApiHubItemsCountsQueryResponseItem } from './data/query/IApiHubItemsCo
 import QueryHelper from './helpers/QueryHelper';
 import { IApiServiceAuthSettingsResponse } from './data/IApiServiceAuthSettingsResponse';
 import VersionHelper, { Version } from './helpers/VersionHelper';
+import StringHelper from './helpers/StringHelper';
 import type IApiUnlinkInquiryResult from './data/IApiUnlinkInquiryResult';
 import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult';
 
@@ -147,5 +148,6 @@ export {
     IApiUnlinkInquiryResult,
     TApiUnlinkInquiryResultType,
     VersionHelper,
-    Version
+    Version,
+    StringHelper
 };

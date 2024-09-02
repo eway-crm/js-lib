@@ -3,7 +3,7 @@
 API used for communication with [eWay-CRM](http://www.eway-crm.com/) web service. This library is a wrapper over HTTP/S communication and sessions. See our [documentation](https://kb.eway-crm.com/documentation/6-add-ins/6-7-api-1) for more information.
 
 ## Installation
-The simpliest way to start using this library is to get the  [NPM Package](https://www.nuget.org/packages/eWayCRM.API). To do that, just run this command in your NodeJS project's root dir:
+The simpliest way to start using this library is to get the  [NPM Package](https://www.npmjs.com/package/@eway-crm/connector). To do that, just run this command in your NodeJS project's root dir:
 
 ```
 npm i @eway-crm/connector
