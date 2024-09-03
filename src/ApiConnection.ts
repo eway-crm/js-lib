@@ -114,14 +114,14 @@ export class ApiConnection {
                         resolve();
                     }
                     reject("Session Id cannot be empty");
-                }
+                };
 
-                this.sessionHandler.getSessionId(this, sessionCallback)
+                this.sessionHandler.getSessionId(this, sessionCallback);
             } else {
                 resolve();
             }
-        })
-    }
+        });
+    };
 
     readonly createOpenLink = (isDevEnvironment: boolean, folderName: TFolderName, guid?: string, fileAs?: string): string => {
         const ws = base64url.encode(this.baseUri);
