@@ -101,6 +101,28 @@ export class ApiConnection {
         return this.baseUri;
     }
 
+
+    /**
+     * Ensures that the current session isn't null and if it is, generates a new one
+     */
+    readonly ensureLogin = (): Promise<void> => {
+        return new Promise<void>((resolve, reject) => {
+            if (!this.sessionId) {
+                const sessionCallback = (sessionId: string): void => {
+                    if (sessionId) {
+                        this.sessionId = sessionId;
+                        resolve();
+                    }
+                    reject("Session Id cannot be empty");
+                }
+
+                this.sessionHandler.getSessionId(this, sessionCallback)
+            } else {
+                resolve();
+            }
+        })
+    }
+
     readonly createOpenLink = (isDevEnvironment: boolean, folderName: TFolderName, guid?: string, fileAs?: string): string => {
         const ws = base64url.encode(this.baseUri);
         let legacyLink = "eway://" + folderName;
