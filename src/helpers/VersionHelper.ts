@@ -8,7 +8,8 @@ export enum Version {
     Version81 = '8.1',
     Version82 = '8.2',
     Version83 = '8.3',
-    Version84 = '8.4',
+    Version90 = '9.0',
+    Version91 = '9.1',
 }
 
 export default class VersionHelper extends VersionHelperBase {
@@ -26,6 +27,22 @@ export default class VersionHelper extends VersionHelperBase {
 
     static readonly is81OrLater = (connection: ApiConnection) => {
         return VersionHelper.supportsFeaturesOf(connection, "8.1");
+    };
+
+    static readonly is82OrLater = (connection: ApiConnection) => {
+        return VersionHelper.supportsFeaturesOf(connection, "8.2");
+    };
+
+    static readonly is83OrLater = (connection: ApiConnection) => {
+        return VersionHelper.supportsFeaturesOf(connection, "8.3");
+    };
+
+    static readonly is90OrLater = (connection: ApiConnection) => {
+        return VersionHelper.supportsFeaturesOf(connection, "9.0");
+    };
+
+    static readonly is91OrLater = (connection: ApiConnection) => {
+        return VersionHelper.supportsFeaturesOf(connection, "9.1");
     };
 
     static readonly isFeatureSupported = (connection: ApiConnection, featureOfVersion: Version) => {
