@@ -349,4 +349,8 @@ export default class QueryHelper {
 
         return inFilterExpression;
     };
+
+    static isNullOrEmptyFilterExpression = (field: string) => {
+        return QueryHelper.orFilterExpression([QueryHelper.equalsFilterExpression(QueryHelper.column(field), null), QueryHelper.equalsFilterExpression(QueryHelper.column(field), '')]);
+    };
 }
