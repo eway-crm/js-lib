@@ -350,7 +350,7 @@ export default class QueryHelper {
         return inFilterExpression;
     };
 
-    static isNullorEmptyFilterExpression = (field: string) => {
-        return this.orFilterExpression([this.equalsFilterExpression(this.column(field), null), this.equalsFilterExpression(this.column(field), '')]);
+    static isNullOrEmptyFilterExpression = (field: string) => {
+        return QueryHelper.orFilterExpression([QueryHelper.equalsFilterExpression(QueryHelper.column(field), null), QueryHelper.equalsFilterExpression(QueryHelper.column(field), '')]);
     };
 }
