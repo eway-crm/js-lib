@@ -38,6 +38,7 @@ import VersionHelper, { Version } from './helpers/VersionHelper';
 import StringHelper from './helpers/StringHelper';
 import type IApiUnlinkInquiryResult from './data/IApiUnlinkInquiryResult';
 import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult';
+import DateHelper from './helpers/DateHelper';
 
 Promise.polyfill();
 
@@ -149,5 +150,6 @@ export {
     TApiUnlinkInquiryResultType,
     VersionHelper,
     Version,
-    StringHelper
+    StringHelper,
+    DateHelper
 };
