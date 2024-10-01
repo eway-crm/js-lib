@@ -58,6 +58,7 @@ export * from './data/IApiCustomizationStatsItem';
 export * from './data/IApiCurrencyExchangeRate';
 export * from './data/IApiBooleanResponse';
 export * from './data/IApiDataResponse';
+export * from './data/IApiDataImportResponse';
 export * from './data/IApiDatumResponse';
 export * from './data/IApiDocument';
 export * from './data/IApiEmail';
