@@ -1,5 +1,5 @@
-import type { ISessionHandler } from './ISessionHandler';
-import type { ApiConnection } from './ApiConnection';
+
+import type { ApiConnection, ISessionHandler } from './ApiConnection';
 import type { TUnionError } from './exceptions/HttpRequestError';
 import { ApiMethods } from './ApiMethods';
 import type { IApiLoginResponse } from './data/IApiLoginResponse';
@@ -13,7 +13,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
     private readonly errorCallback: ((error: TUnionError) => void) | undefined;
     public lastSuccessfulLoginResponse?: IApiLoginResponse;
 
-    constructor (username: string, passwordHash: string, appVersion: string, clientMachineIdentifier: string, clientMachineName: string, errorCallback?: (error: TUnionError) => void) {
+    constructor(username: string, passwordHash: string, appVersion: string, clientMachineIdentifier: string, clientMachineName: string, errorCallback?: (error: TUnionError) => void) {
         if (!username || !passwordHash) {
             throw new Error("Non of the arguments 'username', 'passwordHash' can be empty.");
         }

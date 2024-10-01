@@ -1,5 +1,5 @@
-import type { ISessionHandler } from './ISessionHandler';
-import type { ApiConnection } from './ApiConnection';
+
+import type { ApiConnection, ISessionHandler } from './ApiConnection';
 import type { IApiResult } from './data/IApiResult';
 import { ApiMethods } from './ApiMethods';
 import type { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';

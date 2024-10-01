@@ -1,7 +1,9 @@
-import type { IApiCompany, IApiContact, IApiLead, TFolderName } from "..";
-import { FolderNames } from "../constants/FolderNames";
+import { FolderNames, type TFolderName } from "../constants/FolderNames";
 import type { IItemPreview } from "../interfaces/IItemPreview";
+import type { IApiCompany } from "./IApiCompany";
+import type { IApiContact } from "./IApiContact";
 import type { IApiItemBase } from "./IApiItemBase";
+import type { IApiLead } from "./IApiLead";
 import type { IApiUser } from "./IApiUser";
 
 export class EWItem<T extends IApiItemBase> {

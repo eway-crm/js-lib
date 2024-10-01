@@ -2,7 +2,6 @@ import type { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 import Axios from 'axios';
 import { ReturnCodes } from './ReturnCodes';
 import type { IApiResult } from './data/IApiResult';
-import type { ISessionHandler } from './ISessionHandler';
 import { HttpMethod } from './HttpMethod';
 import { CredentialsSessionHandler } from './CredentialsSessionHandler';
 import { AnonymousSessionHandler } from './AnonymousSessionHandler';
@@ -14,6 +13,13 @@ import type { ITokenData, TInputData } from './interfaces/ITokenData';
 import * as base64url from 'universal-base64url';
 import type { TFolderName } from './constants/FolderNames';
 import ErrorHelper from './helpers/ErrorHelper';
+import type { IApiLoginResponse } from './data/IApiLoginResponse';
+
+export interface ISessionHandler {
+    invalidateSessionId(sessionId: string, callback: () => void): void;
+    getSessionId(connection: ApiConnection, callback: (sessionId: string) => void): void;
+    lastSuccessfulLoginResponse?: IApiLoginResponse;
+}
 
 export class ApiConnection {
     private readonly svcUri: string;

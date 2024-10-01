@@ -1,7 +1,6 @@
 import * as Promise from 'es6-promise';
-import { ApiConnection } from './ApiConnection';
+import { ApiConnection, ISessionHandler } from './ApiConnection';
 import { HttpMethod } from './HttpMethod';
-import { ISessionHandler } from './ISessionHandler';
 import { ReturnCodes } from './ReturnCodes';
 import { ITokenizedApiResult } from './tokenizedServices/ITokenizedApiResult';
 import { TokenizedServiceConnection } from './tokenizedServices/TokenizedServiceConnection';

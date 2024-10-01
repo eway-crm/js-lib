@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { type ApiConnection } from './ApiConnection';
-import type { ISessionHandler } from './ISessionHandler';
+import type { ApiConnection, ISessionHandler } from './ApiConnection';
 
 export class AnonymousSessionHandler implements ISessionHandler {
     readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void): void => {
