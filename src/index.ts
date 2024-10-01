@@ -38,6 +38,7 @@ import StringHelper from './helpers/StringHelper';
 import type IApiUnlinkInquiryResult from './data/IApiUnlinkInquiryResult';
 import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult';
 import DateHelper from './helpers/DateHelper';
+import type { ImportResult } from './constants/ImportResult';
 
 Promise.polyfill();
 
@@ -101,10 +102,11 @@ export * from './data/IApiWorkflowModel';
 export * from './data/IApiWorkReport';
 export * from './data/query/IApiQuery';
 export * from './data/query/IApiQueryFilters';
-
+export * from './constants/ImportResult';
 export * from './interfaces/ITranslatableString';
 
 export {
+    ImportResult,
     SentimentTone,
     HttpMethod,
     ISessionHandler,
