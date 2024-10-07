@@ -1,6 +1,7 @@
 import type { TFieldType } from '../constants/FieldTypes';
 import type { TFolderName } from '../constants/FolderNames';
 import type { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
+import type { TApiColumnPermissionMandatoryRuleOptions, TApiColumnPermissionPermissionRuleOptions } from './IApiColumnPermission';
 
 type TAdditionalFieldItem = {
     CategoryEn: string | null;
@@ -26,8 +27,8 @@ type TNumericInfo = {
 
 export interface IApiColumn {
     AdditionalFieldItem?: TAdditionalFieldItem;
-    AllowedColumnMandatoryTypes: string[] | null;
-    AllowedColumnPermissionTypes: string[] | null;
+    AllowedColumnMandatoryTypes: TApiColumnPermissionMandatoryRuleOptions[] | null;
+    AllowedColumnPermissionTypes: TApiColumnPermissionPermissionRuleOptions[] | null;
     AltNameCs?: string;
     AltNameDe?: string;
     AltNameEn?: string;
