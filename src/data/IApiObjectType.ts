@@ -1,7 +1,8 @@
+import type { TFolderName } from "../constants/FolderNames";
 import type { IApiItemBase } from "./IApiItemBase";
 
 export interface IApiObjectType extends IApiItemBase {
-    FolderName: string;
+    FolderName: TFolderName;
     IsCustomizable: boolean;
     IsModule: boolean;
     IsActive: boolean;
