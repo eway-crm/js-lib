@@ -12,6 +12,10 @@ export default class VersionHelperBase {
             return false;
         }
 
-        return compare(wcfVersion, version, ">=") || compare(wcfVersion, "1.0.0.0", "=" );
+        return VersionHelperBase.supportsVersionFeaturesOf(wcfVersion, version);
+    };
+
+    static readonly supportsVersionFeaturesOf = (testedVersion: string, version: string) => {
+        return compare(testedVersion, version, ">=") || compare(testedVersion, "1.0.0.0", "=");
     };
 }
