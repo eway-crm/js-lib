@@ -530,6 +530,7 @@ export default class FieldNames {
             case FolderNames.carts:
                 return FieldNames.Common.FileAs;
             case FolderNames.goods:
+            case FolderNames.goodsInCart:
                 return FieldNames.Common.FileAs;
             case FolderNames.groups:
                 return FieldNames.Groups.GroupName;
