@@ -14,10 +14,10 @@ export default class LicenseRestrictionKeys {
     static emailsAutomaticTracking = 'EmailsAutomaticTracking';
     static emailSummaryAndSentimentToneFromAi = "EmailSummaryAndSentimentToneFromAi";
     static convertEmailToContact = 'ConvertEmailToContact';
-    static convertEmailToContactInBulk = 'ConvertEmailToContactInBulk';
     static convertEmailToDeal = 'ConvertEmailToDeal';
     static convertEmailToProject = 'ConvertEmailToProject';
     static convertEmailToTask = 'ConvertEmailToTask';
+    static convertFromSuggestedContact = 'ConvertFromSuggestedContact';
     static gravatarIntegration = 'GravatarIntegration';
     static logoboxIntegration = 'LogoboxIntegration';
     static companiesBussinesRegisterApiIntegration = 'CompaniesBussinesRegisterApiIntegration';
