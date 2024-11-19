@@ -10,6 +10,7 @@ export type TFolderName = 'Actions'
     | 'ColumnPermissions'
     | 'Companies'
     | 'Contacts'
+    | 'ContactsSuggestions'
     | 'CurrencyExchangeRates'
     | 'Documents'
     | 'Emails'
@@ -93,6 +94,7 @@ export class FolderNames {
     static readonly columnPermissions: TFolderName = "ColumnPermissions";
     static readonly companies: TFolderName = "Companies";
     static readonly contacts: TFolderName = "Contacts";
+    static readonly contactsSuggestions: TFolderName = "ContactsSuggestions";
     static readonly currencyExchangeRates: TFolderName = "CurrencyExchangeRates";
     static readonly documents: TFolderName = "Documents";
     static readonly emails: TFolderName = "Emails";
