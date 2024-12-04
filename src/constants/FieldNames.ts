@@ -284,6 +284,7 @@ export default class FieldNames {
         ...FieldNames.GoodsBase,
         Cart: 'Cart',
         GoodsInfo: 'GoodsInfo',
+        SuperiorItem: 'SuperiorItem',
         Quantity: 'Quantity',
         PriceTotal: 'PriceTotal',
         PriceTotalDefaultCurrency: 'PriceTotalDefaultCurrency',
