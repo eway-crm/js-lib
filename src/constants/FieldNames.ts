@@ -29,10 +29,23 @@ export default class FieldNames {
 
     static readonly Carts = {
         SuperiorItem: 'SuperiorItem',
-        SuperiorCompany: 'SuperiorCompany',
-        SuperiorContact: 'SuperiorContact',
+        Customer: 'Customer',
+        Contact: 'Contact',
         TypeEn: 'TypeEn',
         StateEn: 'StateEn',
+        PriceTotal: 'PriceTotal',
+        PriceTotalExcludingVAT: 'PriceTotalExcludingVAT',
+        ForPayment: 'ForPayment',
+        Paid: 'Paid',
+        CurrencyEn: 'CurrencyEn',
+        EffectiveFrom: 'EffectiveFrom',
+        ValidUntil: 'ValidUntil',
+        Active: 'Active',
+        Note: 'Note',
+        ID: 'ID',
+        AccountingCaseDate: 'AccountingCaseDate',
+        TaxableSupplyDate: 'TaxableSupplyDate',
+        PaymentDate: 'PaymentDate',
     } as const;
 
     static readonly Companies = {
@@ -241,11 +254,72 @@ export default class FieldNames {
         Summary: 'Summary',
     } as const;
 
-    static readonly Goods = {
+    private static readonly GoodsBase = {
         Code: 'Code',
         Structure: 'Structure',
         Note: 'Note',
-        Description: 'Description'
+        Description: 'Description',
+        TypeEn: 'TypeEn',
+        SaleCurrencyEn: 'SaleCurrencyEn',
+        PurchaseCurrencyEn: 'PurchaseCurrencyEn',
+        UnitEn: 'UnitEn',
+        PurchasePrice: 'PurchasePrice',
+        PurchasePriceDefaultCurrency: 'PurchasePriceDefaultCurrency',
+        PurchasePriceChanged: 'PurchasePriceChanged',
+        SalePrice: 'SalePrice',
+        SalePriceDefaultCurrency: 'SalePriceDefaultCurrency',
+        SalePriceChanged: 'SalePriceChanged',
+        IsPriceSum: 'IsPriceSum',
+        VATRate: 'VATRate',
+        VATIncluded: 'VATIncluded'
+    } as const;
+
+    static readonly Goods = {
+        ...FieldNames.GoodsBase,
+        PriceListGroupGUID: 'PriceListGroupGUID',
+        InventoryQuantity: 'InventoryQuantity'
+    } as const;
+
+    static readonly GoodsInCart = {
+        ...FieldNames.GoodsBase,
+        Cart: 'Cart',
+        GoodsInfo: 'GoodsInfo',
+        Quantity: 'Quantity',
+        PriceTotal: 'PriceTotal',
+        PriceTotalDefaultCurrency: 'PriceTotalDefaultCurrency',
+        PriceTotalParentCurrency: 'PriceTotalParentCurrency',
+        PriceTotalChanged: 'PriceTotalChanged',
+        PriceTotalExcludingVAT: 'PriceTotalExcludingVAT',
+        PriceTotalExcludingVATDefaultCurrency: 'PriceTotalExcludingVATDefaultCurrency',
+        PriceTotalExcludingVATParentCurrency: 'PriceTotalExcludingVATParentCurrency',
+        VATTotal: 'VATTotal',
+        VATTotalDefaultCurrency: 'VATTotalDefaultCurrency',
+        VATTotalParentCurrency: 'VATTotalParentCurrency',
+        SalePriceExcludingVAT: 'SalePriceExcludingVAT',
+        SalePriceExcludingVATDefaultCurrency: 'SalePriceExcludingVATDefaultCurrency',
+        SalePriceExcludingVATParentCurrency: 'SalePriceExcludingVATParentCurrency',
+        VAT: 'VAT',
+        VATDefaultCurrency: 'VATDefaultCurrency',
+        VATParentCurrency: 'VATParentCurrency',
+        PurchasePriceParentCurrency: 'PurchasePriceParentCurrency',
+        SalePriceParentCurrency: 'SalePriceParentCurrency',
+        ListPrice: 'ListPrice',
+        ListPriceDefaultCurrency: 'ListPriceDefaultCurrency',
+        ListPriceParentCurrency: 'ListPriceParentCurrency',
+        ListPriceChanged: 'ListPriceChanged',
+        Discount: 'Discount',
+        HierarchyInSet: 'HierarchyInSet',
+        IsFromSet: 'IsFromSet',
+        ParentGUID: 'ParentGUID',
+        Rank: 'Rank',
+        IncludeInCartPrice: 'IncludeInCartPrice',
+        ListPriceCustomized: 'ListPriceCustomized',
+        ChildItemsCount: 'ChildItemsCount',
+        JoinedToGUID: 'JoinedToGUID',
+        PurchasePriceTotal: 'PurchasePriceTotal',
+        PurchasePriceTotalDefaultCurrency: 'PurchasePriceTotalDefaultCurrency',
+        PurchasePriceTotalParentCurrency: 'PurchasePriceTotalParentCurrency',
+        PurchasePriceTotalChanged: 'PurchasePriceTotalChanged',
     } as const;
 
     static readonly Journal = {
