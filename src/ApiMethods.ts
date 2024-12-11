@@ -60,6 +60,7 @@ export class ApiMethods {
     };
 
     static readonly getSearchFolderNameMethodName = (folderName: TFolderName) => {
-        return `Search${folderName}`;
+        const folderNameForApiMethod = ApiMethods.getFolderNameForApiMethod(folderName);
+        return `Search${folderNameForApiMethod}`;
     };
 }
