@@ -408,7 +408,7 @@ export class ApiConnection {
     };
 
     readonly getItemTransformedToWordGetMethodUrl = (itemGuid: string, folderName: string, transformationGuid: string): string => {
-        return this.svcUri + '/' + ApiMethods.getItemTransformedToWord + '?itemGuid=' + encodeURIComponent(itemGuid) + '?folderName=' + encodeURIComponent(folderName) + `&transformationGuid=${encodeURIComponent(transformationGuid)}`;
+        return this.svcUri + '/' + ApiMethods.getItemTransformedToWord + '?itemGuid=' + encodeURIComponent(itemGuid) + '&folderName=' + encodeURIComponent(folderName) + `&transformationGuid=${encodeURIComponent(transformationGuid)}`;
     };
 
     readonly getActiveSessionId = (): string | null => {
