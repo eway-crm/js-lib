@@ -576,6 +576,25 @@ export default class FieldNames {
         Picture: 'Picture'
     } as const;
 
+    static readonly PriceListGroups = {
+        Note: 'Note'
+    } as const;
+
+    static readonly Prices = {
+        SalePriceGUID: 'SalePriceGUID',
+        GoodsItemGUID: 'GoodsItemGUID',
+        Price: 'Price',
+        CurrencyEn: 'CurrencyEn'
+    } as const;
+
+    static readonly SalePrices = {
+        Note: 'Note',
+        Discount: 'Discount',
+        TypeEn: 'TypeEn',
+        StateEn: 'StateEn',
+        PrevStateEn: 'PrevStateEn'
+    } as const;
+
     static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'];
 
     static getFolderFileAs = (folderName: TFolderName) => {
