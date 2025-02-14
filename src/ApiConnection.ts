@@ -14,6 +14,7 @@ import * as base64url from 'universal-base64url';
 import type { TFolderName } from './constants/FolderNames';
 import ErrorHelper from './helpers/ErrorHelper';
 import type { IApiLoginResponse } from './data/IApiLoginResponse';
+import type { TransformItemFormats } from './enumerations/TransformItemFormats';
 
 export interface ISessionHandler {
     invalidateSessionId(sessionId: string, callback: () => void): void;
@@ -407,8 +408,8 @@ export class ApiConnection {
         return this.svcUri + '/' + ApiMethods.getBinaryAttachmentLatestRevision + '?itemGuid=' + encodeURIComponent(itemGuid);
     };
 
-    readonly getTransformItemMethodUrl = (itemGuid: string, folderName: string, transformationGuid: string): string => {
-        return this.svcUri + '/' + ApiMethods.transformItem + '?itemGuid=' + encodeURIComponent(itemGuid) + '&itemFolderName=' + encodeURIComponent(folderName) + `&transformationGuid=${encodeURIComponent(transformationGuid)}`;
+    readonly getTransformItemMethodUrl = (itemGuid: string, folderName: string, transformationGuid: string, outputFormat: TransformItemFormats): string => {
+        return `${this.svcUri}/${ApiMethods.transformItem}?itemGuid=${encodeURIComponent(itemGuid)}&itemFolderName=${encodeURIComponent(folderName)}&transformationGuid=${encodeURIComponent(transformationGuid)}&outputFormat=${outputFormat}`;
     };
 
     readonly getActiveSessionId = (): string | null => {
