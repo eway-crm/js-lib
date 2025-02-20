@@ -71,6 +71,11 @@ class GlobalSettingsNames {
     static myCompanyZip = 'MyCompanyZIP';
     static myCompanyId = 'MyCompanyID';
     static myCompanyVat = 'MyCompanyVAT';
+    static mergeGoodsInCart = 'MergeGoodsInCart';
+    static cartRefreshLogic = 'CartRefreshLogic';
+    static goodsDefaultQuantity = 'GoodsDefaultQuantity';
+    static goodsDefaultVAT = 'GoodsDefaultVAT';
+    static goodsDefaultVATIncluded = 'GoodsDefaultVATIncluded';
 }
 
 export default GlobalSettingsNames;

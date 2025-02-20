@@ -103,6 +103,7 @@ export * from './data/IApiWorkflowActionDerivedItem';
 export * from './data/IApiWorkflowModel';
 export * from './data/IApiWorkReport';
 export * from './data/IApiXsltTransformation';
+export * from './data/IAPIGoodFinalPrice';
 export * from './data/query/IApiQuery';
 export * from './data/query/IApiQueryFilters';
 export * from './constants/ImportResult';
