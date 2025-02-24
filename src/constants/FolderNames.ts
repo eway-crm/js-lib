@@ -77,7 +77,8 @@ export type TFolderName = 'Actions'
     | 'WorkflowHistory'
     | 'WorkReports'
     | 'WrongClientVersions'
-    | 'XsltTransformations';
+    | 'XsltTransformations'
+    | 'XsltTransformationsModels';
 
 export class FolderNames {
     static isValidFolderName = (folderName: string): boolean => {
@@ -162,6 +163,7 @@ export class FolderNames {
     static readonly workReports: TFolderName = "WorkReports";
     static readonly wrongClientVersions: TFolderName = "WrongClientVersions";
     static readonly xsltTransformations: TFolderName = "XsltTransformations";
+    static readonly xsltTransformationsModels: TFolderName = "XsltTransformationsModels";
 
     static getEnumTypeName = (folderName?: string) => {
         if (folderName === FolderNames.bonuses) return EnumTypes.bonusType;
