@@ -595,6 +595,20 @@ export default class FieldNames {
         PrevStateEn: 'PrevStateEn'
     } as const;
 
+    static readonly XsltTransformations = {
+        LangCode: 'LangCode',
+        Definition: 'Definition',
+        Namespace: 'Namespace',
+        ObjectTypeID: 'ObjectTypeID',
+        TransformationVersion: 'TransformationVersion'
+    } as const;
+
+    static readonly XsltTransformationsModels = {
+        ObjectTypeID: 'ObjectTypeID',
+        TransformationGUID: 'TransformationGUID',
+        ItemTypeGUID: 'ItemTypeGUID'
+    } as const;
+
     static allTypeEnNames = ['TypeEn', FieldNames.Documents.DocTypeEn, FieldNames.WorkReports.WorkReportEn, 'TitleEn'];
 
     static getFolderFileAs = (folderName: TFolderName) => {
@@ -628,6 +642,8 @@ export default class FieldNames {
                 return FieldNames.Common.FileAs;
             case FolderNames.groups:
                 return FieldNames.Groups.GroupName;
+            case FolderNames.xsltTransformations:
+                return FieldNames.Common.FileAs;
             default:
                 console.warn(`FileAs col name not defined for folderName ${folderName}`);
                 return FieldNames.Common.FileAs;
