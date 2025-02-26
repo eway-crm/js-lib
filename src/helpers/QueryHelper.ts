@@ -82,7 +82,7 @@ export default class QueryHelper {
         return multiSelectComboColumn;
     };
 
-    static joinColumn = (itemType: TFolderName, sourceColName: string, pickColName: string, alias?: string) => {
+    static joinColumn = (itemType: TFolderName, sourceColName: string, pickColName: string, alias?: string, targetColName?: string) => {
         const joinedColumn: IApiQueryColumn = {
             __type: 'Column:#EQ',
             Source: {
@@ -93,8 +93,9 @@ export default class QueryHelper {
                     Source: {
                         __type: 'MainTable:#EQ',
                     },
-                    Name: sourceColName,
+                    Name: sourceColName
                 },
+                TargetColumnName: targetColName
             },
             Name: pickColName,
         };

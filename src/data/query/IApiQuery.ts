@@ -8,6 +8,7 @@ interface IApiQueryJoinTableSource {
     __type: 'Join:#EQ';
     ItemType: TFolderName;
     Key: IApiQueryColumn;
+    TargetColumnName?: string;
 }
 
 interface IApiQueryRelationSource {
