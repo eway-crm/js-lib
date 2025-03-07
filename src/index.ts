@@ -74,6 +74,7 @@ export * from './data/IApiGlobalSetting';
 export * from './data/IApiGoal';
 export * from './data/IApiGood';
 export * from './data/IApiGoodInCart';
+export * from './data/IApiGoodInSet';
 export * from './data/IApiGroup';
 export * from './data/IApiItemBase';
 export * from './data/IApiItemIdentifier';
