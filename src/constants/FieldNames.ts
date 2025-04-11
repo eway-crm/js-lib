@@ -114,6 +114,7 @@ export default class FieldNames {
 
         WebPage: 'WebPage',
 
+        TrackedDomains: "TrackedDomains",
         Email: 'Email',
         ICQ: 'ICQ',
         MSN: 'MSN',
