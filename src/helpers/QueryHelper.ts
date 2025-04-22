@@ -22,6 +22,7 @@ import type {
     TApiQueryField,
     IApiQuerySubstituableColumn
 } from "../data/query/IApiQuery";
+import type { TRelationType } from '../constants/RelationTypes';
 
 type TFilterValue = string | number | boolean | null;
 
@@ -32,6 +33,22 @@ export default class QueryHelper {
             "ParentItemGuids": parentItemGuids,
             "ItemTypes": itemTypes,
             "ExcludeSystemItems": excludeSystemItems
+        };
+    }
+
+    static createRelatedTableQuery(baseItemGuid: string, itemTypes: TFolderName | TFolderName[], relationType?: TRelationType) {
+        return {
+            "__type": !!relationType ? "RelatedTableQuery:#EQ" : "TypelessRelatedTableQuery:#EQ",
+            "BaseItemID": baseItemGuid,
+            "ItemTypes": Array.isArray(itemTypes) ? itemTypes : [itemTypes],
+            "RelationType": relationType
+        };
+    }
+
+    static createMainTableQuery(itemTypes: TFolderName | TFolderName[]) {
+        return {
+            "__type": "MainTableQuery:#EQ",
+            "ItemTypes": Array.isArray(itemTypes) ? itemTypes : [itemTypes]
         };
     }
 
