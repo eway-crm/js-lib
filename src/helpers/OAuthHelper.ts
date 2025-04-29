@@ -84,7 +84,15 @@ export class OAuthHelper {
                 }
             }
 
-            throw new Error('Token request failed');
+            callback(
+                {
+                    error: 'Token request failed',
+                    access_token: "",
+                    refresh_token: "",
+                    expires_in: 0,
+                    token_type: "",  
+                }
+            );
         });
     };
 }
