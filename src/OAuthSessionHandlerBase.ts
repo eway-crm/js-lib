@@ -6,17 +6,25 @@ import type { HttpRequestError, TUnionError } from './exceptions/HttpRequestErro
 import { WebServiceError } from './exceptions/WebServiceError';
 import type { IApiLoginResponse } from './data/IApiLoginResponse';
 
+export type GetAccessTokenResult = {
+    error: string;
+    accessToken?: undefined;
+} | {
+    error?: undefined;
+    accessToken: string;
+};
+
 export abstract class OAuthSessionHandlerBase implements ISessionHandler {
     public lastSuccessfulLoginResponse?: IApiLoginResponse;
 
-    private accessToken: string;
+    private accessToken?: string;
     private readonly username: string;
     private readonly appVersion: string;
     protected readonly errorCallback: ((error: TUnionError) => void) | undefined;
-    private readonly getNewAccessTokenCallback: ((connection: ApiConnection, callback: (accessToken: string, error?: string) => void) => void);
+    private readonly getNewAccessTokenCallback: ((connection: ApiConnection, callback: (result: GetAccessTokenResult) => void) => void);
 
     constructor(username: string, accessToken: string, appVersion: string,
-        getNewAccessTokenCallback: ((connection: ApiConnection, callback: (accessToken: string, error?: string) => void) => void),
+        getNewAccessTokenCallback: ((connection: ApiConnection, callback: (result: GetAccessTokenResult) => void) => void),
         errorCallback?: (error: TUnionError) => void) {
         if (!username) {
             throw new Error("Non of the arguments 'username', 'clientId', 'clientSecret', 'refreshToken' can be empty.");
@@ -65,9 +73,10 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
 
         const errorCallbackHandler = (error: TUnionError) => {
             if ((error as HttpRequestError)?.statusCode === 401) {
-                this.getNewAccessTokenCallback(connection, (accessToken, error) => {
-                    this.accessToken = accessToken;
-                    if (!error) {
+                this.getNewAccessTokenCallback(connection, (result) => {
+                    this.accessToken = result.accessToken;
+
+                    if (!result.error) {
                         this.getSessionId(connection, callback);
                     }
                 });
