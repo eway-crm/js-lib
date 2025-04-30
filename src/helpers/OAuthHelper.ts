@@ -84,7 +84,11 @@ export class OAuthHelper {
                 }
             }
 
-            throw new Error('Token request failed');
+            callback(
+                {
+                    error: 'Token request failed'
+                }
+            );
         });
     };
 }

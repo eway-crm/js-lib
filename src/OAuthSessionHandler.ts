@@ -3,7 +3,7 @@ import { OAuthHelper } from './helpers/OAuthHelper';
 import type { ITokenData } from './interfaces/ITokenData';
 import type { TUnionError } from './exceptions/HttpRequestError';
 import type { IApiLoginResponse } from './data/IApiLoginResponse';
-import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
+import { type GetAccessTokenResult, OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
 
 export class OAuthSessionHandler extends OAuthSessionHandlerBase {
     private readonly refreshToken: string;
@@ -18,7 +18,7 @@ export class OAuthSessionHandler extends OAuthSessionHandlerBase {
             throw new Error("Non of the arguments 'username', 'clientId', 'clientSecret', 'refreshToken' can be empty.");
         }
 
-        const getNewAccessToken = (connection: ApiConnection, callback: (accessToken: string, error?: string) => void): void => {
+        const getNewAccessToken = (connection: ApiConnection, callback: (result: GetAccessTokenResult) => void): void => {
             OAuthHelper.refreshToken(connection.wsUrl, this.clientId, this.clientSecret, this.refreshToken, (tokenData) => {
                 try {
                     if (this.refreshTokenCallback) {
@@ -30,7 +30,11 @@ export class OAuthSessionHandler extends OAuthSessionHandlerBase {
                     }
                 }
 
-                callback(tokenData.access_token, tokenData.error);
+                if (tokenData.error === undefined) {
+                    callback({ accessToken: tokenData.access_token });
+                    return;
+                }
+                callback({ error: tokenData.error });
             });
         };
 
