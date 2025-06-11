@@ -5,6 +5,7 @@
 //                                        //
 ////////////////////////////////////////////
 
+import type { IApiGoodInCart } from './IApiGoodInCart';
 import type { IApiItemBase } from './IApiItemBase';
 
 export interface IApiCart extends IApiItemBase {
@@ -20,6 +21,7 @@ export interface IApiCart extends IApiItemBase {
     Vat: number | null;
     PriceTotalExcludingVat: number | null;
     GoodsInCartCount: number | null;
+    GoodsInCart: IApiGoodInCart[] | null;
     Note: string | null;
     PriceTotalDefaultCurrency: number | null;
     PriceTotalParentCurrency: number | null;
