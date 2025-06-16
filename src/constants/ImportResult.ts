@@ -6,7 +6,7 @@ export enum ImportResult {
     FailureItemAlreadyRemoved = "Failed_ItemAlreadyRemoved",
     FailureColumnsLockedWFAction = "Failed_ColumnsLocked",
     FailureItemLockedWFAction = "Failed_ItemLocked",
-    FailureLicenceLimitReached = "Failed_LicenseLimitReached",
+    FailureLicenseLimitReached = "Failed_LicenseLimitReached",
     FailureInssuficientModulePermission = "Failed_InsufficientModulePermission",
     FailureInssuficientColumnsPermission = "Failed_InsufficientColumnsPermission"
 }
