@@ -51,6 +51,7 @@ export * from './data/IApiAvailableBundle';
 export * from './data/IApiAvailableVersionResponse';
 export * from './data/IApiCapacityAvailableBundle';
 export * from './data/IApiCart';
+export * from './data/IApiClientVersion';
 export * from './data/IApiColumn';
 export * from './data/IApiColumnPermission';
 export * from './data/IApiCompany';
