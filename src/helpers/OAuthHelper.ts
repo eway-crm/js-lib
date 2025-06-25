@@ -50,7 +50,8 @@ export class OAuthHelper {
         return jwt_decode<IEWJwtPayload>(accessToken);
     };
 
-    static createAuthorizeUrl(clientId: string, scopes: scope[], redirectUri: string, state?: string, codeChallenge?: string, codeChallengeMethod?: codeChallengeMethod, isDev: boolean = false): string {
+    static createAuthorizeUrl(clientId: string, scopes: scope[], redirectUri: string, state?: string, codeChallenge?: string, codeChallengeMethod?: codeChallengeMethod, isDev: boolean = false,
+        wsUrl?: string): string {
         if ((codeChallenge && !codeChallengeMethod) || (!codeChallenge && codeChallengeMethod)) {
             throw new Error("If codeChallenge is defined, codeChallengeMethod must also be defined and vice versa");
         }
@@ -66,6 +67,10 @@ export class OAuthHelper {
             authorizeUrl += `&code_challenge=${encodeURIComponent(codeChallenge)}&code_challenge_method=${encodeURIComponent(codeChallengeMethod)}`;
         }
 
+        if (wsUrl) {
+            authorizeUrl += `&url=${encodeURIComponent(wsUrl)}`;
+        }
+        
         return authorizeUrl;
     }
 
