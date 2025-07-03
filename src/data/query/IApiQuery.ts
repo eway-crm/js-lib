@@ -1,29 +1,37 @@
 import type { TFolderName } from '../../constants/FolderNames';
 
-interface IApiQueryMainTableSource {
+export interface IApiQueryMainTableSource {
     __type: 'MainTable:#EQ';
 }
 
-interface IApiQueryJoinTableSource {
+export interface IApiQueryJoinTableSource {
     __type: 'Join:#EQ';
     ItemType: TFolderName;
     Key: IApiQueryColumn;
     TargetColumnName?: string;
 }
 
-interface IApiQueryRelationSource {
+export interface IApiQueryRelationSource {
     __type: 'Relation:#EQ';
-    Direction: 1 | 2;
+    Direction: 0 | 1 | 2;
     ItemTypes: TFolderName[];
     RelationType: string;
 }
 
+export interface IApiQueryHubRelationSource {
+    __type: 'HubRelation:#EQ';
+    IsToParentDirection?: boolean;
+    ChildrenFolderNames?: TFolderName[];
+}
+
+type IApiQuerySource = IApiQueryMainTableSource | IApiQueryJoinTableSource | IApiQueryRelationSource | IApiQueryHubRelationSource;
+
 interface IApiQueryField {
-    Source: IApiQueryMainTableSource | IApiQueryJoinTableSource | IApiQueryRelationSource;
+    Source: IApiQuerySource;
     Alias?: string;
 }
 
-export type TApiQueryField = IApiQueryColumn | IApiQuerySubstituableColumn |IApiQueryVariatedColumn | IApiQueryToken;
+export type TApiQueryField = IApiQueryColumn | IApiQuerySubstituableColumn | IApiQueryVariatedColumn | IApiQueryToken;
 
 export interface IApiQueryColumn extends IApiQueryField {
     __type: 'Column:#EQ';
@@ -49,4 +57,13 @@ export interface IApiQueryVariatedColumn extends IApiQueryField {
 export interface IApiQueryToken extends IApiQueryField {
     __type: 'Token:#EQ';
     TypeName: 'ItemType';
+}
+
+export type TApiQueryAggregateFunction = 'Count' | 'Avg' | 'Min' | 'Max' | 'Sum';
+
+export interface IApiQueryAggregateColumn extends IApiQueryField {
+    "__type": "AggregateColumn:#EQ";
+    FunctionName: TApiQueryAggregateFunction;
+    Function?: 0 | 1 | 2 | 3 | 4; // 0 - Count, 1 - Avg, 2 - Min, 3 - Max, 4 - Sum
+    AggregatedField: TApiQueryField;
 }

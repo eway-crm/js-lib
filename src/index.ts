@@ -31,7 +31,7 @@ import { TNumericValidatorType } from './interfaces/TNumericValidatorType';
 import { IApiEvent, IApiSetFieldValueAction } from './data/workflowActions/IApiAction';
 import ObjectTypeIds from './constants/ObjectTypeIds';
 import { IApiHubItemsCountsQueryResponseItem } from './data/query/IApiHubItemsCountsQueryResponseItem';
-import QueryHelper from './helpers/QueryHelper';
+import QueryHelper from './helpers/QueryHelper/QueryHelper';
 import { IApiServiceAuthSettingsResponse } from './data/IApiServiceAuthSettingsResponse';
 import VersionHelper, { Version } from './helpers/VersionHelper';
 import StringHelper from './helpers/StringHelper';
@@ -40,6 +40,7 @@ import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult
 import DateHelper from './helpers/DateHelper';
 import type { ImportResult } from './constants/ImportResult';
 import { TransformItemFormats } from './enumerations/TransformItemFormats';
+import type QuerySources from './helpers/QueryHelper/QuerySources';
 
 Promise.polyfill();
 
@@ -152,6 +153,7 @@ export {
     ObjectTypeIds,
     IApiHubItemsCountsQueryResponseItem,
     QueryHelper,
+    QuerySources,
     IApiServiceAuthSettingsResponse,
     ApiConnection as ApiConnectionAsNonDefaultExport,
     IApiUnlinkInquiryResult,
