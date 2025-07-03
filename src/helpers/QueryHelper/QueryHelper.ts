@@ -97,9 +97,13 @@ export default class QueryHelper {
     };
 
     static joinColumn = (itemType: TFolderName, sourceColName: string, pickColName: string, alias?: string, targetColName?: string): IApiQueryColumn => {
+        return QueryHelper.joinColumnFromKey(itemType, QueryHelper.column(sourceColName), pickColName, alias, targetColName);
+    };
+
+    static joinColumnFromKey = (itemType: TFolderName, sourceKey: IApiQueryColumn, pickColName: string, alias?: string, targetColName?: string): IApiQueryColumn => {
         const joinedColumn: IApiQueryColumn = {
             __type: 'Column:#EQ',
-            Source: QuerySources.join(itemType, QueryHelper.column(sourceColName), targetColName),
+            Source: QuerySources.join(itemType, sourceKey, targetColName),
             Name: pickColName,
         };
 
