@@ -151,7 +151,7 @@ export class ApiFetchClient {
         return this.callMethod("QueryAmount", queryData);
     }
 
-    public async query<TResult extends IApiResult>(folderName: string, fields: object | null = null, filter: object | null = null, sort: object | null = null): Promise<IApiResult> {
+    public async query<TResult extends IApiResult>(folderName: string, fields: object | null = null, filter: object | null = null, sort: object | null = null): Promise<TResult> {
         const queryData: TInputData = {
             "query": {
                 "__type": "MainTableQuery:#EQ",
@@ -179,7 +179,7 @@ export class ApiFetchClient {
         return this.callMethod<TResult>("Query", queryData);
     }
 
-    public async callMethod<TResult extends IApiResult>(methodName: string, data: TInputData, method: string = "POST"): Promise<IApiResult> {
+    public async callMethod<TResult extends IApiResult>(methodName: string, data: TInputData, method: string = "POST"): Promise<TResult> {
         if (!this.sessionId) {
             throw new Error("Session ID is not set. Please call init() first.");
         }
