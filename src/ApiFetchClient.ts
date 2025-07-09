@@ -10,7 +10,7 @@
  */
 import type { TInputData, IApiResult, IApiLoginResponse, IApiDatumResponse, IApiDataResponse, IApiObjectType, IApiClientVersion, IApiLicense } from "./";
 import type { ITokenSuccess } from "./interfaces/ITokenData";
-import { OAuthHelper } from "./";
+import { OAuthHelper } from "./helpers/OAuthHelper";
 
 export class ApiFetchClient {
     private appName: string;
