@@ -65,10 +65,10 @@ test('Create open link test', (done) => {
 
     const connection = ApiConnection.create(serviceUrl, username, passwordHash, 'JestTest1', '00:00:00:00:00', 'JestTestMachine', done);
     expect(connection.createOpenLink(false, FolderNames.users, 'EDB8F11C-C759-4DB9-9927-3AAA4B342083', 'JestTest1')).toBe(
-        'https://open.eway-crm.com/?ws=aHR0cHM6Ly90cmlhbC5ld2F5LWNybS5jb20vMzE5OTQ&l=ZXdheTovL1VzZXJzL2VkYjhmMTFjLWM3NTktNGRiOS05OTI3LTNhYWE0YjM0MjA4Mw&n=JestTest1'
+        'https://open.eway-crm.com/?ws=aHR0cHM6Ly9mcmVlLmV3YXktY3JtLmNvbS8zMTk5NA&l=ZXdheTovL1VzZXJzL2VkYjhmMTFjLWM3NTktNGRiOS05OTI3LTNhYWE0YjM0MjA4Mw&n=JestTest1'
     );
     expect(connection.createOpenLink(false, FolderNames.users)).toBe(
-        'https://open.eway-crm.com/?ws=aHR0cHM6Ly90cmlhbC5ld2F5LWNybS5jb20vMzE5OTQ&l=ZXdheTovL1VzZXJz'
+        'https://open.eway-crm.com/?ws=aHR0cHM6Ly9mcmVlLmV3YXktY3JtLmNvbS8zMTk5NA&l=ZXdheTovL1VzZXJz'
     );
 
     done();
