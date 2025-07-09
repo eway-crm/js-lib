@@ -41,6 +41,7 @@ import DateHelper from './helpers/DateHelper';
 import type { ImportResult } from './constants/ImportResult';
 import { TransformItemFormats } from './enumerations/TransformItemFormats';
 import type QuerySources from './helpers/QueryHelper/QuerySources';
+import { ApiFetchClient } from './ApiFetchClient';
 
 Promise.polyfill();
 
@@ -162,5 +163,6 @@ export {
     Version,
     StringHelper,
     DateHelper,
-    TransformItemFormats
+    TransformItemFormats,
+    ApiFetchClient
 };
