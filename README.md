@@ -35,7 +35,7 @@ To communicate with eWay-CRM web service, we first have to establish connection.
 ```JS
 import ApiConnection from '@eway-crm/connector';
 
-const serviceUrl = 'https://trial.eway-crm.com/31994';
+const serviceUrl = 'https://free.eway-crm.com/31994';
 const username = 'api';
 const passwordHash = '470AE7216203E23E1983EF1851E72947';
 

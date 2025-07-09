@@ -7,7 +7,7 @@ jest.setTimeout(30000);
 
 test('Base ComonDataApi Test', (done) => {
 
-    const serviceUrl = 'https://trial.eway-crm.com/31994';
+    const serviceUrl = 'https://free.eway-crm.com/31994';
 
     const commonDataConnection = new CommonDataConnection(
         ApiConnection.createAnonymous(serviceUrl),
