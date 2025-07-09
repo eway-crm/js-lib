@@ -74,7 +74,7 @@ export class ApiFetchClient {
                 body: JSON.stringify(body)
             }
         );
-        
+
         const loginResponse = await fetch(loginRequest);
         const loginResponseBody = loginResponse.status === 200 ? await loginResponse.json() as IApiLoginResponse : undefined;
 
@@ -151,7 +151,7 @@ export class ApiFetchClient {
         return this.callMethod("QueryAmount", queryData);
     }
 
-    public async query(folderName: string, fields: object | null = null, filter: object | null = null, sort: object | null = null): Promise<IApiResult> {
+    public async query<TResult extends IApiResult>(folderName: string, fields: object | null = null, filter: object | null = null, sort: object | null = null): Promise<IApiResult> {
         const queryData: TInputData = {
             "query": {
                 "__type": "MainTableQuery:#EQ",
@@ -176,14 +176,14 @@ export class ApiFetchClient {
             (queryData.query as { Sort?: object }).Sort = sort;
         }
 
-        return this.callMethod("Query", queryData);
+        return this.callMethod<TResult>("Query", queryData);
     }
 
-    public async callMethod(methodName: string, data: TInputData, method: string = "POST"): Promise<IApiResult> {
+    public async callMethod<TResult extends IApiResult>(methodName: string, data: TInputData, method: string = "POST"): Promise<IApiResult> {
         if (!this.sessionId) {
             throw new Error("Session ID is not set. Please call init() first.");
         }
-        
+
         data.sessionId = this.sessionId;
 
         const request = new Request(
@@ -202,7 +202,7 @@ export class ApiFetchClient {
             throw new Error(`Error calling method ${methodName}: ${response.statusText}`);
         }
 
-        const responseBody = response.status === 200 ? await response.json() as IApiResult : undefined;
+        const responseBody = response.status === 200 ? await response.json() as TResult : undefined;
         if (!responseBody || responseBody.ReturnCode !== "rcSuccess") {
             throw new Error(`API call failed (${responseBody?.ReturnCode}): ${responseBody?.Description}`);
         }
@@ -221,11 +221,11 @@ export class ApiFetchClient {
         const tokenRequest = new Request(
             `${wsUrl}/auth/connect/token`,
             {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: params.toString()
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: params.toString()
             }
         );
 

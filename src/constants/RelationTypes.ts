@@ -8,7 +8,8 @@ export type TRelationType = 'GENERAL'
     | 'SUPERVISOR'
     | 'PROJECT_ORIGIN'
     | 'CART'
-    | 'GOODSINCART';
+    | 'GOODSINCART'
+    | 'SUPERIORITEM';
 
 export default class RelationTypes {
     static readonly general: TRelationType = 'GENERAL';
@@ -22,4 +23,5 @@ export default class RelationTypes {
     static readonly projectOrigin: TRelationType = 'PROJECT_ORIGIN';
     static readonly cart: TRelationType = 'CART';
     static readonly goodsInCart: TRelationType = 'GOODSINCART';
+    static readonly superiorItem: TRelationType = 'SUPERIORITEM';
 }
