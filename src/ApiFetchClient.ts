@@ -107,12 +107,12 @@ export class ApiFetchClient {
     }
 
     public async getObjectTypes(): Promise<IApiObjectType[]> {
-        const response = await this.callMethod("GetObjectTypes", {}) as IApiDataResponse<IApiObjectType>;
+        const response = await this.callMethod<IApiDataResponse<IApiObjectType>>("GetObjectTypes", {});
         return response.Data;
     }
 
     public async getLicense(): Promise<IApiLicense> {
-        const response = await this.callMethod("GetLicense", {}) as IApiDatumResponse<IApiLicense>;
+        const response = await this.callMethod<IApiDatumResponse<IApiLicense>>("GetLicense", {});
         return response.Datum;
     }
 
@@ -121,7 +121,7 @@ export class ApiFetchClient {
             "versionName": clientVersionName
         };
 
-        return (await this.callMethod("GetClientVersion", queryData) as IApiDatumResponse<IApiClientVersion>).Datum?.Id;
+        return (await this.callMethod<IApiDatumResponse<IApiClientVersion>>("GetClientVersion", queryData)).Datum?.Id;
     }
 
     public async queryAmount(folderName: string, filter: object | null = null): Promise<IApiResult> {
