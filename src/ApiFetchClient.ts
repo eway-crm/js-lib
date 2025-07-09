@@ -210,9 +210,9 @@ export class ApiFetchClient {
         return responseBody;
     }
 
-    public static async getAccessToken(wsUrl: string, authorizationCode: string, redirectUrl: string, clientSecret: string): Promise<string> {
+    public static async getTokenData(wsUrl: string, authorizationCode: string, redirectUrl: string, clientId: string, clientSecret: string): Promise<ITokenSuccess> {
         const params = new URLSearchParams();
-        params.append('client_id', 'hostingoverview');
+        params.append('client_id', clientId);
         params.append('client_secret', clientSecret);
         params.append('code', authorizationCode);
         params.append('redirect_uri', redirectUrl);
@@ -239,6 +239,6 @@ export class ApiFetchClient {
             throw new Error("Failed to get access token");
         }
 
-        return tokenData.access_token;
+        return tokenData;
     }
 }

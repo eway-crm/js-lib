@@ -112,6 +112,7 @@ export * from './data/query/IApiQuery';
 export * from './data/query/IApiQueryFilters';
 export * from './constants/ImportResult';
 export * from './interfaces/ITranslatableString';
+export * from './interfaces/ITokenData';
 
 export {
     ImportResult,
