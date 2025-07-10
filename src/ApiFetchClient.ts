@@ -21,24 +21,30 @@ export class ApiFetchClient {
     private accessToken: string;
     private loginResponse: IApiLoginResponse | null = null;
 
-    public constructor(appName: string, accessToken: string) {
-        const parts = OAuthHelper.decodeAccessToken(accessToken);
-        const wsUrl = parts.ws;
+    public constructor(appName: string, accessToken: string, wsUrl?: string, username?: string) {
+        let parts;
         if (!wsUrl) {
-            throw new Error("Failed to get web service URL from JWT");
+            parts = OAuthHelper.decodeAccessToken(accessToken);
+            wsUrl = parts.ws;
+            if (!wsUrl)
+                throw new Error("Failed to get web service URL from JWT");
+        }
+
+        if (!username) {
+            if (!parts) {
+                parts = OAuthHelper.decodeAccessToken(accessToken);
+            }
+
+            username = parts.username;
+            if (!username)
+                throw new Error("Failed to get username from JWT");
         }
 
         this.appName = appName;
         this.wsUrl = wsUrl;
+        this.userName = username;
         this.endpoint = wsUrl.startsWith("http://") ? "InsecureAPI.svc" : "API.svc";
         this.accessToken = accessToken;
-
-        const userName = parts.username;
-        if (!userName) {
-            throw new Error("Failed to get username from JWT");
-        }
-
-        this.userName = userName;
     }
 
     public getWsUrl(): string {
