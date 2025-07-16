@@ -104,6 +104,24 @@ export class ApiConnection {
         return wsUrl;
     }
 
+    static isCloudUrl(wsUrl: string, allowDev: boolean) {
+        const url = new URL(wsUrl);
+        const hosts = new Set();
+        hosts.add("hosting.eway-crm.com");
+        hosts.add("free.eway-crm.com");
+        hosts.add("hosting.eway-crm.us");
+        hosts.add("hosting-vh39276.eway-crm.us");
+        hosts.add("free.eway-crm.us");
+
+        if (allowDev) {
+            hosts.add("free.eway-crm.dev");
+            hosts.add("hosting.eway-crm.dev");
+            hosts.add("localhost");
+        }
+
+        return hosts.has(url.host);
+    }
+
     get wsUrl(): string {
         return this.baseUri;
     }
