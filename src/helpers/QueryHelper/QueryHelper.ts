@@ -12,7 +12,8 @@ import type {
     IApiQueryInFilterExpressionPredicate,
     IApiQueryNotFilterExpression,
     IApiQueryOrFilterExpressionOperator,
-    TApiQueryFilterExpression
+    TApiQueryFilterExpression,
+    IApiQueryRelatedToFilterExpressionPredicate
 } from '../../data/query/IApiQueryFilters';
 import type {
     IApiQueryColumn,
@@ -338,6 +339,15 @@ export default class QueryHelper {
         };
 
         return inFilterExpression;
+    };
+
+    static relatedToExpression = (baseItemGuid: string, relationType?: string | null) => {
+        const relatedToExpression: IApiQueryRelatedToFilterExpressionPredicate = {
+            __type: 'RelatedToFilterExpressionPredicate:#EQ',
+            Value: baseItemGuid,
+            RelationType: relationType
+        };
+        return relatedToExpression;
     };
 
     static isNullOrEmptyFilterExpression = (field: string) => {
