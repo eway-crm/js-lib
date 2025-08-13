@@ -3,11 +3,22 @@ import type { TFolderName } from '../constants/FolderNames';
 import type { TNumericValidatorType } from '../interfaces/TNumericValidatorType';
 import type { TApiColumnPermissionMandatoryRuleOptions, TApiColumnPermissionPermissionRuleOptions } from './IApiColumnPermission';
 
+type TAdditionalFieldItemData = {
+    RelatedFolderName: TFolderName | null;
+    IsDateTime: boolean | null;
+    FormatType: string | null;
+    EditMask: string | null;
+    MemoBoxLines: number | null;
+    SummaryType: string | null;
+    LinkType: string | null;
+};
+
 type TAdditionalFieldItem = {
     CategoryEn: string | null;
     Comment: string;
     FieldId: number;
     ItemGUID: string;
+    Data?: TAdditionalFieldItemData | null; // Added in 9.3 + 9.2 hotfix
 };
 
 type EnumTypeItem = {
