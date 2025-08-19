@@ -70,4 +70,6 @@ export interface IApiLicense {
 
 export interface IApiLicenseDbSizeModel {
     IsFull: boolean;
+    Used: number | null;
+    Licensed: number | null;
 }
