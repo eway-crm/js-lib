@@ -5,7 +5,7 @@ import dts from "rollup-plugin-dts";
 import json from '@rollup/plugin-json';
 import terser from "@rollup/plugin-terser";
 import del from 'rollup-plugin-delete';
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 
 export default [
     {
