@@ -260,6 +260,8 @@ export default class FieldNames {
         LastWriteTime: 'LastWriteTime',
         IsPrivate: 'Private',
         Note: 'Note',
+
+        ExternalUrl: 'ExternalUrl',
     } as const;
 
     static readonly Emails = {
