@@ -13,7 +13,7 @@ import { OAuthHelper } from './helpers/OAuthHelper';
 import { HttpRequestError, TUnionError } from './exceptions/HttpRequestError';
 import { TInputData } from './interfaces/ITokenData';
 import EnumTypes from './constants/EnumTypes';
-import RelationTypes, { TRelationType } from './constants/RelationTypes';
+import RelationTypes, { type TRelationType, RelationTypeIds } from './constants/RelationTypes';
 import { ColumnPermissionPermissionRules, ColumnPermissionMandatoryRules } from './constants/ColumnPermissionRules';
 import { Edition } from './constants/Edition';
 import { Feature } from './constants/Feature';
@@ -134,6 +134,7 @@ export {
     FieldNames,
     EnumTypes,
     RelationTypes,
+    RelationTypeIds,
     TRelationType,
     ColumnPermissionPermissionRules,
     ColumnPermissionMandatoryRules,
