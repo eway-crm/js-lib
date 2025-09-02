@@ -25,3 +25,18 @@ export default class RelationTypes {
     static readonly goodsInCart: TRelationType = 'GOODSINCART';
     static readonly superiorItem: TRelationType = 'SUPERIORITEM';
 }
+
+export class RelationTypeIds {
+    static readonly general = 1;
+    static readonly group = 2;
+    static readonly contactPerson = 10;
+    static readonly contact = 11;
+    static readonly customer = 12;
+    static readonly company = 13;
+    static readonly outlookProject = 28;
+    static readonly supervisor = 32;
+    static readonly projectOrigin = 25;
+    static readonly cart = 9;
+    static readonly goodsInCart = 15;
+    static readonly superiorItem = 31;
+}
