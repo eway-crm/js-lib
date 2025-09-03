@@ -15,6 +15,7 @@ import { OAuthHelper } from "./helpers/OAuthHelper";
 export class ApiFetchClient {
     private appName: string;
     private sessionId: string | null = null;
+    private isAdmin: boolean | null = null;
     private wsUrl: string;
     private userName: string;
     private endpoint: string;
@@ -45,6 +46,10 @@ export class ApiFetchClient {
         this.userName = username;
         this.endpoint = wsUrl.startsWith("http://") ? "InsecureAPI.svc" : "API.svc";
         this.accessToken = accessToken;
+    }
+
+    public hasAdminRights(): boolean | null {
+        return this.isAdmin;
     }
 
     public getWsUrl(): string {
@@ -89,6 +94,7 @@ export class ApiFetchClient {
         }
 
         this.sessionId = loginResponseBody?.SessionId;
+        this.isAdmin = loginResponseBody?.IsAdmin;
         this.loginResponse = loginResponseBody;
     }
 
