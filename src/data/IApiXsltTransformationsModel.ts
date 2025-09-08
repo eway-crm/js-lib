@@ -7,11 +7,9 @@
 
 import { IApiItemBase } from './IApiItemBase';
 
-export interface IApiXsltTransformation extends IApiItemBase {
-    LangCode: string | null;
-    Namespace: string | null;
+export interface IApiXsltTransformationsModel extends IApiItemBase {
     ObjectTypeId: number | null;
     FolderName: string | null;
-    TransformationVersionEnum: number | null;
-    TransformationVersion: string | null;
+    TransformationGuid: string | null;
+    ItemTypeGuid: string | null;
 }
