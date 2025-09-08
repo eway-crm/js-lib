@@ -51,6 +51,7 @@ export * from './data/EWItem';
 export * from './data/IApiAdditionalField';
 export * from './data/IApiAvailableBundle';
 export * from './data/IApiAvailableVersionResponse';
+export * from './data/IApiCalendar';
 export * from './data/IApiCapacityAvailableBundle';
 export * from './data/IApiCart';
 export * from './data/IApiClientVersion';
