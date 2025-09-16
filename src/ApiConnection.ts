@@ -167,16 +167,21 @@ export class ApiConnection {
         return url;
     };
 
-    /**
+       /**
      * Creates a promise for async file upload using binary stream
-     * @param itemGuid Item identificator. Ex. '9ac561be-9b7d-4938-8e55-4cce97142483'.
-     * @param fileName File name, ex. 'picture.img'.
-     * @param data Single file to be uploaded.
+     * @param file Single file to be uploaded.
+     * @param data Additional data to be sent as URL parameters
+     * @param methodName API method name. Ex. 'SaveBinaryAttachment'.
      * @param config Optional. Additional config for the request.
      * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
      */
-
-    readonly askUploadMethod = (itemGuid: string, fileName: string, data: File, config?: AxiosRequestConfig, catchGlobally?: boolean): Promise<IApiResult> => {
+    readonly askCustomUploadMethod = (
+        file: File,
+        data: Record<string, string>,
+        methodName: string,
+        config?: AxiosRequestConfig,
+        catchGlobally?: boolean
+    ): Promise<IApiResult> => {
         return new Promise<IApiResult>((resolve, reject) => {
             const errClb = catchGlobally
                 ? (e: TUnionError | IApiResult): void => {
@@ -185,25 +190,47 @@ export class ApiConnection {
                 }
                 : reject;
 
-            this.callUploadMethod(itemGuid, fileName, data, resolve, errClb, errClb, config);
+            this.callCustomUploadMethod(file, data, methodName, resolve, errClb, errClb, config);
         });
     };
 
     /**
-     * Asynchronously uploads file using binary stream
+     * Creates a promise for async file upload using binary stream
      * @param itemGuid Item identificator. Ex. '9ac561be-9b7d-4938-8e55-4cce97142483'.
      * @param fileName File name, ex. 'picture.img'.
-     * @param data Single file to be uploaded.
+     * @param file Single file to be uploaded.
+     * @param config Optional. Additional config for the request.
+     * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
+     */
+
+    readonly askUploadMethod = (itemGuid: string, fileName: string, file: File, config?: AxiosRequestConfig, catchGlobally?: boolean): Promise<IApiResult> => {
+        return new Promise<IApiResult>((resolve, reject) => {
+            const errClb = catchGlobally
+                ? (e: TUnionError | IApiResult): void => {
+                    reject(e);
+                    throw e;
+                }
+                : reject;
+
+            this.callUploadMethod(itemGuid, fileName, file, resolve, errClb, errClb, config);
+        });
+    };
+
+    /**
+     * 
+     * @param file File to be uploaded
+     * @param data Additional data to be sent as URL parameters
+     * @param methodName API method name. Ex. 'SaveBinaryAttachment'.
      * @param successCallback Handler callback when the method executes well. Gets the whole response JSON object as the only argument.
      * @param unsuccessCallback Optional. Handler callback for eWay-API app level failures. Gets the whole response JSON object as the only argument. If not supplied, the global error handler is used.
      * @param errorCallback Optional. Handler callback for any other failures. If not supplied, the global error handler is used.
      * @param config Optional. Additional config for the request.
      */
 
-    readonly callUploadMethod = (
-        itemGuid: string,
-        fileName: string,
-        data: File,
+    readonly callCustomUploadMethod = (
+        file: File,
+        data: Record<string, string>,
+        methodName: string,
         successCallback: (res: IApiResult) => void,
         unsuccessCallback?: (e: IApiResult) => void,
         errorCallback?: (e: TUnionError) => void,
@@ -212,7 +239,7 @@ export class ApiConnection {
         const noSessionCallback = (): void => {
             this.sessionHandler.getSessionId(this, (newSessionId) => {
                 this.sessionId = newSessionId;
-                this.callUploadMethod(itemGuid, fileName, data, successCallback, unsuccessCallback, errorCallback, config);
+                this.callCustomUploadMethod(file, data, methodName, successCallback, unsuccessCallback, errorCallback, config);
             });
         };
 
@@ -256,10 +283,34 @@ export class ApiConnection {
             }
         };
 
-        const methodUrl = `${this.svcUri}/SaveBinaryAttachment?sessionId=${this.sessionId}&itemGuid=${itemGuid}&fileName=${encodeURIComponent(fileName)}`;
+        const dataUrlSearchParams = new URLSearchParams(data);
+        const methodUrl = `${this.svcUri}/${methodName}?sessionId=${this.sessionId}&${dataUrlSearchParams.toString()}`;
         const promise = Axios.post<IApiResult>(methodUrl, data, config);
 
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessClb, errorClb);
+    };
+
+    /**
+     * Asynchronously uploads file using binary stream
+     * @param itemGuid Item identificator. Ex. '9ac561be-9b7d-4938-8e55-4cce97142483'.
+     * @param fileName File name, ex. 'picture.img'.
+     * @param file Single file to be uploaded.
+     * @param successCallback Handler callback when the method executes well. Gets the whole response JSON object as the only argument.
+     * @param unsuccessCallback Optional. Handler callback for eWay-API app level failures. Gets the whole response JSON object as the only argument. If not supplied, the global error handler is used.
+     * @param errorCallback Optional. Handler callback for any other failures. If not supplied, the global error handler is used.
+     * @param config Optional. Additional config for the request.
+     */
+
+    readonly callUploadMethod = (
+        itemGuid: string,
+        fileName: string,
+        file: File,
+        successCallback: (res: IApiResult) => void,
+        unsuccessCallback?: (e: IApiResult) => void,
+        errorCallback?: (e: TUnionError) => void,
+        config?: AxiosRequestConfig,
+    ) => {
+        this.callCustomUploadMethod(file, { itemGuid, fileName }, ApiMethods.saveBinaryAttachment, successCallback, unsuccessCallback, errorCallback, config);
     };
 
     /**
