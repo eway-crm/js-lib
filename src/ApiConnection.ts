@@ -430,6 +430,10 @@ export class ApiConnection {
         return `${this.svcUri}/${ApiMethods.transformItem}?itemGuid=${encodeURIComponent(itemGuid)}&itemFolderName=${encodeURIComponent(folderName)}&transformationGuid=${encodeURIComponent(transformationGuid)}&outputFormat=${outputFormat}`;
     };
 
+    readonly getXsltTransformationDefinitionMethodUrl = (transformationGuid: string): string => {
+        return `${this.svcUri}/${ApiMethods.getXsltTransormationDefinition}?itemGuid=${encodeURIComponent(transformationGuid)}`;
+    };
+
     readonly getActiveSessionId = (): string | null => {
         return this.sessionId;
     };

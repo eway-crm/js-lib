@@ -26,6 +26,7 @@ export class ApiMethods {
     static readonly unlinkItems = 'UnlinkItems';
     static readonly getGoodsFinalPrices = 'GetGoodsFinalPrices';
     static readonly saveItemCopyRelation = 'SaveItemCopyRelation';
+    static readonly getXsltTransormationDefinition = 'GetXsltTransformationDefinition';
 
     /**
      * Return folderName part of API method that is used in API calls. Some API methods have different names than the folder names they are associated with.
