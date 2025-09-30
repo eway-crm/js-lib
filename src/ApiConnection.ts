@@ -167,7 +167,7 @@ export class ApiConnection {
         return url;
     };
 
-       /**
+    /**
      * Creates a promise for async file upload using binary stream
      * @param file Single file to be uploaded.
      * @param data Additional data to be sent as URL parameters
@@ -285,7 +285,7 @@ export class ApiConnection {
 
         const dataUrlSearchParams = new URLSearchParams(data);
         const methodUrl = `${this.svcUri}/${methodName}?sessionId=${this.sessionId}&${dataUrlSearchParams.toString()}`;
-        const promise = Axios.post<IApiResult>(methodUrl, data, config);
+        const promise = Axios.post<IApiResult>(methodUrl, file, config);
 
         ApiConnection.handleCallPromise(promise, successCallback, unsuccessClb, errorClb);
     };

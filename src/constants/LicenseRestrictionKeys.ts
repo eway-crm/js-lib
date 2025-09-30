@@ -65,4 +65,8 @@ export default class LicenseRestrictionKeys {
     static convertEmailToContactWithDataFromAi = "ConvertEmailToContactWithDataFromAi";
     static convertEmailToDealWithDataFromAi = "ConvertEmailToDealWithDataFromAi";
     static convertEmailToProjectWithDataFromAi = "ConvertEmailToProjectWithDataFromAi";
+    static xsltTransformationsAdministrationForCaCAndRest = 'XsltTransformationsAdministrationForCaCAndRest';
+    static xsltTransformationsAdministrationForSales = 'XsltTransformationsAdministrationForSales';
+    static xsltTransformationsAdministrationForProjects = 'XsltTransformationsAdministrationForProjects';
+    static xsltTransformationsAdministrationForMarketing = 'XsltTransformationsAdministrationForMarketing';
 }
