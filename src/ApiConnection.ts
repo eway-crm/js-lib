@@ -477,8 +477,8 @@ export class ApiConnection {
         return this.svcUri + '/' + ApiMethods.getBinaryAttachmentLatestRevision + '?itemGuid=' + encodeURIComponent(itemGuid);
     };
 
-    readonly getTransformItemMethodUrl = (itemGuid: string, folderName: string, transformationGuid: string, outputFormat: TransformItemFormats): string => {
-        return `${this.svcUri}/${ApiMethods.transformItem}?itemGuid=${encodeURIComponent(itemGuid)}&itemFolderName=${encodeURIComponent(folderName)}&transformationGuid=${encodeURIComponent(transformationGuid)}&outputFormat=${outputFormat}`;
+    readonly getTransformItemMethodUrl = (itemGuid: string, folderName: string, transformationGuid: string, outputFormat: TransformItemFormats, lang?: string): string => {
+        return `${this.svcUri}/${ApiMethods.transformItem}?itemGuid=${encodeURIComponent(itemGuid)}&itemFolderName=${encodeURIComponent(folderName)}&transformationGuid=${encodeURIComponent(transformationGuid)}&outputFormat=${outputFormat}${lang ? `&lang=${encodeURIComponent(lang)}` : ''}`;
     };
 
     readonly getXsltTransformationDefinitionMethodUrl = (transformationGuid: string): string => {
