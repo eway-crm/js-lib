@@ -23,7 +23,14 @@ export default class FieldNames {
     } as const;
 
     static readonly Calendar = {
+        Location: 'Location',
+        StartDate: 'StartDate',
         EndDate: 'EndDate',
+        AllDayEvent: 'AllDayEvent',
+        SuperiorItem: 'SuperiorItem',
+        BusyStatus: 'BusyStatus',
+        GraphID: 'GraphID',
+        GraphCalendarID: 'GraphCalendarID',
         Note: 'Note',
     } as const;
 
