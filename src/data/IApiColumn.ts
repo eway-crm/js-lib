@@ -18,6 +18,7 @@ type TAdditionalFieldItem = {
     Comment: string;
     FieldId: number;
     ItemGUID: string;
+    IsSystem?: boolean; // Added in 9.3
     Data?: TAdditionalFieldItemData | null; // Added in 9.3 + 9.2 hotfix
 };
 
