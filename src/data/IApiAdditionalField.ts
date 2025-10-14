@@ -19,4 +19,5 @@ export interface IApiAdditionalField extends IApiItemBase {
     Data_LinkType: string | null;
     AssociatedEnumTypeGuid: string | null;
     IsInGeneralSection: boolean;
+    IsSystem?: boolean; // Added in 9.3
 }
