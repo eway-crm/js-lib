@@ -304,7 +304,10 @@ export default class FieldNames {
         SalePriceChanged: 'SalePriceChanged',
         IsPriceSum: 'IsPriceSum',
         VATRate: 'VATRate',
-        VATIncluded: 'VATIncluded'
+        VATIncluded: 'VATIncluded',
+        Picture: 'Picture',
+        PictureHeight: 'PictureHeight',
+        PictureWidth: 'PictureWidth'
     } as const;
 
     static readonly Goods = {
