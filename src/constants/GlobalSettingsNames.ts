@@ -1,6 +1,7 @@
 class GlobalSettingsNames {
     static readonly acceptableBackwardWorkReportDays = 'AcceptableBackwardWorkReportDays';
     static readonly adminAppInactiveLogoutTime = 'AdminAppInactiveLogoutTime';
+    static readonly allowChangeGoodsInCartListPrice = "AllowChangeGoodsInCartListPrice";
     static readonly applyGeneralDataProtectionRules = 'ApplyGeneralDataProtectionRules';
     static readonly automaticallyCreateJournalAfterCallDuration = 'AutomaticallyCreateJournalAfterCallDuration';
     static readonly bonusesCompletedState = 'BonusesCompletedState';
