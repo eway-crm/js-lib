@@ -33,7 +33,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
         }
     };
 
-    readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void): void => {
+    readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string, loginResponse: IApiLoginResponse) => void): void => {
         connection.callWithoutSession(
             ApiMethods.logIn,
             {
@@ -57,7 +57,7 @@ export class CredentialsSessionHandler implements ISessionHandler {
                     return;
                 }
                 if (callback) {
-                    callback(newSessionId);
+                    callback(newSessionId, result);
                 }
             },
             (result) => {

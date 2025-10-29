@@ -74,7 +74,7 @@ export default class QueryHelper {
             __type: 'Column:#EQ',
             Source: QuerySources.mainTable(),
             Name: 'ItemGUID',
-            Transformation: `[dbo].[GetConcatenatedEnumValuesRelationsValues]({0}, '${colName}', '${pickColName}'`,
+            Transformation: `[dbo].[GetConcatenatedEnumValuesRelationsValues]({0}, '${colName}', '${pickColName}')`,
             Alias: alias ?? colName,
         };
 

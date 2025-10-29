@@ -37,14 +37,14 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
         this.errorCallback = errorCallback;
     }
 
-    readonly invalidateSessionId = (_: string, callback: () => void) => {
+    invalidateSessionId(_: string, callback: () => void) {
         // Nothing to invalidate.
         if (callback) {
             callback();
         }
     };
 
-    readonly getSessionId = (connection: ApiConnection, callback: (sessionId: string) => void) => {
+    getSessionId(connection: ApiConnection, callback: (sessionId: string, loginResponse?: IApiLoginResponse) => void) {
         const successCallbackHandler = (result: IApiLoginResponse) => {
             this.lastSuccessfulLoginResponse = result;
             const newSessionId = result.SessionId;
@@ -58,7 +58,7 @@ export abstract class OAuthSessionHandlerBase implements ISessionHandler {
                 return;
             }
             if (callback) {
-                callback(newSessionId);
+                callback(newSessionId, result);
             }
         };
 

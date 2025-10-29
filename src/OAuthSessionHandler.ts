@@ -2,7 +2,6 @@ import type { ApiConnection } from './ApiConnection';
 import { OAuthHelper } from './helpers/OAuthHelper';
 import type { ITokenData } from './interfaces/ITokenData';
 import type { TUnionError } from './exceptions/HttpRequestError';
-import type { IApiLoginResponse } from './data/IApiLoginResponse';
 import { type GetAccessTokenResult, OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
 
 export class OAuthSessionHandler extends OAuthSessionHandlerBase {
@@ -10,10 +9,17 @@ export class OAuthSessionHandler extends OAuthSessionHandlerBase {
     private readonly clientId: string;
     private readonly clientSecret: string;
     private readonly refreshTokenCallback?: ((tokenData: ITokenData) => void) | undefined;
-    public lastSuccessfulLoginResponse?: IApiLoginResponse;
 
-    constructor(username: string, clientId: string, clientSecret: string, refreshToken: string, accessToken: string, appVersion: string, errorCallback?: (error: TUnionError) => void,
-        refreshTokenCallback?: (tokenData: ITokenData) => void) {
+    constructor(
+        username: string,
+        clientId: string,
+        clientSecret: string,
+        refreshToken: string,
+        accessToken: string,
+        appVersion: string,
+        errorCallback?: (error: TUnionError) => void,
+        refreshTokenCallback?: (tokenData: ITokenData) => void
+    ) {
         if (!username || !refreshToken || !clientId || !clientSecret) {
             throw new Error("Non of the arguments 'username', 'clientId', 'clientSecret', 'refreshToken' can be empty.");
         }

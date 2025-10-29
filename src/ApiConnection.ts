@@ -18,7 +18,7 @@ import type { TransformItemFormats } from './enumerations/TransformItemFormats';
 
 export interface ISessionHandler {
     invalidateSessionId(sessionId: string, callback: () => void): void;
-    getSessionId(connection: ApiConnection, callback: (sessionId: string) => void): void;
+    getSessionId(connection: ApiConnection, callback: (sessionId: string, loginResponse?: IApiLoginResponse) => void): void;
     lastSuccessfulLoginResponse?: IApiLoginResponse;
 }
 
