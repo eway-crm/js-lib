@@ -26,6 +26,7 @@ import LicenseKeyInvoiceSeverity from './constants/LicenseKeyInvoiceSeverity';
 import ErrorHelper from './helpers/ErrorHelper';
 import VersionHelperBase from './helpers/VersionHelperBase';
 import { OAuthSessionHandlerBase } from './OAuthSessionHandlerBase';
+import { OAuthSessionHandler } from './OAuthSessionHandler';
 import FieldTypes, { TFieldType } from './constants/FieldTypes';
 import { TNumericValidatorType } from './interfaces/TNumericValidatorType';
 import { IApiEvent, IApiSetFieldValueAction } from './data/workflowActions/IApiAction';
@@ -150,6 +151,7 @@ export {
     ErrorHelper,
     VersionHelperBase,
     OAuthSessionHandlerBase,
+    OAuthSessionHandler,
     FieldTypes,
     TFieldType,
     TNumericValidatorType,
