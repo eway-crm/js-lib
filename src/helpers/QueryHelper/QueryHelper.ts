@@ -31,12 +31,13 @@ import QuerySources, { type TApiQueryHubRelationSourceOptions } from './QuerySou
 type TFilterValue = string | number | boolean | null;
 
 export default class QueryHelper {
-    static createHubItemsCountsQuery(parentItemGuids: string[], itemTypes: TFolderName[], excludeSystemItems?: boolean) {
+    static createHubItemsCountsQuery(parentItemGuids: string[], itemTypes: TFolderName[], excludeSystemItems?: boolean, splitDateInRfc3339?: string) {
         return {
             "__type": "HubItemsCountsQuery:#EQ",
             "ParentItemGuids": parentItemGuids,
             "ItemTypes": itemTypes,
-            "ExcludeSystemItems": excludeSystemItems
+            "ExcludeSystemItems": excludeSystemItems,
+            "SplitDate": splitDateInRfc3339
         };
     }
 
