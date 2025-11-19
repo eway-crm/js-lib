@@ -78,6 +78,8 @@ class GlobalSettingsNames {
     static readonly goodsDefaultQuantity = 'GoodsDefaultQuantity';
     static readonly goodsDefaultVAT = 'GoodsDefaultVAT';
     static readonly goodsDefaultVATIncluded = 'GoodsDefaultVATIncluded';
+    static readonly recalculateOnListPriceChange = 'RecalculateOnListPriceChange';
+    static readonly recalculateOnPurchasePriceChange = 'RecalculateOnPurchasePriceChange';
 }
 
 export default GlobalSettingsNames;
