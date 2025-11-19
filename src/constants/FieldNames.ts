@@ -307,7 +307,9 @@ export default class FieldNames {
         VATIncluded: 'VATIncluded',
         Picture: 'Picture',
         PictureHeight: 'PictureHeight',
-        PictureWidth: 'PictureWidth'
+        PictureWidth: 'PictureWidth',
+        Margin: 'Margin',
+        Markup: 'Markup',
     } as const;
 
     static readonly Goods = {
