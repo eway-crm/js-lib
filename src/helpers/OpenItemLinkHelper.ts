@@ -19,11 +19,11 @@ export class OpenItemLinkHelper {
                 const itemurl = new URL(ol);
                 const itemLink = itemurl.searchParams.get(OpenItemLinkHelper.itemParamName);
                 return itemLink;
-            })
+            });
         } catch (e) {
             console.error('Invalid string passed for cretaing url while getting links from open links');
         }
-    }
+    };
 
     static readonly getItemInfoFromLink = (link: string) => {
         const decodedItemUrl: string[] = base64url.decode(link).substring(OpenItemLinkHelper.openLinkDomainLength).split('/');
@@ -32,10 +32,10 @@ export class OpenItemLinkHelper {
             const folderName = decodedItemUrl[0] as TFolderName;
             return { folderName, itemGuid: decodedItemUrl[1] };
         }
-    }
+    };
 
     static readonly getAllItemsFromTextWithLinks = (text: string) => {
-        const result: TItemInfo = {}
+        const result: TItemInfo = {};
         if (OpenItemLinkHelper.isOpenItemLinkInText(text)) {
             const matches = OpenItemLinkHelper.getOpenLinksFromString(text);
             if (!matches) return;
@@ -46,10 +46,10 @@ export class OpenItemLinkHelper {
                 }
                 const itemInfo = OpenItemLinkHelper.getItemInfoFromLink(link);
                 if (itemInfo) {
-                    result[itemInfo.folderName] = !!result[itemInfo.folderName] ? [...result[itemInfo.folderName] ?? [], itemInfo.itemGuid] : [itemInfo.itemGuid]
+                    result[itemInfo.folderName] = !!result[itemInfo.folderName] ? [...result[itemInfo.folderName] ?? [], itemInfo.itemGuid] : [itemInfo.itemGuid];
                 }
-            })
+            });
         }
         return result;
-    }
+    };
 }
