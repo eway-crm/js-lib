@@ -15,7 +15,7 @@ import type { TFolderName } from './constants/FolderNames';
 import ErrorHelper from './helpers/ErrorHelper';
 import type { IApiLoginResponse } from './data/IApiLoginResponse';
 import type { TransformItemFormats } from './enumerations/TransformItemFormats';
-import { EwayOpenLinkHelper } from './helpers/EwayOpenLinkHelper';
+import { OpenItemLinkHelper } from './helpers/OpenItemLinkHelper';
 
 export interface ISessionHandler {
     invalidateSessionId(sessionId: string, callback: () => void): void;
@@ -156,10 +156,10 @@ export class ApiConnection {
             legacyLink += "/" + guid?.toLowerCase();
         }
 
-        const domain = EwayOpenLinkHelper.getEwayOpenDomain(isDevEnvironment);
+        const domain = OpenItemLinkHelper.getOpenLinkDomain(isDevEnvironment);
 
         legacyLink = base64url.encode(legacyLink);
-        let url = "https://" + domain + "/?ws=" + ws + `&${EwayOpenLinkHelper.ewayItemLinkParamName}=` + legacyLink;
+        let url = "https://" + domain + "/?ws=" + ws + `&${OpenItemLinkHelper.itemParamName}=` + legacyLink;
 
         if (fileAs) {
             url += "&n=" + encodeURIComponent(fileAs);

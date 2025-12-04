@@ -43,7 +43,7 @@ import type { ImportResult } from './constants/ImportResult';
 import { TransformItemFormats } from './enumerations/TransformItemFormats';
 import type QuerySources from './helpers/QueryHelper/QuerySources';
 import { ApiFetchClient } from './ApiFetchClient';
-import { EwayOpenLinkHelper } from './helpers/EwayOpenLinkHelper';
+import { OpenItemLinkHelper } from './helpers/OpenItemLinkHelper';
 
 Promise.polyfill();
 
@@ -119,7 +119,7 @@ export * from './interfaces/ITranslatableString';
 export * from './interfaces/ITokenData';
 
 export {
-    EwayOpenLinkHelper,
+    OpenItemLinkHelper,
     ImportResult,
     SentimentTone,
     HttpMethod,
