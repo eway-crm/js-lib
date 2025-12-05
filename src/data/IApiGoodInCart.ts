@@ -67,4 +67,6 @@ export interface IApiGoodInCart extends IApiItemBase {
     Goods_GoodsInfoGuid: string | null;
     Leads_ProjectGuid: string | null;
     Projects_ProjectGuid: string | null;
+    Margin: number | null;
+    Markup: number | null;
 }
