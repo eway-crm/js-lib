@@ -31,4 +31,6 @@ export interface IApiGood extends IApiItemBase {
     PictureHeight: number | null;
     TypeEn: string | null;
     Goods_SuperiorGoodGuid: string | null;
+    Margin: number | null;
+    Markup: number | null;
 }
