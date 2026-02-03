@@ -29,6 +29,7 @@ class GlobalSettingsNames {
     static readonly enableLlamaAiFeatures = 'EnableLlamaAiFeatures';
     static readonly enableUsersSyncIntoMobileDeviceContacts = 'EnableUsersSyncIntoMobileDeviceContacts';
     static readonly emailsActiveProjectsLeadsFilter = 'EmailsActiveProjectsLeadsFilter';
+    static readonly trackToAddressesOnly = 'TrackToAddressesOnly';
     static readonly exchangeRatesAdminGroupName = 'ExchangeRatesAdminGroupName';
     static readonly forcedEmailTrackingGroups = 'ForcedEmailTrackingGroups';
     static readonly ignoreEmailsFromDomainsOnEmailsTracking = 'IgnoreEmailsFromDomainsOnEmailsTracking';
