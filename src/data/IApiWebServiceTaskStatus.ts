@@ -1,4 +1,3 @@
-
 export interface IApiWebServiceTaskStatus {
     TaskGuid: string;
     TaskName: string;

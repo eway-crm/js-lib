@@ -127,7 +127,6 @@ export class ApiConnection {
         return this.baseUri;
     }
 
-
     /**
      * Ensures that the current session isn't null and if it is, generates a new one
      */
@@ -218,7 +217,7 @@ export class ApiConnection {
     };
 
     /**
-     * 
+     *
      * @param file File to be uploaded
      * @param data Additional data to be sent as URL parameters
      * @param methodName API method name. Ex. 'SaveBinaryAttachment'.

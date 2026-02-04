@@ -70,7 +70,7 @@ export class OAuthHelper {
         if (wsUrl) {
             authorizeUrl += `&url=${encodeURIComponent(wsUrl)}`;
         }
-        
+
         return authorizeUrl;
     }
 

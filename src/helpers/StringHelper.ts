@@ -1,4 +1,3 @@
-
 /**
  * StringHelper contains helper methods for string manipulation relevant for eWay-CRM
  * @class StringHelper

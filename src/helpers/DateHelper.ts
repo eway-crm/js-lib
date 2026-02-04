@@ -1,4 +1,3 @@
-
 export default class DateHelper {
     /**
      * Checks if the date object is valid.
@@ -45,7 +44,7 @@ export default class DateHelper {
         return dateString.slice(0, 19);
     };
 
-    /** 
+    /**
      * Converts the date to the RFC3339 string preserving the given time zone info (does not convert to Zulu time as toISOString() does).
      */
     static toRfc3339String(d: Date) {

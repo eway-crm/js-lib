@@ -1,6 +1,5 @@
-
-export enum SentimentTone { 
+export enum SentimentTone {
     Negative = 0,
     Neutral = 1,
-    Positive = 2 
+    Positive = 2
 }

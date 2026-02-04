@@ -1,4 +1,3 @@
-
 import type { ApiConnection, ISessionHandler } from './ApiConnection';
 import type { IApiResult } from './data/IApiResult';
 import { ApiMethods } from './ApiMethods';

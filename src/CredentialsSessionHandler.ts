@@ -1,4 +1,3 @@
-
 import type { ApiConnection, ISessionHandler } from './ApiConnection';
 import type { TUnionError } from './exceptions/HttpRequestError';
 import { ApiMethods } from './ApiMethods';

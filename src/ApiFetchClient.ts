@@ -2,7 +2,7 @@
  * ApiClient provides methods to interact with the eWay-CRM API using a JWT access token.
  * Fetch method is used instead of Axios which is not supported in Cloudflare Workers.
  * Use it as alternative to ApiConnection class which uses Axios.
- * 
+ *
  * @remarks
  * - Requires a valid JWT access token for initialization.
  * - Handles session management internally.
