@@ -22,7 +22,7 @@ export class ApiFetchClient {
     private accessToken: string;
     private loginResponse: IApiLoginResponse | null = null;
 
-    public constructor(appName: string, accessToken: string, wsUrl?: string, username?: string) {
+    public constructor(appName: string, accessToken: string, wsUrl?: string, username?: string, sessionId?: string) {
         let parts;
         if (!wsUrl) {
             parts = OAuthHelper.decodeAccessToken(accessToken);
@@ -46,6 +46,7 @@ export class ApiFetchClient {
         this.userName = username;
         this.endpoint = wsUrl.startsWith("http://") ? "InsecureAPI.svc" : "API.svc";
         this.accessToken = accessToken;
+        this.sessionId = sessionId || null;
     }
 
     public hasAdminRights(): boolean | null {
@@ -66,6 +67,10 @@ export class ApiFetchClient {
 
     public getWebServiceVersion(): string | undefined {
         return this.loginResponse?.WcfVersion;
+    }
+
+    public getSessionId(): string | null {
+        return this.sessionId;
     }
 
     public async login() {
@@ -99,6 +104,10 @@ export class ApiFetchClient {
     }
 
     public async logout() {
+        if (!this.sessionId) {
+            throw new Error("Session ID is not set. Please call login() first.");
+        }
+
         const logoutRequest = new Request(
             `${this.wsUrl}/${this.endpoint}/LogOut`,
             {
@@ -116,6 +125,32 @@ export class ApiFetchClient {
         if (logoutResponseBody.ReturnCode !== "rcSuccess") {
             throw new Error("Failed to logout");
         }
+    }
+
+    public async validateSession(): Promise<boolean> {
+        if (!this.sessionId) {
+            throw new Error("Session ID is not set. Please call login() first.");
+        }
+
+        const logoutRequest = new Request(
+            `${this.wsUrl}/${this.endpoint}/IsSessionValid`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ sessionId: this.sessionId })
+            }
+        );
+
+        const validateResponse = await fetch(logoutRequest);
+        const validateResponseBody = await validateResponse.json() as { ReturnCode: string; Result?: boolean };
+
+        if (validateResponseBody.ReturnCode !== "rcSuccess") {
+            throw new Error("Failed to validate session");
+        }
+
+        return validateResponseBody.Result || false;
     }
 
     public async getObjectTypes(): Promise<IApiObjectType[]> {
@@ -193,7 +228,7 @@ export class ApiFetchClient {
 
     public async callMethod<TResult extends IApiResult>(methodName: string, data: TInputData, method: string = "POST"): Promise<TResult> {
         if (!this.sessionId) {
-            throw new Error("Session ID is not set. Please call init() first.");
+            throw new Error("Session ID is not set. Please call login() first.");
         }
 
         data.sessionId = this.sessionId;
