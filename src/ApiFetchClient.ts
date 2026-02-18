@@ -95,7 +95,7 @@ export class ApiFetchClient {
         const loginResponseBody = loginResponse.status === 200 ? await loginResponse.json() as IApiLoginResponse : undefined;
 
         if (!loginResponseBody || loginResponseBody.ReturnCode !== "rcSuccess") {
-            throw new Error(`Login failed: ${loginResponseBody?.Description || "Unknown error"}`);
+            throw new Error(`Login failed: ${loginResponseBody?.Description || loginResponse.statusText}`);
         }
 
         this.sessionId = loginResponseBody?.SessionId;
