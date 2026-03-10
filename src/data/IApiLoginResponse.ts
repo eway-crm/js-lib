@@ -6,5 +6,6 @@ export interface IApiLoginResponse extends IApiResult {
     IsAdmin: boolean | null;
     WcfVersion: string;
     OutlookClientVersion: string;
+    EwayToken: string | null;
     Debug?: boolean;
 }

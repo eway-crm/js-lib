@@ -21,6 +21,7 @@ export class ApiFetchClient {
     private endpoint: string;
     private accessToken: string;
     private loginResponse: IApiLoginResponse | null = null;
+    private ewayToken: string | null = null;
 
     public constructor(appName: string, accessToken: string, wsUrl?: string, username?: string, sessionId?: string) {
         let parts;
@@ -73,6 +74,10 @@ export class ApiFetchClient {
         return this.sessionId;
     }
 
+    public getEwayToken(): string | null {
+        return this.ewayToken;
+    }
+
     public async login() {
         const body = {
             userName: this.userName,
@@ -101,6 +106,7 @@ export class ApiFetchClient {
         this.sessionId = loginResponseBody?.SessionId;
         this.isAdmin = loginResponseBody?.IsAdmin;
         this.loginResponse = loginResponseBody;
+        this.ewayToken = loginResponseBody?.EwayToken;
     }
 
     public async logout() {
@@ -239,6 +245,32 @@ export class ApiFetchClient {
                 method: method,
                 headers: {
                     "Content-Type": "application/json"
+                },
+                body: method === "POST" ? JSON.stringify(data) : undefined
+            }
+        );
+
+        const response = await fetch(request);
+        if (!response.ok) {
+            throw new Error(`Error calling method ${methodName}: ${response.statusText}`);
+        }
+
+        const responseBody = response.status === 200 ? await response.json() as TResult : undefined;
+        if (!responseBody || responseBody.ReturnCode !== "rcSuccess") {
+            throw new Error(`API call failed (${responseBody?.ReturnCode}): ${responseBody?.Description}`);
+        }
+
+        return responseBody;
+    }
+
+    public async callMethodWithToken<TResult extends IApiResult>(methodName: string, data: TInputData, method: string = "POST"): Promise<TResult> {
+        const request = new Request(
+            `${this.wsUrl}/${this.endpoint}/${methodName}`,
+            {
+                method: method,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${this.accessToken}`
                 },
                 body: method === "POST" ? JSON.stringify(data) : undefined
             }
