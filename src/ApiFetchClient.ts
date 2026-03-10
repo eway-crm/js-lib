@@ -11,6 +11,7 @@
 import type { TInputData, IApiResult, IApiLoginResponse, IApiDatumResponse, IApiDataResponse, IApiObjectType, IApiClientVersion, IApiLicense } from "./";
 import type { ITokenSuccess } from "./interfaces/ITokenData";
 import { OAuthHelper } from "./helpers/OAuthHelper";
+import { HttpRequestError } from "./exceptions/HttpRequestError";
 
 export class ApiFetchClient {
     private appName: string;
@@ -278,7 +279,7 @@ export class ApiFetchClient {
 
         const response = await fetch(request);
         if (!response.ok) {
-            throw new Error(`Error calling method ${methodName}: ${response.statusText}`);
+            throw new HttpRequestError(response.status, `Error calling method ${methodName}: ${response.statusText}`);
         }
 
         const responseBody = response.status === 200 ? await response.json() as TResult : undefined;
