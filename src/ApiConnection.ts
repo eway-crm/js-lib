@@ -415,7 +415,7 @@ export class ApiConnection {
         if (!!headers) {
             config = {
                 headers,
-                withCredentials: this.supportGetItemPreviewMethod ?? methodName == ApiMethods.logIn
+                withCredentials: this.supportGetItemPreviewMethod ?? methodName === ApiMethods.logIn
             };
         }
         let promise: Promise<AxiosResponse<TResult>>;
