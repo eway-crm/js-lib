@@ -20,6 +20,7 @@ export default class FieldNames {
         ModifiedByGUID: 'ModifiedByGUID',
         OwnerGUID: 'OwnerGUID',
         ParentCurrencySuffix: 'ParentCurrency',
+        Picture: "Picture",
     } as const;
 
     static readonly Calendar = {
