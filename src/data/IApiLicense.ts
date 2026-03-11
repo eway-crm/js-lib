@@ -58,6 +58,7 @@ export interface IApiLicense {
     CustomerName: string;
     BusinessType: LicenceBusinessType;
     Features: TFeatureWithEdition[] | null;
+    Products?: IApiLicenseProductsModel; // Added in eWay-CRM 9.5
     CurrentUserRestrictions: IApiRestrictionsClass;
     Restrictions: IApiRestrictionsClass;
     CurrentUserLicenseInfo: IApiCurrentUserLicenseInfo;
@@ -72,4 +73,13 @@ export interface IApiLicenseDbSizeModel {
     IsFull: boolean;
     Used: number | null;
     Licensed: number | null;
+}
+
+export interface IApiLicenseProductsModel {
+    PohodaSync: IApiLicenseSyncLicenseModel;
+    QuickBooksSync: IApiLicenseSyncLicenseModel;
+}
+
+export interface IApiLicenseSyncLicenseModel {
+    IsLicensed: boolean;
 }
