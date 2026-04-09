@@ -175,14 +175,14 @@ export class ApiConnection {
      * @param config Optional. Additional config for the request.
      * @param catchGlobally Optional. If true, raises this the global error handler each time the promise is rejected.
      */
-    readonly askCustomUploadMethod = (
+    readonly askCustomUploadMethod = <TResult extends IApiResult>(
         file: File,
         data: Record<string, string>,
         methodName: string,
         config?: AxiosRequestConfig,
         catchGlobally?: boolean
-    ): Promise<IApiResult> => {
-        return new Promise<IApiResult>((resolve, reject) => {
+    ): Promise<TResult> => {
+        return new Promise<TResult>((resolve, reject) => {
             const errClb = catchGlobally
                 ? (e: TUnionError | IApiResult): void => {
                     reject(e);
@@ -190,7 +190,7 @@ export class ApiConnection {
                 }
                 : reject;
 
-            this.callCustomUploadMethod(file, data, methodName, resolve, errClb, errClb, config);
+            this.callCustomUploadMethod<TResult>(file, data, methodName, resolve, errClb, errClb, config);
         });
     };
 
@@ -227,11 +227,11 @@ export class ApiConnection {
      * @param config Optional. Additional config for the request.
      */
 
-    readonly callCustomUploadMethod = (
+    readonly callCustomUploadMethod = <TResult extends IApiResult>(
         file: File,
         data: Record<string, string>,
         methodName: string,
-        successCallback: (res: IApiResult) => void,
+        successCallback: (res: TResult) => void,
         unsuccessCallback?: (e: IApiResult) => void,
         errorCallback?: (e: TUnionError) => void,
         config?: AxiosRequestConfig,
@@ -285,9 +285,9 @@ export class ApiConnection {
 
         const dataUrlSearchParams = new URLSearchParams(data);
         const methodUrl = `${this.svcUri}/${methodName}?sessionId=${this.sessionId}&${dataUrlSearchParams.toString()}`;
-        const promise = Axios.post<IApiResult>(methodUrl, file, config);
+        const promise = Axios.post<TResult>(methodUrl, file, config);
 
-        ApiConnection.handleCallPromise(promise, successCallback, unsuccessClb, errorClb);
+        ApiConnection.handleCallPromise<TResult>(promise, successCallback, unsuccessClb, errorClb);
     };
 
     /**
