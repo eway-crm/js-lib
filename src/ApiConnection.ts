@@ -107,20 +107,26 @@ export class ApiConnection {
 
     static isCloudUrl(wsUrl: string, allowDev: boolean) {
         const url = new URL(wsUrl);
-        const hosts = new Set();
-        hosts.add("hosting.eway-crm.com");
-        hosts.add("free.eway-crm.com");
-        hosts.add("hosting.eway-crm.us");
-        hosts.add("hosting-vh39276.eway-crm.us");
-        hosts.add("free.eway-crm.us");
+        const rootDomains = new Set();
+        rootDomains.add("eway-crm.com");
+        rootDomains.add("eway-crm.us");
 
         if (allowDev) {
-            hosts.add("free.eway-crm.dev");
-            hosts.add("hosting.eway-crm.dev");
-            hosts.add("localhost");
+            rootDomains.add("eway-crm.dev");
+            rootDomains.add("localhost");
         }
 
-        return hosts.has(url.host);
+        return rootDomains.has(ApiConnection.getRootDomain(url.hostname));
+    }
+
+    static getRootDomain(hostname: string): string {
+        const parts = hostname.split('.');
+
+        if (!parts || parts.length <= 2) {
+            return hostname;
+        }
+
+        return parts.slice(-2).join('.');
     }
 
     get wsUrl(): string {
