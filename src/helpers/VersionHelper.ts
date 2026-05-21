@@ -14,7 +14,6 @@ export enum Version {
     Version92 = '9.2',
     Version93 = '9.3',
     Version94 = '9.4',
-    Version95 = '9.5',
     Version100 = '10.0',
     Version101 = '10.1'
 }
@@ -66,10 +65,6 @@ export default class VersionHelper extends VersionHelperBase {
 
     static readonly is94OrLater = (connection: ApiConnection) => {
         return VersionHelper.supportsFeaturesOf(connection, Version.Version94);
-    };
-
-    static readonly is95OrLater = (connection: ApiConnection) => {
-        return VersionHelper.supportsFeaturesOf(connection, Version.Version95);
     };
 
     static readonly is100OrLater = (connection: ApiConnection) => {
