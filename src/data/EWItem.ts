@@ -71,7 +71,7 @@ export class EWItem<T extends IApiItemBase> {
 
     private getInitialsInternal(firstName: string | null, lastName: string | null): string | null {
         const initials = (firstName?.substr(0, 1) || '') + (lastName?.substr(0, 1) || '');
-        if (initials == '')
+        if (initials === '')
             return null;
 
         return initials;

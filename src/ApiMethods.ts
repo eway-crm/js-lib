@@ -29,6 +29,8 @@ export class ApiMethods {
     static readonly getXsltTransormationDefinition = 'GetXsltTransformationDefinition';
     static readonly saveBinaryAttachment = 'SaveBinaryAttachment';
     static readonly saveBinaryXsltTransformation = 'SaveBinaryXsltTransformation';
+    static readonly GetLoginHistory = 'GetLoginHistory';
+    static readonly GetMyLoginHistory = 'GetMyLoginHistory';
 
     /**
      * Return folderName part of API method that is used in API calls. Some API methods have different names than the folder names they are associated with.
