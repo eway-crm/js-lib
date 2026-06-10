@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest';
 import { HttpRequestError } from '../exceptions/HttpRequestError';
 
 test('HttpRequestError.fromResponse prefers the api result Description over the status text', () => {
