@@ -160,12 +160,12 @@ export class TokenizedServiceConnection<TObtainResponse extends IApiResult> {
                         unsuccessCallback(response.data);
                     }
                 } else {
-                    errorCallback(new HttpRequestError(response.status, response.statusText));
+                    errorCallback(HttpRequestError.fromResponse(response.status, response.statusText, response.data));
                 }
             })
             .catch((error: AxiosError) => {
                 if (error.response) {
-                    errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
+                    errorCallback(HttpRequestError.fromResponse(error.response.status, error.response.statusText, error.response.data));
                     return;
                 }
 

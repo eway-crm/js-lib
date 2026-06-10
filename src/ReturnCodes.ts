@@ -6,4 +6,5 @@ export class ReturnCodes {
     static readonly rcAccessDenied = 'rcAccessDenied';
     static readonly rcLoginUserNameChanged = 'rcLoginUserNameChanged';
     static readonly rcLicenseExpired = 'rcLicenseExpired';
+    static readonly rcBadAccessToken = 'rcBadAccessToken';
 }
