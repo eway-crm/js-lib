@@ -9,15 +9,13 @@ export class HttpRequestError extends Error {
 
     /**
      * Builds the error from a non-200 HTTP response. Prefers the API result body's Description over the HTTP
-     * status text, which is empty over HTTP/2 (reason phrases do not exist there anymore). The body is kept in
+     * status text, which is empty over HTTP/2. The body is kept in
      * responseData so callers can inspect the ReturnCode; it is typed unknown because a non-200 body may as well
      * be a proxy/server error page instead of the API json.
      */
-    static readonly fromResponse = (statusCode: number, statusText: string, responseData: unknown): HttpRequestError => {
-        const description =
-            typeof responseData === 'object' && responseData !== null && 'Description' in responseData && typeof (responseData as { Description: unknown }).Description === 'string'
-                ? (responseData as { Description: string }).Description
-                : null;
-        return new HttpRequestError(statusCode, description || statusText, responseData);
+    static readonly from = (response: { status: number; statusText: string; data: unknown }): HttpRequestError => {
+        const description = (response.data as { Description?: unknown } | null | undefined)?.Description;
+        const message = typeof description === 'string' && description ? description : response.statusText;
+        return new HttpRequestError(response.status, message, response.data);
     };
 }
