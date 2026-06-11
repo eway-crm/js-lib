@@ -513,11 +513,11 @@ export class ApiConnection {
                     unsuccessCallback(response.data);
                 }
             } else {
-                errorCallback(new HttpRequestError(response.status, response.statusText));
+                errorCallback(HttpRequestError.from(response));
             }
         }).catch((error: AxiosError) => {
             if (error.response) {
-                errorCallback(new HttpRequestError(error.response.status, error.response.statusText));
+                errorCallback(HttpRequestError.from(error.response));
                 return;
             }
 

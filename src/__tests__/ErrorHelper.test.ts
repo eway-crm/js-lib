@@ -1,6 +1,7 @@
-import ErrorHelper from "../helpers/ErrorHelper";
+import { test, expect } from 'vitest';
+import ErrorHelper from '../helpers/ErrorHelper';
 
-test('ErrorHelper.stringifyError test', (done) => {
+test('ErrorHelper.stringifyError test', () => {
     try {
         const error = new Error('testing') as any;
         error.detail = new Error('inner');
@@ -12,5 +13,4 @@ test('ErrorHelper.stringifyError test', (done) => {
         expect(msg).toContain('"stack":"Error: inner');
         expect(msg).toContain('"detail":"innerdetail"');
     }
-    done();
 });
