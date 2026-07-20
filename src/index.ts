@@ -41,6 +41,7 @@ import type { TApiUnlinkInquiryResultType } from './data/IApiUnlinkInquiryResult
 import DateHelper from './helpers/DateHelper';
 import type { ImportResult } from './constants/ImportResult';
 import { TransformItemFormats } from './enumerations/TransformItemFormats';
+import { EmailConversionSource } from './enumerations/EmailConversionSource';
 import type QuerySources from './helpers/QueryHelper/QuerySources';
 import { ApiFetchClient } from './ApiFetchClient';
 import { OpenItemLinkHelper } from './helpers/OpenItemLinkHelper';
@@ -172,5 +173,6 @@ export {
     StringHelper,
     DateHelper,
     TransformItemFormats,
+    EmailConversionSource,
     ApiFetchClient
 };
