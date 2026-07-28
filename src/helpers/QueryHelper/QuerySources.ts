@@ -37,7 +37,7 @@ export default class QuerySources {
         const relation: IApiQueryHubRelationSource = {
             __type: 'HubRelation:#EQ',
         };
-        if (typeof isToParentDirection !== undefined) {
+        if (isToParentDirection !== undefined) {
             relation.IsToParentDirection = isToParentDirection;
         }
         if (childrenFolderNames) {

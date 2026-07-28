@@ -4,7 +4,7 @@ import { FolderNames, type TFolderName } from '../constants/FolderNames';
 export type TItemInfo = Partial<{ [key in TFolderName]: string[] }>;
 
 export class OpenItemLinkHelper {
-    private static readonly openItemLinkRegEx = /https:\/\/open\.eway-crm\.(dev|com)\/\?[-a-zA-Z0-9()@:%_\+.~#?&\/=]*/gi;
+    private static readonly openItemLinkRegEx = /https:\/\/open\.eway-crm\.(dev|com)\/\?[-a-zA-Z0-9()@:%_+.~#?&/=]*/gi;
     static readonly itemParamName = 'l';
     static readonly openLinkDomainLength = 7;
     static readonly getOpenLinkDomain = (isDevEnvironment: boolean) => isDevEnvironment ? 'open.eway-crm.dev' : 'open.eway-crm.com';
@@ -21,7 +21,7 @@ export class OpenItemLinkHelper {
                 return itemLink;
             });
         } catch (e) {
-            console.error('Invalid string passed for cretaing url while getting links from open links');
+            console.error('Invalid string passed for cretaing url while getting links from open links', e);
         }
     };
 

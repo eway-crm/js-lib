@@ -13,5 +13,5 @@ export interface ITokenSuccess {
 
 export type ITokenData = ITokenError | ITokenSuccess;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
 export type TInputData = Record<string, Object | null>;
