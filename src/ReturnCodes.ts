@@ -7,4 +7,7 @@ export class ReturnCodes {
     static readonly rcLoginUserNameChanged = 'rcLoginUserNameChanged';
     static readonly rcLicenseExpired = 'rcLicenseExpired';
     static readonly rcBadAccessToken = 'rcBadAccessToken';
+    static readonly rcExchangeWebServicesAccountAuthorizationRequired = 'rcExchangeWebServicesAccountAuthorizationRequired';
+    static readonly rcGraphAuthorizationRequired = 'rcGraphAuthorizationRequired';
+    static readonly rcConsentRequired = 'rcConsentRequired';
 }

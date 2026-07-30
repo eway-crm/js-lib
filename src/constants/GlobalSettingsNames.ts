@@ -49,6 +49,7 @@ class GlobalSettingsNames {
     static readonly notifyAboutPaidInvoiceInPohodaGroup = 'NotifyAboutPaidInvoiceInPohodaGroup';
     static readonly notifyAboutProjectDeadline = 'NotifyAboutProjectDeadline';
     static readonly numberOfDecimalPlaces = 'NumberOfDecimalPlaces';
+    static readonly openFileByDefault = 'OpenFileByDefault';
     static readonly phoneListTaskSolverGroup = 'PhoneListTaskSolverGroup';
     static readonly projectDeadlineAlert = 'ProjectDeadlineAlert';
     static readonly serverUpdateProgressNotificationGroup = 'ServerUpdateProgressNotificationGroup';

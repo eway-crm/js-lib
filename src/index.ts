@@ -7,6 +7,7 @@ import { TokenizedServiceConnection } from './tokenizedServices/TokenizedService
 import { CommonDataConnection } from './tokenizedServices/CommonDataConnection';
 import { ApiMethods } from './ApiMethods';
 import GlobalSettingsNames from './constants/GlobalSettingsNames';
+import GroupNames from './constants/GroupNames';
 import FieldNames from './constants/FieldNames';
 import { FolderNames, TFolderName } from './constants/FolderNames';
 import { OAuthHelper } from './helpers/OAuthHelper';
@@ -131,6 +132,7 @@ export {
     CommonDataConnection,
     ApiMethods,
     GlobalSettingsNames,
+    GroupNames,
     FolderNames,
     TFolderName,
     OAuthHelper,
