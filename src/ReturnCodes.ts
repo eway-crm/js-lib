@@ -10,4 +10,6 @@ export class ReturnCodes {
     static readonly rcExchangeWebServicesAccountAuthorizationRequired = 'rcExchangeWebServicesAccountAuthorizationRequired';
     static readonly rcGraphAuthorizationRequired = 'rcGraphAuthorizationRequired';
     static readonly rcConsentRequired = 'rcConsentRequired';
+    static readonly rcParameterError = 'rcParameterError';
+    static readonly rcGeneralError = 'rcGeneralError';
 }
