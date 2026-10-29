@@ -14,4 +14,5 @@ export interface IApiXsltTransformation extends IApiItemBase {
     FolderName: string | null;
     TransformationVersionEnum: number | null;
     TransformationVersion: string | null;
+    Server_StoredSize?: number | null; // Added in 10.2
 }
